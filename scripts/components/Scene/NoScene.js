@@ -1,5 +1,5 @@
 import React from 'react';
-import './NoScene.scss';
+import './NoScene.css';
 import PropTypes from 'prop-types';
 
 const NoScene = ({ label }) => (

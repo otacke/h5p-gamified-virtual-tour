@@ -1,6 +1,6 @@
 import React from 'react';
-import './NavigationButton.scss';
-import './NavigationButtonLabel.scss';
+import './NavigationButton.css';
+import './NavigationButtonLabel.css';
 import { H5PContext } from '../../context/H5PContext.js';
 import { willOverflow } from './OverflowHelpers.js';
 

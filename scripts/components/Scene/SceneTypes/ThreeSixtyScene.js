@@ -4,7 +4,7 @@ import NavigationButton, { getIconFromInteraction, getLabelFromInteraction } fro
 import { H5PContext } from '../../../context/H5PContext.js';
 import ContextMenu from '../../Shared/ContextMenu.js';
 import loading from '../../../assets/images/loading.svg';
-import './ThreeSixtyScene.scss';
+import './ThreeSixtyScene.css';
 
 export const sceneRenderingQualityMapping = {
   high: 128,

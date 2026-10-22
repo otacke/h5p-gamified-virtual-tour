@@ -1,14 +1,11 @@
 {
   "presets": [
-    "@babel/preset-react",
     [
-      "@babel/preset-env",
+      "@babel/preset-react",
       {
-        "targets": "last 2 versions, ie 11, > 0.5%, not dead",
-        "useBuiltIns": "entry",
-        "corejs": 3
+        "runtime": "classic"
       }
-    ]
-  ],
-  "plugins": ["@babel/plugin-proposal-class-properties"]
+    ],
+    "@babel/preset-env"
+  ]
 }

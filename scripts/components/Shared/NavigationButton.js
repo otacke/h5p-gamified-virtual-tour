@@ -1,5 +1,5 @@
 import React from 'react';
-import './NavigationButton.scss';
+import './NavigationButton.css';
 import { H5PContext } from '../../context/H5PContext.js';
 import NavigationButtonLabel, { getLabelPos, getLabelText, isHoverLabel } from './NavigationButtonLabel.js';
 

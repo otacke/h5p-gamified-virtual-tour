@@ -1,5 +1,5 @@
 import React from 'react';
-import './HUD.scss';
+import './HUD.css';
 
 import { H5PContext } from '../../context/H5PContext.js';
 import AudioButton from './Buttons/AudioButton.js';

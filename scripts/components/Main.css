@@ -1,5 +1,5 @@
 @font-face {
-  font-family: '360-image', sans-serif;
+  font-family: '360-image';
   src:  url('../assets/fonts/360-image.eot?nghxo3');
   src:  url('../assets/fonts/360-image.eot?nghxo3#iefix') format('embedded-opentype'),
   url('../assets/fonts/360-image.ttf?nghxo3') format('truetype'),
@@ -12,14 +12,6 @@
 .h5p-gamified-virtual-tour.h5p-fullscreen {
   display: block;
   background-color: black;
-
-  .h5p-three-sixty-wrapper {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-
-    width: 100%;
-  }
 }
 
 .h5p-gamified-virtual-tour [tabIndex="-1"] {
@@ -28,4 +20,12 @@
 
 .h5p-editor-gamified-virtual-tour-wrapper .h5p-editing-overlay {
   z-index: 4;
+}
+
+.h5p-gamified-virtual-tour.h5p-fullscreen .h5p-three-sixty-wrapper {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 100%;
 }

@@ -3,7 +3,7 @@ import Scene, { SceneTypes } from './Scene/Scene.js';
 import Dialog from './Dialog/Dialog.js';
 import InteractionContent from './Dialog/InteractionContent.js';
 import { H5PContext } from '../context/H5PContext.js';
-import './Main.scss';
+import './Main.css';
 import HUD from './HUD/HUD.js';
 import AudioButton from './HUD/Buttons/AudioButton.js';
 import NoScene from './Scene/NoScene.js';

@@ -1,5 +1,5 @@
 import React from 'react';
-import './StaticScene.scss';
+import './StaticScene.css';
 import NavigationButton,
   { getIconFromInteraction, getLabelFromInteraction, Icons } from '../../Shared/NavigationButton.js';
 import { H5PContext } from '../../../context/H5PContext.js';

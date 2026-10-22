@@ -1,5 +1,5 @@
 import React from 'react';
-import './Dialog.scss';
+import './Dialog.css';
 import { H5PContext } from '../../context/H5PContext.js';
 
 export default class Dialog extends React.Component {
