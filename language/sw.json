@@ -191,10 +191,6 @@
           "default": "Weka Kamera Upya"
         },
         {
-          "label": "Lebo ya kitufe cha kuwasilisha mazungumzo",
-          "default": "Wasilisha Mazungumzo"
-        },
-        {
           "label": "Lebo ya kitufe cha kufunga mazungumzo",
           "default": "Funga Mazungumzo"
         },

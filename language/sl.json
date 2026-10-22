@@ -191,10 +191,6 @@
           "default": "Ponastavi kamero"
         },
         {
-          "label": "Besedilo gumba za dodajanje opisa",
-          "default": "Dodaj opis"
-        },
-        {
           "label": "Besedilo gumba za zapiranje opisa",
           "default": "Zapri opis"
         },

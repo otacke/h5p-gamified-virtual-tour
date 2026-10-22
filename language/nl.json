@@ -191,10 +191,6 @@
           "default": "Camera resetten"
         },
         {
-          "label": "Label van knop om dialoog in te dienen",
-          "default": "Dialoog indienen"
-        },
-        {
           "label": "Label van knop om dialoog te sluiten",
           "default": "Dialoog sluiten"
         },

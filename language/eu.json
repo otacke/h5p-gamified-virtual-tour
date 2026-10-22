@@ -191,10 +191,6 @@
           "default": "Berrabiarazi kamera"
         },
         {
-          "label": "Elkarrizketa bidaltzeko botoiaren etiketa",
-          "default": "Bidali Elkarrizketa"
-        },
-        {
           "label": "Elkarrizketa ixteko botoiaren etiketa",
           "default": "Itxi Elkarrizketa"
         },

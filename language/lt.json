@@ -191,10 +191,6 @@
           "default": "Kameros atstatymas"
         },
         {
-          "label": "Pateikimo funkcijos mygtuko etiketė",
-          "default": "Pateikti"
-        },
-        {
           "label": "Uždarymo funkcijos mygtuko etiketė",
           "default": "Uždaryti"
         },

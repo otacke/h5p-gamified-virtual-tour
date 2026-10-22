@@ -190,10 +190,6 @@
           "default": "Resetează camera"
         },
         {
-          "label": "Etichetă pentru butonul de trimitere a dialogului",
-          "default": "Trimite dialogul"
-        },
-        {
           "label": "Etichetă pentru butonul de închidere a dialogului",
           "default": "Închide dialogul"
         },

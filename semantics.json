@@ -341,12 +341,6 @@
         "default": "Reset Camera"
       },
       {
-        "name": "submitDialog",
-        "type": "text",
-        "label": "Label for the submit dialog button",
-        "default": "Submit Dialog"
-      },
-      {
         "name": "closeDialog",
         "type": "text",
         "label": "Label for the close dialog button",

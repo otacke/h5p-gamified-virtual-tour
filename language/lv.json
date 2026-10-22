@@ -191,10 +191,6 @@
           "default": "Atiestatīt kameru"
         },
         {
-          "label": "Iesniegšanas dialoga pogas etiķete",
-          "default": "Iesniegšanas dialogs"
-        },
-        {
           "label": "Dialoga aizvēršanas pogas etiķete",
           "default": "Aizvērt dialogu"
         },

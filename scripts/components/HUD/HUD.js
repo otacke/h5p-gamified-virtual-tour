@@ -7,12 +7,6 @@ import Button from './Buttons/Button/Button.js';
 import { SceneTypes } from '../Scene/Scene.js';
 
 export default class HUD extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.buttons = {};
-  }
-
   /**
    * Help pick the audio track for the given scene.
    * @param {object} scene The current scene (may have its own audio track).
@@ -48,8 +42,6 @@ export default class HUD extends React.Component {
 
     return (
       <div className="hud" aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }>
-        <div className="hud-top-right">
-        </div>
         <div className="hud-bottom-left">
           <AudioButton { ...this.getSceneAudioTrack(this.props.scene) }/>
           { this.props.scene.scenedescription &&
@@ -69,15 +61,6 @@ export default class HUD extends React.Component {
               isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
               nextFocus={ this.props.nextFocus }
               onClick={ this.props.onCenterScene }
-            />
-          }
-          { false &&
-            <Button
-              type={ 'submit-dialog' }
-              label={ this.context.l10n.submitDialog }
-              isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
-              nextFocus={ this.props.nextFocus }
-              onClick={ this.props.onSubmitDialog}
             />
           }
         </div>

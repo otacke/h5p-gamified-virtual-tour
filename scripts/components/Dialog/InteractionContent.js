@@ -77,7 +77,7 @@ export default class InteractionContent extends React.Component {
       img.style.width = isWide ? '100%' : 'auto';
       img.style.height = isWide ? 'auto' : '100%';
 
-      this.instance.on('loaded', () => this.props.onResize(!isWide));
+      this.instance.on('loaded', () => this.props.onResize());
     }
 
     this.instance.on('resize', () => this.props.onResize());

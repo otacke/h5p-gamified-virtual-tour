@@ -18,18 +18,12 @@ export default class Dialog extends React.Component {
     }
   };
 
-  handleResize = (isNarrow) => {
+  handleResize = () => {
     if (this.el) {
       // Reset to allow size growth
       this.el.style.width = '';
       this.el.style.height = '';
       this.el.style.height = `${this.el.getBoundingClientRect().height  }px`;
-      //if (isNarrow) {
-        // This make IE11 not show the image. It seems to be the combination of
-        // flexbox and width:auto that is causing this
-        // Shrink dialog width for narrow images
-        // this.el.style.width = 'auto';
-      //}
     }
   };
 

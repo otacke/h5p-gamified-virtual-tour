@@ -73,11 +73,6 @@
   bottom: 200%;
 }
 
-.hud-top-right .tooltip {
-  right: 0.25em;
-  top: 200%;
-}
-
 .btn-wrap .tooltip .text-wrap {
   max-width: 30em;
   overflow: hidden;
@@ -113,25 +108,10 @@
   content: var(--icon-reset);
 }
 
-.hud-btn.submit-dialog:before {
-  content: " ";
-  background-image: url('../../../../assets/images/the-h5p-star.svg');
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  width: 1em;
-  height: 1em;
-}
-
 .hud-bottom-left .tooltip:after {
   left: 0;
   top: 100%;
   transform: translateX(130%) translateY(-50%) rotate(45deg);
-}
-
-.hud-top-right .tooltip:after {
-  right: 0;
-  bottom: 100%;
-  transform: translateX(-70%) translateY(50%) rotate(45deg);
 }
 
 .hud-btn.audio-track.active:before {
@@ -140,8 +120,4 @@
 
 .hud-bottom-left .btn-wrap:hover .tooltip {
   bottom: 140%;
-}
-
-.hud-top-right .btn-wrap:hover .tooltip {
-  top: 140%;
 }

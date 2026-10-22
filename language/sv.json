@@ -191,10 +191,6 @@
           "default": "Återställ kamera"
         },
         {
-          "label": "Etikett för skicka-in-dialog-knapp",
-          "default": "Skicka in dialog"
-        },
-        {
           "label": "Etikett för stäng-dialog-knapp",
           "default": "Stäng dialog"
         },

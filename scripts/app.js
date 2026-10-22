@@ -49,7 +49,6 @@ H5P.GamifiedVirtualTour = (function () {
       pauseAudioTrack: 'Pause Audio Track',
       sceneDescription: 'Scene Description',
       resetCamera: 'Reset Camera',
-      submitDialog: 'Submit Dialog',
       closeDialog: 'Close Dialog',
       expandButtonAriaLabel: 'Expand the visual label',
       backgroundLoading: 'Loading background image...',

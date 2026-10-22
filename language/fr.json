@@ -191,10 +191,6 @@
           "default": "Réinitialiser la caméra"
         },
         {
-          "label": "Vignette de la touche de la boîte de dialogue Soumettre",
-          "default": "Boîte de dialogue Soumettre"
-        },
-        {
           "label": "Vignette pour la touche Fermer la boîte de dialogue",
           "default": "Fermer la boîte de dialogue"
         },

@@ -423,7 +423,6 @@ export default class Main extends React.Component {
           nextFocus={ this.state.nextFocus }
           onAudioIsPlaying={ this.handleAudioIsPlaying }
           onSceneDescription={ this.handleSceneDescription }
-          onSubmitDialog={ () => console.error('Please implement SubmitDialog') }
           onCenterScene={ this.centerScene.bind(this) }
         />
       </div>

@@ -191,10 +191,6 @@
           "default": "Reiniciar Cámara"
         },
         {
-          "label": "Etiqueta para el botón del diálogo de envío",
-          "default": "Diálogo de Envío"
-        },
-        {
           "label": "Etiqueta para el botón del diálogo cerrar",
           "default": "Diálogo Cerrar"
         },

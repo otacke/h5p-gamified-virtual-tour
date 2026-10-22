@@ -252,16 +252,6 @@ export default class NavigationButton extends React.Component {
     }
   };
 
-  /**
-   * Handle changing scenes
-   */
-  handleGoToScene = () => {
-    // Make sure focus is dropped when changing scenes (Edge)
-    this.setState({
-      isFocused: false,
-    });
-  };
-
   handleExpandButtonFocus = () => {
     this.setState({
       expandButtonFocused: true,
@@ -282,10 +272,6 @@ export default class NavigationButton extends React.Component {
 
     if (this.props.icon) {
       wrapperClasses.push(this.props.icon);
-    }
-
-    if (this.state.isMouseOver) {
-      wrapperClasses.push('hover');
     }
 
     // only apply custom focus if we have children that are shown on focus

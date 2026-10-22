@@ -191,10 +191,6 @@
           "default": "Kamera zurücksetzen"
         },
         {
-          "label": "Beschriftung des Buttons, um den Dialog zu senden",
-          "default": "Dialog absenden"
-        },
-        {
           "label": "Beschriftung des Buttons, um den Dialog zu schließen",
           "default": "Dialog schließen"
         },

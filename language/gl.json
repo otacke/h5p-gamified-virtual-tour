@@ -191,10 +191,6 @@
           "default": "Restablecer Cámara"
         },
         {
-          "label": "Etiqueta para o botón do diálogo de envío",
-          "default": "Diálogo de Envío"
-        },
-        {
           "label": "Etiqueta para o botón do diálogo de peche",
           "default": "Diálogo de Peche"
         },

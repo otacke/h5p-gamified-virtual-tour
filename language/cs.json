@@ -191,10 +191,6 @@
           "default": "Resetovat kameru"
         },
         {
-          "label": "Popisek pro dialogové okno odeslání",
-          "default": "Odeslat dialog"
-        },
-        {
           "label": "Popisek tlačítka pro zavírání dialogu",
           "default": "Zavřít dialog"
         },

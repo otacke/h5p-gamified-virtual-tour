@@ -191,10 +191,6 @@
           "default": "Redefinir câmera"
         },
         {
-          "label": "Rótulo para o botão de diálogo de envio",
-          "default": "Caixa de diálogo Enviar"
-        },
-        {
           "label": "Rótulo para o botão de fechar a caixa de diálogo",
           "default": "Fechar caixa de diálogo"
         },
