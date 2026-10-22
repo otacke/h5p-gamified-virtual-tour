@@ -1,0 +1,17 @@
+.h5p-text-content > .h5p-image {
+  height: 100%;
+  width: 100%;
+}
+.h5p-text-content > .h5p-image > img {
+  margin: 0 auto;
+}
+
+.h5p-text-content > .h5p-video {
+  overflow: hidden;
+  height: 100%;
+}
+
+.h5p-text-dialog.h5p-video .h5p-text-content {
+  height: 100%;
+  overflow: hidden;
+}
