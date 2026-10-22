@@ -9,7 +9,7 @@ H5PUpgrades['H5P.GamifiedVirtualTour'] = (function () {
           // Add wrapper for audio
           const audio = parameters.context.behaviour;
           parameters.context.behaviour = {
-            audio: audio
+            audio: audio,
           };
         }
         finished(null, parameters);
@@ -18,11 +18,11 @@ H5PUpgrades['H5P.GamifiedVirtualTour'] = (function () {
         if (parameters && parameters.behaviour) {
           parameters.behaviour.label = {
             showLabel: false,
-            labelPosition: 'right'
+            labelPosition: 'right',
           };
         }
         finished(null, parameters);
-      }
-    }
+      },
+    },
   };
 })();
