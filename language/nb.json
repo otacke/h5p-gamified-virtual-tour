@@ -36,10 +36,7 @@
                 "description": "En beskrivelse av scenen"
               },
               {
-                "fields": [
-                  {},
-                  {}
-                ]
+                "label": "Camera start position"
               },
               {
                 "entity": "interaction",
@@ -92,10 +89,7 @@
                     },
                     {},
                     {
-                      "fields": [
-                        {},
-                        {}
-                      ]
+                      "label": "Interaction position"
                     }
                   ]
                 }

@@ -36,10 +36,7 @@
                 "description": "Текст, който описва сцената за ученика"
               },
               {
-                "fields": [
-                  {},
-                  {}
-                ]
+                "label": "Camera start position"
               },
               {
                 "entity": "interaction",
@@ -92,10 +89,7 @@
                     },
                     {},
                     {
-                      "fields": [
-                        {},
-                        {}
-                      ]
+                      "label": "Interaction position"
                     }
                   ]
                 }

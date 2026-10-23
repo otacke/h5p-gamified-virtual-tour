@@ -36,10 +36,7 @@
                 "description": "O texto que pode descrever a cena para o utilizador final"
               },
               {
-                "fields": [
-                  {},
-                  {}
-                ]
+                "label": "Camera start position"
               },
               {
                 "entity": "interaction",
@@ -92,10 +89,7 @@
                     },
                     {},
                     {
-                      "fields": [
-                        {},
-                        {}
-                      ]
+                      "label": "Interaction position"
                     }
                   ]
                 }

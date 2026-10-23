@@ -83,6 +83,7 @@
             {
               "name": "cameraStartPosition",
               "type": "group",
+              "label": "Camera start position",
               "fields": [
                 {
                   "name": "yaw",
@@ -184,6 +185,7 @@
                   {
                     "name": "interactionPosition",
                     "type": "group",
+                    "label": "Interaction position",
                     "fields": [
                       {
                         "name": "x",

@@ -36,10 +36,7 @@
                 "description": "Besedilo udeležencem opiše prizor."
               },
               {
-                "fields": [
-                  {},
-                  {}
-                ]
+                "label": "Camera start position"
               },
               {
                 "entity": "interaction",
@@ -92,10 +89,7 @@
                     },
                     {},
                     {
-                      "fields": [
-                        {},
-                        {}
-                      ]
+                      "label": "Interaction position"
                     }
                   ]
                 }

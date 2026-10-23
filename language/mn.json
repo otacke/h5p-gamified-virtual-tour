@@ -36,10 +36,7 @@
                 "description": "Эцсийн хэрэглэгчдэд зориулсан дүр зургийг дүрсэлж чадах текст"
               },
               {
-                "fields": [
-                  {},
-                  {}
-                ]
+                "label": "Camera start position"
               },
               {
                 "entity": "interaction",
@@ -92,10 +89,7 @@
                     },
                     {},
                     {
-                      "fields": [
-                        {},
-                        {}
-                      ]
+                      "label": "Interaction position"
                     }
                   ]
                 }
