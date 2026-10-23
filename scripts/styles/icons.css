@@ -1,19 +1,17 @@
 .h5p-gamified-virtual-tour {
+  --icon-audio-off: '\e904';
+  --icon-audio-on: '\e90a';
+  --icon-close: '\e916';
+  --icon-delete: '\e910';
+  --icon-edit: '\e90f';
+  --icon-go-back: '\e903';
+  --icon-go-to-scene: '\e907';
   /* 360-image icons */
   --icon-info: '\e906';
-  --icon-question: '\e905';
-  --icon-go-to-scene: '\e907';
-  --icon-go-back: '\e903';
-  --icon-scene-description: '\e909';
-  --icon-audio-on: '\e90a';
-  --icon-audio-off: '\e904';
-  --icon-close: '\e916';
   --icon-no-icon: '\1F605';
-  --icon-reset: '\e901';
   --icon-no-scene: '\e900';
-
-  --icon-edit: '\e90f';
-  --icon-delete: '\e910';
-
+  --icon-question: '\e905';
+  --icon-reset: '\e901';
+  --icon-scene-description: '\e909';
   --icon-triangle-arrow: '\e913';
 }

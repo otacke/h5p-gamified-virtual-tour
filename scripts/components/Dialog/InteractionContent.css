@@ -11,8 +11,8 @@
       }
 
       > .h5p-video {
-        overflow: hidden;
         height: 100%;
+        overflow: hidden;
       }
     }
 

@@ -2,22 +2,21 @@
 @import '@styles/colors.css';
 
 .nav-label-container {
-  --label-padding: 0.5em 1em 0.5em 1em;
-  --label-min-width: 6em;
-  --label-max-width: 11em;
-  --arrow-up-top: calc(-50% - 1px);
   --arrow-down-top: calc(-50% + 1px);
-
+  --arrow-up-top: calc(-50% - 1px);
+  --label-max-width: 11em;
+  --label-min-width: 6em;
+  --label-padding: 0.5em 1em 0.5em 1em;
+  border: 0;
   position: absolute;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  border: 0;
 
   &.hover-only {
     visibility: hidden;
 
     .nav-label-inner {
-      text-overflow: unset;
       overflow: auto;
+      text-overflow: unset;
       white-space: normal;
     }
 
@@ -27,46 +26,46 @@
   }
 
   .nav-label {
-    transition: height 0.2s linear;
-    border-radius: 3px;
     background: var(--label-bg);
+    border-radius: 3px;
     color: var(--label-color);
-    line-height: 1.5;
-    padding: var(--label-padding);
-    overflow: hidden;
     font-size: 0.9em;
-    min-width: var(--label-min-width);
-    max-width: var(--label-max-width);
+    line-height: 1.5;
     max-height: 20.5em;
+    max-width: var(--label-max-width);
+    min-width: var(--label-min-width);
+    overflow: hidden;
+    padding: var(--label-padding);
+    transition: height 0.2s linear;
 
     .nav-label-inner {
-      white-space: pre;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      text-align: left;
+      -webkit-box-orient: vertical;
       display: -webkit-box;
       -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-align: left;
+      text-overflow: ellipsis;
+      white-space: pre;
     }
   }
 
   .nav-label-expand-button {
-    display: block;
-    position: absolute;
-    bottom: -1.1em;
     background: transparent;
-    border-radius: 50%;
-    padding: 0.8em;
     border: 1px solid transparent;
+    border-radius: 50%;
+    bottom: -1.1em;
     cursor: pointer;
+    display: block;
+    left: 50%;
+    padding: 0.8em;
+    position: absolute;
     /* center-horizontally */
     transform: translateX(-50%);
-    left: 50%;
 
     &:focus {
       background-color: #000000;
-      box-shadow: 0 0px 10px 1px #373e94;
       border: 1px dotted #ffffff;
+      box-shadow: 0 0px 10px 1px #373e94;
       outline: none;
     }
 
@@ -79,29 +78,29 @@
       position: relative;
 
       &:before {
+        color: #ffffff;
+        content: var(--icon-triangle-arrow);
         font-family: "360-image", sans-serif;
-        position: absolute;
-        left: -50%;
-        top: var(--arrow-down-top);
-        transform: rotate(180deg) translate(50%, 50%);
         font-size: 1.1em;
         height: 1.025em;
-        content: var(--icon-triangle-arrow);
+        left: -50%;
+        position: absolute;
+        top: var(--arrow-down-top);
+        transform: rotate(180deg) translate(50%, 50%);
         z-index: 1;
-        color: #ffffff;
       }
 
       &:after {
+        color: #000000;
+        content: var(--icon-triangle-arrow);
         font-family: "360-image", sans-serif;
-        position: absolute;
-        left: -50%;
-        top: -50%;
-        transform: rotate(180deg) translate(50%, 50%);
         font-size: 1.1em;
         height: 1.025em;
-        content: var(--icon-triangle-arrow);
+        left: -50%;
+        position: absolute;
+        top: -50%;
+        transform: rotate(180deg) translate(50%, 50%);
         z-index: 1;
-        color: #000000;
       }
     }
   }
@@ -110,9 +109,9 @@
 
   &.top {
     bottom: calc(var(--button-size) / 2);
+    left: 50%;
     /* center-horizontally */
     transform: translateX(-50%);
-    left: 50%;
 
     .nav-label {
       padding-bottom: 1.5em;
@@ -128,8 +127,8 @@
 
       .nav-label-expand-arrow {
         &:before {
-          transform: rotate(0deg) translate(-50%, -50%);
           top: var(--arrow-up-top);
+          transform: rotate(0deg) translate(-50%, -50%);
         }
 
         &:after {
@@ -140,14 +139,14 @@
   }
 
   &.bottom {
+    left: 50%;
     top: calc(var(--button-size) / 2);
     /* center-horizontally */
     transform: translateX(-50%);
-    left: 50%;
 
     .nav-label {
-      text-align: center;
       padding-top: 1.5em;
+      text-align: center;
 
       .nav-label-inner {
         text-align: center;
@@ -189,8 +188,8 @@
   this applies to right and left aligned elements */
   &.left.expand-up,
   &.right.expand-up {
-    top: unset;
     bottom: 0;
+    top: unset;
   }
 
   &.expand-up .nav-label-expand-button {
@@ -199,8 +198,8 @@
 
     .nav-label-expand-arrow {
       &:before {
-        transform: rotate(0deg) translate(-50%, -50%);
         top: var(--arrow-up-top);
+        transform: rotate(0deg) translate(-50%, -50%);
       }
 
       &:after {
@@ -220,15 +219,15 @@
 
     .nav-label-expand-button .nav-label-expand-arrow {
       &:before {
-        transform: rotate(0deg) translate(-50%, -50%);
-        top: var(--arrow-up-top);
         left: 50%;
+        top: var(--arrow-up-top);
+        transform: rotate(0deg) translate(-50%, -50%);
       }
 
       &:after {
-        transform: rotate(0deg) translate(-50%, -50%);
-        top: 50%;
         left: 50%;
+        top: 50%;
+        transform: rotate(0deg) translate(-50%, -50%);
       }
     }
   }
@@ -251,8 +250,8 @@
 
   &.top.is-expanded .nav-label-expand-button .nav-label-expand-arrow {
     &:before {
-      transform: rotate(180deg) translate(50%, 50%);
       top: var(--arrow-down-top);
+      transform: rotate(180deg) translate(50%, 50%);
     }
 
     &:after {
@@ -262,8 +261,8 @@
 
   &.expand-up.is-expanded .nav-label-expand-button .nav-label-expand-arrow {
     &:before {
-      transform: rotate(180deg) translate(50%, 50%);
       top: var(--arrow-down-top);
+      transform: rotate(180deg) translate(50%, 50%);
     }
 
     &:after {
@@ -275,8 +274,8 @@
     visibility: visible;
 
     .nav-label {
-      max-width: var(--label-max-width);
       max-height: 3em;
+      max-width: var(--label-max-width);
     }
   }
 
@@ -284,8 +283,8 @@
     visibility: visible;
 
     .nav-label {
-      max-width: var(--label-max-width);
       max-height: 3em;
+      max-width: var(--label-max-width);
     }
   }
 }

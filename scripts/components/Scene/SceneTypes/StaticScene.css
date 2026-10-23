@@ -1,14 +1,14 @@
 .image-scene-overlay {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  left: 0;
-  top: 0;
+  align-items: center;
   background: black;
   display: flex;
+  height: 100%;
   justify-content: center;
-  align-items: center;
+  left: 0;
+  position: absolute;
   text-align: center;
+  top: 0;
+  width: 100%;
 
   .image-scene-wrapper {
     position: relative;
@@ -16,12 +16,11 @@
 
     .image-scene {
       align-self: center;
-      width: 100%;
-
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
+      width: 100%;
     }
 
     &.vertical {
@@ -29,8 +28,8 @@
 
       .image-scene {
         height: 100%;
-        width: auto;
         max-width: 100%;
+        width: auto;
       }
     }
   }
