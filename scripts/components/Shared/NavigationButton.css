@@ -9,131 +9,133 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
 
-.nav-button {
-  position: relative;
-  width: var(--button-size);
-  height: var(--button-size);
-  padding: 0;
-  border-radius: 50%;
-  line-height: 1;
-  font-size: 0.92em;
+  &.h5p-go-back-button {
+    top: 1em;
+    left: 1em;
+    /* It is nessecary to show the back button on
+    top of labels so it can be clicked even when covered */
+    z-index: 3;
+  }
 
-  background: var(--button-bg);
-  border: none;
-  cursor: pointer;
+  &.active-element {
+    z-index: 2;
+  }
 
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  z-index: 1;
-  box-shadow: 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.2);
-  transition: border 100ms linear;
-}
+  &:hover {
+    z-index: 3;
+  }
 
-.h5p-go-back-button {
-  top: 1em;
-  left: 1em;
-  /* It is nessecary to show the back button on
-  top of labels so it can be clicked even when covered */
-  z-index: 3;
-}
+  &.dragging,
+  &.focused {
+    z-index: 3;
+  }
 
-.nav-button-wrapper.active-element {
-  z-index: 2;
-}
+  .nav-button {
+    position: relative;
+    width: var(--button-size);
+    height: var(--button-size);
+    padding: 0;
+    border-radius: 50%;
+    line-height: 1;
+    font-size: 0.92em;
 
-.nav-button-wrapper:hover {
-  z-index: 3;
-}
+    background: var(--button-bg);
+    border: none;
+    cursor: pointer;
 
-.nav-button-wrapper.dragging,
-.nav-button-wrapper.focused {
-  z-index: 3;
-}
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: 1;
+    box-shadow: 0.2em 0.2em 0.3em rgba(0, 0, 0, 0.2);
+    transition: border 100ms linear;
 
-.nav-button:hover {
-  background: var(--hover-bg);
-}
+    &:hover {
+      background: var(--hover-bg);
+    }
 
-.nav-button:active {
-  background: var(--active-bg);
-  border: 0.25em solid var(--active-border);
-}
+    &:active {
+      background: var(--active-bg);
+      border: 0.25em solid var(--active-border);
+    }
 
-.h5p-interaction-button .nav-button {
-  background: var(--interaction-bg);
-}
+    &:before {
+      font-family: "360-image", sans-serif;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      color: white;
+      font-size: 1.25em;
+      height: 1.025em;
+    }
+  }
 
-.disabled .nav-button {
-  opacity: 0.5;
+  &.h5p-interaction-button {
+    .nav-button {
+      background: var(--interaction-bg);
+
+      &:active {
+        background: var(--interaction-active-bg);
+        border-color: var(--interaction-active-border);
+      }
+    }
+
+    &:hover .nav-button {
+      background: var(--interaction-hover-bg);
+    }
+  }
+
+  &.disabled .nav-button {
+    opacity: 0.5;
+  }
+
+  &.h5p-go-back-button .nav-button {
+    width: 2em;
+    height: 2em;
+    border-width: 0.2em;
+
+    &:before {
+      content: var(--icon-go-back);
+      font-size: 1em;
+    }
+
+    &:active {
+      border-color: var(--active-border);
+    }
+  }
+
+  &.h5p-question-button .nav-button:before {
+    content: var(--icon-question);
+  }
+
+  &.h5p-info-button .nav-button:before {
+    content: var(--icon-info);
+    font-size: 1.6em;
+  }
+
+  &.h5p-go-to-scene-button .nav-button:before {
+    content: var(--icon-go-to-scene);
+  }
+
+  &.h5p-audio-button .nav-button:before {
+    content: var(--icon-audio-on);
+  }
+
+  &.h5p-scene-description-button .nav-button:before {
+    content: var(--icon-scene-description);
+  }
+
+  &.h5p-audio-button.active .nav-button:before {
+    content: var(--icon-audio-off);
+  }
 }
 
 .bottom .nav-button {
   top: auto;
   left: 0.75em;
   bottom: 0.5em;
-}
-
-.nav-button:before {
-  font-family: "360-image", sans-serif;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  color: white;
-  font-size: 1.25em;
-  height: 1.025em;
-}
-
-.h5p-go-back-button .nav-button {
-  width: 2em;
-  height: 2em;
-  border-width: 0.2em;
-}
-
-.h5p-interaction-button .nav-button:active {
-  background: var(--interaction-active-bg);
-  border-color: var(--interaction-active-border);
-}
-
-.h5p-interaction-button:hover .nav-button {
-  background: var(--interaction-hover-bg);
-}
-
-.h5p-question-button .nav-button:before {
-  content: var(--icon-question);
-}
-
-.h5p-info-button .nav-button:before {
-  content: var(--icon-info);
-  font-size: 1.6em;
-}
-
-.h5p-go-to-scene-button .nav-button:before {
-  content: var(--icon-go-to-scene);
-}
-
-.h5p-audio-button .nav-button:before {
-  content: var(--icon-audio-on);
-}
-
-.h5p-go-back-button .nav-button:before {
-  content: var(--icon-go-back);
-  font-size: 1em;
-}
-
-.h5p-go-back-button .nav-button:active {
-  border-color: var(--active-border);
-}
-
-.h5p-scene-description-button .nav-button:before {
-  content: var(--icon-scene-description);
-}
-
-.h5p-audio-button.active .nav-button:before {
-  content: var(--icon-audio-off);
 }

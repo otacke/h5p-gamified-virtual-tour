@@ -1,105 +1,5 @@
 @import '../../styles/icons.css';
 
-.h5p-text-dialog .nav-button-wrapper {
-  top: -1rem;
-  right: -1rem;
-  left: auto;
-  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
-  border: 8px solid #fff;
-  background-color: #ebebeb;
-  border-radius: 50%;
-  transition: background 0.5s linear;
-}
-
-.h5p-text-dialog .outer-nav-button {
-  background: transparent;
-}
-
-.h5p-text-dialog .nav-button {
-  background: transparent;
-}
-
-.h5p-text-dialog .nav-button-wrapper:hover {
-  background: #d6d6d6;
-}
-
-.h5p-text-dialog {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  left: 50%;
-  top: 50%;
-  width: 80%;
-  max-width: 93%;
-  max-height: 90%;
-  background: white;
-  z-index: 1;
-  padding: 2rem;
-  display: flex;
-  box-sizing: border-box;
-}
-
-.h5p-text-dialog .close-button-wrapper {
-  line-height: 1;
-  position: absolute;
-  font-size: 1rem;
-  box-sizing: content-box;
-  width: 2rem;
-  height: 2rem;
-  padding: 0;
-
-  top: -1rem;
-  right: -1rem;
-
-  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
-  border: 8px solid #fff;
-  background-color: #ebebeb;
-  border-radius: 50%;
-  transition: background 0.5s linear;
-  z-index: 2;
-  cursor: pointer;
-}
-
-.h5p-text-dialog .close-button-wrapper:hover {
-  background: #d6d6d6;
-}
-
-.h5p-text-dialog .close-button-wrapper:before {
-  font-family: "360-image", sans-serif;
-  content: var(--icon-close);
-  vertical-align: text-bottom;
-}
-
-.h5p-medium-tablet-size .h5p-text-dialog {
-  width: 86%;
-  margin: 0;
-  padding: 0.25rem;
-}
-
-.h5p-text-content {
-  flex: 1;
-  max-height: 100%;
-  max-width: 100%;
-  overflow-y: auto;
-}
-
-.h5p-text-content::-webkit-scrollbar {
-  width: 0.5rem;
-  background: #fff;
-}
-
-.h5p-text-content::-webkit-scrollbar-thumb {
-  background: #ddd;
-}
-
-.h5p-text-content::-webkit-scrollbar-thumb:hover {
-  background: #aaa;
-}
-
-.h5p-text-content::-webkit-scrollbar-thumb:active,
-.h5p-text-content::-webkit-scrollbar-thumb:focus {
-  background: #888;
-}
-
 .h5p-text-overlay {
   position: absolute;
   top: 0;
@@ -108,4 +8,104 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
   z-index: 4;
+
+  .h5p-text-dialog {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    width: 80%;
+    max-width: 93%;
+    max-height: 90%;
+    background: white;
+    z-index: 1;
+    padding: 2rem;
+    display: flex;
+    box-sizing: border-box;
+
+    .h5p-medium-tablet-size & {
+      width: 86%;
+      margin: 0;
+      padding: 0.25rem;
+    }
+
+    .nav-button-wrapper {
+      top: -1rem;
+      right: -1rem;
+      left: auto;
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+      border: 8px solid #fff;
+      background-color: #ebebeb;
+      border-radius: 50%;
+      transition: background 0.5s linear;
+
+      &:hover {
+        background: #d6d6d6;
+      }
+    }
+
+    .outer-nav-button {
+      background: transparent;
+    }
+
+    .nav-button {
+      background: transparent;
+    }
+
+    .h5p-text-content {
+      flex: 1;
+      max-height: 100%;
+      max-width: 100%;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 0.5rem;
+        background: #fff;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #ddd;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: #aaa;
+      }
+
+      &::-webkit-scrollbar-thumb:active,
+      &::-webkit-scrollbar-thumb:focus {
+        background: #888;
+      }
+    }
+
+    .close-button-wrapper {
+      line-height: 1;
+      position: absolute;
+      font-size: 1rem;
+      box-sizing: content-box;
+      width: 2rem;
+      height: 2rem;
+      padding: 0;
+
+      top: -1rem;
+      right: -1rem;
+
+      box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+      border: 8px solid #fff;
+      background-color: #ebebeb;
+      border-radius: 50%;
+      transition: background 0.5s linear;
+      z-index: 2;
+      cursor: pointer;
+
+      &:hover {
+        background: #d6d6d6;
+      }
+
+      &:before {
+        font-family: "360-image", sans-serif;
+        content: var(--icon-close);
+        vertical-align: text-bottom;
+      }
+    }
+  }
 }

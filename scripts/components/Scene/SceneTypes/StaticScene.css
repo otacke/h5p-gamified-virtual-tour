@@ -9,33 +9,33 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-}
 
-.image-scene-overlay .image-scene-wrapper {
-  position: relative;
-  width: 100%;
-}
+  .image-scene-wrapper {
+    position: relative;
+    width: 100%;
 
-.image-scene-overlay .image-scene {
-  align-self: center;
-  width: 100%;
+    .image-scene {
+      align-self: center;
+      width: 100%;
 
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
 
-.image-scene-overlay .interaction {
-  background: white;
-}
+    &.vertical {
+      height: 100%;
 
-.image-scene-overlay .image-scene-wrapper.vertical {
-  height: 100%;
-}
+      .image-scene {
+        height: 100%;
+        width: auto;
+        max-width: 100%;
+      }
+    }
+  }
 
-.image-scene-overlay .image-scene-wrapper.vertical .image-scene {
-  height: 100%;
-  width: auto;
-  max-width: 100%;
+  .interaction {
+    background: white;
+  }
 }

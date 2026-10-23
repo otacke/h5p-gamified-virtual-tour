@@ -9,23 +9,27 @@
   font-style: normal;
 }
 
-.h5p-gamified-virtual-tour.h5p-fullscreen {
-  display: block;
-  background-color: black;
+.h5p-gamified-virtual-tour {
+  [tabIndex="-1"] {
+    outline: none;
+  }
+
+  &.h5p-fullscreen {
+    display: block;
+    background-color: black;
+
+    .h5p-three-sixty-wrapper {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+
+      width: 100%;
+    }
+  }
 }
 
-.h5p-gamified-virtual-tour [tabIndex="-1"] {
-  outline: none;
-}
-
-.h5p-editor-gamified-virtual-tour-wrapper .h5p-editing-overlay {
-  z-index: 4;
-}
-
-.h5p-gamified-virtual-tour.h5p-fullscreen .h5p-three-sixty-wrapper {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-
-  width: 100%;
+.h5p-editor-gamified-virtual-tour-wrapper {
+  .h5p-editing-overlay {
+    z-index: 4;
+  }
 }
