@@ -36,7 +36,15 @@
                 "description": "사용자에게 장면을 설명하기 위한 텍스트"
               },
               {
-                "label": "Camera start position"
+                "label": "Camera start position",
+                "fields": [
+                  {
+                    "label": "Yaw"
+                  },
+                  {
+                    "label": "Pitch"
+                  }
+                ]
               },
               {
                 "entity": "interaction",
@@ -89,7 +97,15 @@
                     },
                     {},
                     {
-                      "label": "Interaction position"
+                      "label": "Interaction position",
+                      "fields": [
+                        {
+                          "label": "X"
+                        },
+                        {
+                          "label": "Y"
+                        }
+                      ]
                     }
                   ]
                 }

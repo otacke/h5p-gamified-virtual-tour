@@ -36,7 +36,15 @@
                 "description": "Text, který může popsat scénu pro koncového uživatele"
               },
               {
-                "label": "Camera start position"
+                "label": "Camera start position",
+                "fields": [
+                  {
+                    "label": "Yaw"
+                  },
+                  {
+                    "label": "Pitch"
+                  }
+                ]
               },
               {
                 "entity": "interaction",
@@ -89,7 +97,15 @@
                     },
                     {},
                     {
-                      "label": "Interaction position"
+                      "label": "Interaction position",
+                      "fields": [
+                        {
+                          "label": "X"
+                        },
+                        {
+                          "label": "Y"
+                        }
+                      ]
                     }
                   ]
                 }

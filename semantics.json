@@ -87,11 +87,13 @@
               "fields": [
                 {
                   "name": "yaw",
-                  "type": "text"
+                  "type": "text",
+                  "label": "Yaw"
                 },
                 {
                   "name": "pitch",
-                  "type": "text"
+                  "type": "text",
+                  "label": "Pitch"
                 }
               ]
             },
@@ -189,11 +191,13 @@
                     "fields": [
                       {
                         "name": "x",
-                        "type": "text"
+                        "type": "text",
+                        "label": "X"
                       },
                       {
                         "name": "y",
-                        "type": "text"
+                        "type": "text",
+                        "label": "Y"
                       }
                     ]
                   }
