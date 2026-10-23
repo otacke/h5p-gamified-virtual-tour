@@ -21,24 +21,26 @@ export default class InteractionContent extends React.Component {
    * @param {object} prevProps Props from previous render.
    */
   componentDidUpdate(prevProps) {
-    if (this.props.audioIsPlaying && this.props.audioIsPlaying !== prevProps.audioIsPlaying) {
-      // The Audio Player has changed
+    // The Audio Player has changed
+    if (!this.props.audioIsPlaying || this.props.audioIsPlaying === prevProps.audioIsPlaying) {
+      return;
+    }
 
-      if (AudioButton.isVideoAudio(prevProps.audioIsPlaying)) {
-        // Thas last player was us, we need to stop it
+    // Thas last player was us, we need to stop it
+    if (!AudioButton.isVideoAudio(prevProps.audioIsPlaying)) {
+      return;
+    }
 
-        // NOTE: This is a hack for Panopto embed player bug where the API
-        // sends a "play" event to all Panopto players when one is played
-        // causing us to think that the audio is changed, when it actually
-        // is not.
-        // By checking that the new audio source is not a video, we can rule
-        // this case out, since two videos can never happen at the same time
-        // currently. This can be removed when Panopto has fixed their
-        // API. See HFP-3191
-        if (!AudioButton.isVideoAudio(this.props.audioIsPlaying)) {
-          this.instance.pause();
-        }
-      }
+    // NOTE: This is a hack for Panopto embed player bug where the API
+    // sends a "play" event to all Panopto players when one is played
+    // causing us to think that the audio is changed, when it actually
+    // is not.
+    // By checking that the new audio source is not a video, we can rule
+    // this case out, since two videos can never happen at the same time
+    // currently. This can be removed when Panopto has fixed their
+    // API. See HFP-3191
+    if (!AudioButton.isVideoAudio(this.props.audioIsPlaying)) {
+      this.instance.pause();
     }
   }
 
@@ -62,11 +64,7 @@ export default class InteractionContent extends React.Component {
     const interaction = scene.interactions[this.props.currentInteraction];
     const library = interaction.action;
 
-    this.instance = H5P.newRunnable(
-      library,
-      this.context.contentId,
-      H5P.jQuery(contentRef),
-    );
+    this.instance = H5P.newRunnable(library, this.context.contentId, H5P.jQuery(contentRef));
 
     if (library.library.split(' ')[0] === 'H5P.Video') {
       this.instance.on('stateChange', (e) => {

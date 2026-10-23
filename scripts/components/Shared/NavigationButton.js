@@ -18,11 +18,7 @@ export const Icons = {
 };
 
 /** @constant {Array} infoInteractions Machine names of info-type interactions. */
-const infoInteractions = [
-  'H5P.AdvancedText',
-  'H5P.Image',
-  'H5P.Video',
-];
+const infoInteractions = ['H5P.AdvancedText', 'H5P.Image', 'H5P.Video'];
 
 /**
  * Determine if machine name is info interaction.
@@ -124,8 +120,7 @@ export default class NavigationButton extends React.Component {
    * @param {object} e Blur event.
    */
   onBlur = (e) => {
-    const navButtonWrapper = this.navButtonWrapper
-      && this.navButtonWrapper.current;
+    const navButtonWrapper = this.navButtonWrapper && this.navButtonWrapper.current;
 
     if (
       navButtonWrapper?.contains(e.relatedTarget) &&
@@ -241,17 +236,17 @@ export default class NavigationButton extends React.Component {
    * Handle navigation button clicked.
    */
   onClick = () => {
-    const hasClickHandler = this.props.forceClickHandler
-      || !this.context.extras.isEditor;
-
-    if (hasClickHandler) {
-      this.props.clickHandler();
-
-      // Reset button focus state when changing scenes or opening content
-      this.setState({
-        innerButtonFocused: false,
-      });
+    const hasClickHandler = this.props.forceClickHandler || !this.context.extras.isEditor;
+    if (!hasClickHandler) {
+      return;
     }
+
+    this.props.clickHandler();
+
+    // Reset button focus state when changing scenes or opening content
+    this.setState({
+      innerButtonFocused: false,
+    });
   };
 
   /**
@@ -271,8 +266,7 @@ export default class NavigationButton extends React.Component {
    * @param {object} e Mouse event.
    */
   onMouseDown = (e) => {
-    const hasMouseDownHandler = this.context.extras.isEditor
-      && this.props.mouseDownHandler;
+    const hasMouseDownHandler = this.context.extras.isEditor && this.props.mouseDownHandler;
 
     if (hasMouseDownHandler) {
       this.props.mouseDownHandler(e);
@@ -283,9 +277,7 @@ export default class NavigationButton extends React.Component {
    * Set focus to navigation button.
    */
   setFocus = () => {
-    const isFocusable = this.context.extras.isEditor
-      && this.navButtonWrapper
-      && this.navButtonWrapper.current;
+    const isFocusable = this.context.extras.isEditor && this.navButtonWrapper && this.navButtonWrapper.current;
     if (isFocusable) {
       this.navButtonWrapper.current.focus({
         preventScroll: true,
@@ -334,9 +326,7 @@ export default class NavigationButton extends React.Component {
    * @returns {React.Element} Rendered navigation button element.
    */
   render() {
-    let wrapperClasses = [
-      'nav-button-wrapper',
-    ];
+    let wrapperClasses = ['nav-button-wrapper'];
 
     if (this.props.buttonClasses) {
       wrapperClasses = wrapperClasses.concat(this.props.buttonClasses);
@@ -359,8 +349,7 @@ export default class NavigationButton extends React.Component {
     }
 
     const isWrapperTabbable = this.context.extras.isEditor;
-    const isInnerButtonTabbable = !this.context.extras.isEditor
-      && !this.props.isHiddenBehindOverlay;
+    const isInnerButtonTabbable = !this.context.extras.isEditor && !this.props.isHiddenBehindOverlay;
 
     let title = '';
     if (this.props.title) {

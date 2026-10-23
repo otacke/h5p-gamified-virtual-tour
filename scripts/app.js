@@ -27,12 +27,10 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     super();
 
     extras = extras || {};
-    this.forceStartScreen = (extras.forceStartScreen !== undefined
-      && extras.forceStartScreen >= 0)
+    this.forceStartScreen = (extras.forceStartScreen !== undefined && extras.forceStartScreen >= 0)
       ? extras.forceStartScreen : null;
 
-    this.forceStartCamera = extras.forceStartCamera !== undefined
-      ? extras.forceStartCamera : null;
+    this.forceStartCamera = extras.forceStartCamera !== undefined ? extras.forceStartCamera : null;
 
     this.behavior = {
       label: {
@@ -107,8 +105,7 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
    */
   reDraw = (forceStartScreen = this.currentScene) => {
     const sceneRenderingQuality = this.behavior.sceneRenderingQuality;
-    if (sceneRenderingQuality !== this.sceneRenderingQuality
-      && this.threeSixty) {
+    if (sceneRenderingQuality !== this.sceneRenderingQuality && this.threeSixty) {
       this.setSceneRenderingQuality(sceneRenderingQuality);
     }
 
@@ -168,8 +165,7 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
       || this.wrapper.parentElement.classList.contains('h5p-semi-fullscreen');
     const rect = this.getRect();
     // Fullscreen should use all of the space
-    const ratio = (isFullscreen ? (rect.height / rect.width)
-      : (DEFAULT_RATIO_HEIGHT / DEFAULT_RATIO_WIDTH));
+    const ratio = (isFullscreen ? (rect.height / rect.width) : (DEFAULT_RATIO_HEIGHT / DEFAULT_RATIO_WIDTH));
 
     this.wrapper.style.height = (isFullscreen ? '100%' : (`${rect.width * ratio  }px`));
 

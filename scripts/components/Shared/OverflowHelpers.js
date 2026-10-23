@@ -32,8 +32,7 @@ export class OverflowHelper {
    * @returns {boolean} Whether element overflows bottom edge, false if not.
    */
   overflowsBottom() {
-    return this.height + this.topPosition >
-      this.containerHeight;
+    return this.height + this.topPosition > this.containerHeight;
   }
 }
 

@@ -75,15 +75,17 @@ export default class AudioButton extends React.Component {
     // Determine player ID
     const id = this.getPlayerId(this.props);
     const player = this.getPlayer(id);
-    if (player) {
-      if (id === this.props.isPlaying) {
-        // Pause and reset the player
-        player.pause();
-      }
-      else {
-        // Start the playback!
-        player.play();
-      }
+    if (!player) {
+      return;
+    }
+
+    if (id === this.props.isPlaying) {
+      // Pause and reset the player
+      player.pause();
+    }
+    else {
+      // Start the playback!
+      player.play();
     }
   };
 
@@ -205,7 +207,7 @@ export default class AudioButton extends React.Component {
    */
   static createAudioPlayer(id, sources, onPlay, onStop, loop) {
     // Check if browser supports audio.
-    let player = document.createElement('audio');
+    const player = document.createElement('audio');
     if (player.canPlayType !== undefined) {
       // Add supported source files.
       for (let i = 0; i < sources.length; i++) {
@@ -219,16 +221,15 @@ export default class AudioButton extends React.Component {
     }
 
     if (!player.children.length) {
-      player = null; // Not supported
+      return null; // Not supported
     }
-    else {
-      player.controls = false;
-      player.preload = 'auto';
-      player.loop = loop;
-      player.addEventListener('play', onPlay);
-      player.addEventListener('ended', onStop);
-      player.addEventListener('pause', onStop);
-    }
+
+    player.controls = false;
+    player.preload = 'auto';
+    player.loop = loop;
+    player.addEventListener('play', onPlay);
+    player.addEventListener('ended', onStop);
+    player.addEventListener('pause', onStop);
 
     return player;
   }

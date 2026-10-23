@@ -40,8 +40,7 @@ export default class HUD extends React.Component {
    * @returns {React.Element} Rendered HUD elements.
    */
   render() {
-    const isThreeSixty = this.props.scene.sceneType
-      === SceneTypes.THREE_SIXTY_SCENE;
+    const isThreeSixty = this.props.scene.sceneType === SceneTypes.THREE_SIXTY_SCENE;
 
     return (
       <div className="hud" aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }>

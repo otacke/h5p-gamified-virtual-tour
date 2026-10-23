@@ -53,8 +53,7 @@ export default class ThreeSixtyScene extends React.Component {
    */
   initializePointerLock = (element) => {
     // Not supported
-    element.requestPointerLock = element.requestPointerLock
-      || element.mozRequestPointerLock;
+    element.requestPointerLock = element.requestPointerLock || element.mozRequestPointerLock;
     if (!element.requestPointerLock) {
       return;
     }
@@ -100,29 +99,31 @@ export default class ThreeSixtyScene extends React.Component {
     }
 
     const target = e.data.target;
-    if (target) {
-      // Don't move when dragging context menu
-      if (target.classList.contains('context-menu')) {
+    if (!target) {
+      return;
+    }
+
+    // Don't move when dragging context menu
+    if (target.classList.contains('context-menu')) {
+      e.defaultPrevented = true;
+      return false;
+    }
+
+    // Don't move when dragging context menu children
+    if (target.parentNode) {
+      const parent = target.parentNode;
+      if (parent.classList.contains('context-menu')) {
         e.defaultPrevented = true;
         return false;
-      }
-
-      // Don't move when dragging context menu children
-      if (target.parentNode) {
-        const parent = target.parentNode;
-        if (parent.classList.contains('context-menu')) {
-          e.defaultPrevented = true;
-          return false;
-        }
       }
     }
 
     // Make sure we don't start movement on contextmenu actions
-    if (target && (
+    if (
       target.classList.contains('nav-button')
       || target.classList.contains('nav-label-container')
       || target.classList.contains('nav-label')
-      || target.classList.contains('nav-label-inner'))) {
+      || target.classList.contains('nav-label-inner')) {
       const element = e.data.element;
       this.initializePointerLock(element);
     }
@@ -270,8 +271,7 @@ export default class ThreeSixtyScene extends React.Component {
     this.renderedInteractions = list.length;
 
     const cameraElement = threeSixty.getCameraElement();
-    if (!this.interactionHotspotRoot
-      || this.interactionHotspotRootElement !== cameraElement) {
+    if (!this.interactionHotspotRoot || this.interactionHotspotRootElement !== cameraElement) {
       if (this.interactionHotspotRoot) {
         this.interactionHotspotRoot.unmount();
       }
@@ -444,8 +444,7 @@ export default class ThreeSixtyScene extends React.Component {
       }
     }
     else {
-      document.exitPointerLock = document.exitPointerLock
-        || document.mozExitPointerLock;
+      document.exitPointerLock = document.exitPointerLock || document.mozExitPointerLock;
       if (document.exitPointerLock) {
         if (this.state.pointerLockElement) {
           this.state.pointerLockElement.classList.remove('dragging');
@@ -461,51 +460,52 @@ export default class ThreeSixtyScene extends React.Component {
       this.props.threeSixty.setTabIndex(false);
     }
 
-    if (this.props.threeSixty && this.props.isActive) {
-      // Need to respond to audio in order to update the icon of the interaction
-      const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);
-      const hasChangedFocus = prevProps.focusedInteraction
-        !== this.props.focusedInteraction;
+    if (!this.props.threeSixty || !this.props.isActive) {
+      return;
+    }
 
-      const hasChangedInteractions = this.props.sceneParams.interactions
-        && (this.renderedInteractions
-          !== this.props.sceneParams.interactions.length);
+    // Need to respond to audio in order to update the icon of the interaction
+    const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);
+    const hasChangedFocus = prevProps.focusedInteraction !== this.props.focusedInteraction;
 
-      let shouldUpdateInteractionHotspots = hasChangedInteractions
-          || audioHasChanged
-          || hasChangedFocus
-          || isHiddenBehindOverlayHasChanged
-          || this.props.isEditingInteraction;
+    const hasChangedInteractions = this.props.sceneParams.interactions
+      && (this.renderedInteractions !== this.props.sceneParams.interactions.length);
 
-      // Check if the scene that interactions point to has changed icon type
-      // This is only relevant when changing the icon using the H5P editor
-      if (window.H5PEditor && !shouldUpdateInteractionHotspots && this.props.sceneParams.interactions) {
-        shouldUpdateInteractionHotspots = this.props.sceneParams.interactions.some((interaction) => {
-          const library = H5P.libraryFromString(interaction.action.library);
-          const machineName = library.machineName;
-          if (machineName === 'H5P.GoToScene') {
-            const nextSceneId = interaction.action.params.nextSceneId;
-            const nextSceneIcon = this.props.sceneIcons.find((scene) => {
-              return scene.id === nextSceneId;
-            });
-            const oldNextSceneIcon = prevProps.sceneIcons.find((scene) => {
-              return scene.id === nextSceneId;
-            });
+    let shouldUpdateInteractionHotspots = hasChangedInteractions
+        || audioHasChanged
+        || hasChangedFocus
+        || isHiddenBehindOverlayHasChanged
+        || this.props.isEditingInteraction;
 
-            const hasChangedIcon = nextSceneIcon
-              && oldNextSceneIcon
-              && nextSceneIcon.iconType !== oldNextSceneIcon.iconType;
-            if (hasChangedIcon) {
-              return true;
-            }
-          }
+    // Check if the scene that interactions point to has changed icon type
+    // This is only relevant when changing the icon using the H5P editor
+    if (window.H5PEditor && !shouldUpdateInteractionHotspots && this.props.sceneParams.interactions) {
+      shouldUpdateInteractionHotspots = this.props.sceneParams.interactions.some((interaction) => {
+        const library = H5P.libraryFromString(interaction.action.library);
+        const machineName = library.machineName;
+        if (machineName !== 'H5P.GoToScene') {
           return false;
-        });
-      }
+        }
 
-      if (shouldUpdateInteractionHotspots) {
-        this.addInteractionHotspots(this.props.threeSixty, this.props.sceneParams.interactions);
-      }
+        const nextSceneId = interaction.action.params.nextSceneId;
+        const nextSceneIcon = this.props.sceneIcons.find((scene) => {
+          return scene.id === nextSceneId;
+        });
+        const oldNextSceneIcon = prevProps.sceneIcons.find((scene) => {
+          return scene.id === nextSceneId;
+        });
+
+        const hasChangedIcon = nextSceneIcon && oldNextSceneIcon
+          && nextSceneIcon.iconType !== oldNextSceneIcon.iconType;
+        if (hasChangedIcon) {
+          return true;
+        }
+        return false;
+      });
+    }
+
+    if (shouldUpdateInteractionHotspots) {
+      this.addInteractionHotspots(this.props.threeSixty, this.props.sceneParams.interactions);
     }
   }
 

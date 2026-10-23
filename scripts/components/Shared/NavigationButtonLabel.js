@@ -98,25 +98,27 @@ export default class NavigationButtonLabel extends React.Component {
    */
   handleResize = () => {
     if (
-      this.state.isExpanded &&
-      this.innerLabelDiv.current &&
-      this.state.divHeight !== this.innerLabelDiv.current.scrollHeight
+      !this.state.isExpanded ||
+      !this.innerLabelDiv.current ||
+      this.state.divHeight === this.innerLabelDiv.current.scrollHeight
     ) {
-      // Font size changes when the screen resizes so we need to make sure it has the correct height
-      if (this.innerLabelDiv.current.scrollHeight !== 0 && this.props.staticScene) {
-        this.setState({
-          divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight : 0,
-        });
-      }
-      // If the interaction doesn't have a scrollheight and is expanded it means that we have moved scene
-      // The interactions in 360 scene is not proparaly remounted and this leads to
-      // Labels being expanded and not proparly shown when going back
-      else if (!this.props.staticScene && (this.state.isExpanded || this.state.divHeight !== '3em') ) {
-        this.setState({
-          isExpanded: false,
-          divHeight: '3em',
-        });
-      }
+      return;
+    }
+
+    // Font size changes when the screen resizes so we need to make sure it has the correct height
+    if (this.innerLabelDiv.current.scrollHeight !== 0 && this.props.staticScene) {
+      this.setState({
+        divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight : 0,
+      });
+    }
+    // If the interaction doesn't have a scrollheight and is expanded it means that we have moved scene
+    // The interactions in 360 scene is not proparaly remounted and this leads to
+    // Labels being expanded and not proparly shown when going back
+    else if (!this.props.staticScene && (this.state.isExpanded || this.state.divHeight !== '3em') ) {
+      this.setState({
+        isExpanded: false,
+        divHeight: '3em',
+      });
     }
   };
 
@@ -271,8 +273,7 @@ export default class NavigationButtonLabel extends React.Component {
     const alignment = this.state.alignment || this.props.labelPos;
     const showLabel = this.props.navButtonFocused && !this.context.extras.isEditor ? 'show-label' : '';
 
-    const expandButtonTabIndex = !this.context.extras.isEditor
-      && this.props.isHiddenBehindOverlay ? '-1' : undefined;
+    const expandButtonTabIndex = !this.context.extras.isEditor && this.props.isHiddenBehindOverlay ? '-1' : undefined;
 
     return (
       <div

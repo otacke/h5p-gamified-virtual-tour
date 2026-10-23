@@ -212,18 +212,9 @@ export default class StaticScene extends React.Component {
     const interaction = this.getDraggingInteraction();
     const initialPos = interaction.interactionPosition;
 
-    const xPos = this.getNewInteractionPosition(
-      initialPos,
-      mouseEvent,
-      this.state.draggingElement,
-    );
+    const xPos = this.getNewInteractionPosition(initialPos, mouseEvent, this.state.draggingElement);
 
-    const yPos = this.getNewInteractionPosition(
-      initialPos,
-      mouseEvent,
-      this.state.draggingElement,
-      true,
-    );
+    const yPos = this.getNewInteractionPosition(initialPos, mouseEvent, this.state.draggingElement, true);
 
     return {
       x: xPos,
@@ -417,10 +408,7 @@ export default class StaticScene extends React.Component {
     const isShowingBackButton = this.props.sceneParams.showBackButton
       && (hasPreviousScene || this.context.extras.isEditor);
 
-    const backButtonClasses = this.context.extras.isEditor
-      && !hasPreviousScene
-      ? ['disabled']
-      : [];
+    const backButtonClasses = this.context.extras.isEditor && !hasPreviousScene ? ['disabled'] : [];
 
     const imageSceneClasses = ['image-scene-wrapper'];
     if (this.state.isVerticalImage) {
@@ -450,8 +438,7 @@ export default class StaticScene extends React.Component {
               const pos = interaction.interactionPosition;
               let posX = this.removePercentageDenotationFromPosition(pos.x);
               let posY = this.removePercentageDenotationFromPosition(pos.y);
-              const hasUpdatedPositions = this.state.x !== null
-                && this.state.y !== null
+              const hasUpdatedPositions = this.state.x !== null && this.state.y !== null
                 && this.state.draggingInteractionIndex === index;
               if (hasUpdatedPositions) {
                 posX = this.state.x;
@@ -473,10 +460,7 @@ export default class StaticScene extends React.Component {
 
               if (this.sceneWrapperRef && this.sceneWrapperRef.current) {
                 // Adjust interaction position if overflowing
-                const pos = this.getAdjustedInteractionPositions(
-                  parseFloat(posX),
-                  parseFloat(posY),
-                );
+                const pos = this.getAdjustedInteractionPositions(parseFloat(posX), parseFloat(posY));
                 if (pos) {
                   posX = pos.posX;
                   posY = pos.posY;

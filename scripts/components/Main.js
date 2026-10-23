@@ -97,9 +97,7 @@ export default class Main extends React.Component {
       // Remove current scene if it is at the top of the history
       while (lastElement === this.props.currentScene) {
         prunedHistory.pop();
-        lastElement = prunedHistory.length
-          ? prunedHistory[prunedHistory.length - 1]
-          : null;
+        lastElement = prunedHistory.length ? prunedHistory[prunedHistory.length - 1] : null;
       }
       this.setState({
         sceneHistory: prunedHistory,
@@ -114,26 +112,25 @@ export default class Main extends React.Component {
       }
 
       this.setState({
-        sceneHistory: [
-          ...this.state.sceneHistory,
-          prevProps.currentScene,
-        ],
+        sceneHistory: [...this.state.sceneHistory, prevProps.currentScene],
       });
     }
 
-    if (this.state.audioIsPlaying && this.state.audioIsPlaying !== prevState.audioIsPlaying) {
-      // Something is playing audio
+    // Something is playing audio
+    if (!this.state.audioIsPlaying || this.state.audioIsPlaying === prevState.audioIsPlaying) {
+      return;
+    }
 
-      if (AudioButton.isInteractionAudio(prevState.audioIsPlaying)) {
-        // Thas last player was us, we need to stop it
+    // Thas last player was us, we need to stop it
+    if (!AudioButton.isInteractionAudio(prevState.audioIsPlaying)) {
+      return;
+    }
 
-        const lastPlayer = this.getAudioPlayer(prevState.audioIsPlaying);
-        if (lastPlayer) {
-          // Pause and reset the last player
-          lastPlayer.pause();
-          lastPlayer.currentTime = 0;
-        }
-      }
+    const lastPlayer = this.getAudioPlayer(prevState.audioIsPlaying);
+    if (lastPlayer) {
+      // Pause and reset the last player
+      lastPlayer.pause();
+      lastPlayer.currentTime = 0;
     }
   }
 
@@ -229,8 +226,7 @@ export default class Main extends React.Component {
   getAudioPlayer = (id, interaction) => {
     // Create player if none exist
     if (this.audioPlayers[id] === undefined) {
-      if (!interaction || !interaction.action || !interaction.action.params ||
-          !interaction.action.params.files ||
+      if (!interaction || !interaction.action || !interaction.action.params || !interaction.action.params.files ||
           !interaction.action.params.files.length) {
         return; // No track to play
       }
@@ -373,8 +369,7 @@ export default class Main extends React.Component {
     if (!scene) {
       return null;
     }
-    const isShowingInteraction = this.state.showingInteraction &&
-      this.state.currentInteraction !== null;
+    const isShowingInteraction = this.state.showingInteraction && this.state.currentInteraction !== null;
 
     let dialogClasses = [];
     if (isShowingInteraction) {
@@ -383,9 +378,7 @@ export default class Main extends React.Component {
       });
       const interaction = scene.interactions[this.state.currentInteraction];
       const library = H5P.libraryFromString(interaction.action.library);
-      const interactionClass = library.machineName
-        .replace('.', '-')
-        .toLowerCase();
+      const interactionClass = library.machineName.replace('.', '-').toLowerCase();
 
       dialogClasses.push(interactionClass);
     }

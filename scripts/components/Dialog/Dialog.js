@@ -25,12 +25,14 @@ export default class Dialog extends React.Component {
    * Resize dialog to fit content.
    */
   handleResize = () => {
-    if (this.el) {
-      // Reset to allow size growth
-      this.el.style.width = '';
-      this.el.style.height = '';
-      this.el.style.height = `${this.el.getBoundingClientRect().height  }px`;
+    if (!this.el) {
+      return;
     }
+
+    // Reset to allow size growth
+    this.el.style.width = '';
+    this.el.style.height = '';
+    this.el.style.height = `${this.el.getBoundingClientRect().height  }px`;
   };
 
   /**
