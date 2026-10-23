@@ -26,16 +26,6 @@ export default class StaticScene extends React.Component {
       draggingElement: null,
       isVerticalImage: false,
     };
-
-    /**
-     *  Note: Need to bind function reference once in the constructor
-     *        otherwise EventListener will not be removed, since it will
-     *        think it is a new function reference if we bind it when creating
-     *        the listener.
-     * @see {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind}
-     */
-    this.onMove = this.onMove.bind(this);
-    this.stoppedDragging = this.stoppedDragging.bind(this);
   }
 
   componentDidMount() {
@@ -65,7 +55,7 @@ export default class StaticScene extends React.Component {
     }
   }
 
-  resizeScene() {
+  resizeScene = () => {
     if (!this.sceneWrapperRef || !this.sceneWrapperRef.current) {
       return;
     }
@@ -101,28 +91,28 @@ export default class StaticScene extends React.Component {
 
     this.sceneWrapperRef.current.style.fontSize = `${newFontSize}px`;
     this.forceUpdate();
-  }
+  };
 
-  getWrapperSize(isVertical = false) {
-    let wrapper = this.sceneWrapperRef.current;
+  getWrapperSize = (isVertical = false) => {
+    const wrapper = this.sceneWrapperRef.current;
     if (wrapper) {
       return isVertical ? wrapper.clientHeight : wrapper.clientWidth;
     }
     return undefined;
-  }
+  };
 
-  getDraggingInteraction() {
+  getDraggingInteraction = () => {
     if (this.state.draggingInteractionIndex === null) {
       return false;
     }
 
     const interactions = this.props.sceneParams.interactions;
     return interactions[this.state.draggingInteractionIndex];
-  }
+  };
 
-  getMouseMovedPercentages(mouseEvent, isVertical = false) {
+  getMouseMovedPercentages = (mouseEvent, isVertical = false) => {
     let startPos = this.startX;
-    let wrapperSize = this.getWrapperSize(isVertical);
+    const wrapperSize = this.getWrapperSize(isVertical);
     let mousePos = mouseEvent.clientX;
 
     if (isVertical) {
@@ -131,29 +121,29 @@ export default class StaticScene extends React.Component {
     }
 
     return ((startPos - mousePos) / wrapperSize) * 100;
-  }
+  };
 
-  removePercentageDenotationFromPosition(position) {
+  removePercentageDenotationFromPosition = (position) => {
     const lastChar = position.charAt(position.length - 1);
     if (lastChar !== '%') {
       return false;
     }
 
     return position.substr(0, position.length - 1);
-  }
+  };
 
-  getPositions(positions) {
+  getPositions = (positions) => {
     const pos = positions.split(',');
     return {
       x: pos[0],
       y: pos[1],
     };
-  }
+  };
 
-  getNewInteractionPosition(initialPos, mouseEvent, element, isVertical = false) {
+  getNewInteractionPosition = (initialPos, mouseEvent, element, isVertical = false) => {
     let position = initialPos.x;
-    let mouseMoved = this.getMouseMovedPercentages(mouseEvent, isVertical);
-    let wrapperSize = this.getWrapperSize(isVertical);
+    const mouseMoved = this.getMouseMovedPercentages(mouseEvent, isVertical);
+    const wrapperSize = this.getWrapperSize(isVertical);
 
     if (isVertical) {
       position = initialPos.y;
@@ -176,9 +166,9 @@ export default class StaticScene extends React.Component {
     }
 
     return movedTo;
-  }
+  };
 
-  getNewInteractionPositions(mouseEvent) {
+  getNewInteractionPositions = (mouseEvent) => {
     const interaction = this.getDraggingInteraction();
     const initialPos = this.getPositions(interaction.interactionpos);
 
@@ -199,9 +189,9 @@ export default class StaticScene extends React.Component {
       x: xPos,
       y: yPos,
     };
-  }
+  };
 
-  startDragging(interactionIndex, e) {
+  startDragging = (interactionIndex, e) => {
     if (e.button !== 0) {
       return;
     }
@@ -224,18 +214,18 @@ export default class StaticScene extends React.Component {
         isDragDelayed: false,
       });
     }, DRAG_TIMEOUT_MS);
-  }
+  };
 
-  onMove(e) {
+  onMove = (e) => {
     const isDragging = this.state.draggingInteractionIndex !== null;
     const isDragDelayed = this.state.isDragDelayed;
     if (!isDragging || isDragDelayed) {
       return;
     }
     this.setState(this.getNewInteractionPositions(e));
-  }
+  };
 
-  stoppedDragging() {
+  stoppedDragging = () => {
     if (this.state.draggingInteractionIndex === null) {
       return;
     }
@@ -268,15 +258,15 @@ export default class StaticScene extends React.Component {
       draggingElement: null,
       isDragDelayed: true,
     });
-  }
+  };
 
-  goToPreviousScene() {
+  goToPreviousScene = () => {
     if (this.props.sceneHistory.length > 0) {
       this.props.navigateToScene(SceneTypes.PREVIOUS_SCENE);
     }
-  }
+  };
 
-  onSceneLoaded() {
+  onSceneLoaded = () => {
     const imageElement = this.imageElementRef.current;
     const ratio = imageElement.naturalWidth / imageElement.naturalHeight;
     this.setState({
@@ -291,10 +281,10 @@ export default class StaticScene extends React.Component {
         isVerticalImage: ratio < this.context.getRatio(),
       });
     });
-  }
+  };
 
   // Since some interactions don't have titles this seeks to use the closest thing to a title to prevent "Untitled Text"
-  getInteractionTitle(action) {
+  getInteractionTitle = (action) => {
     const currentTitle = action.metadata.title;
 
     switch (currentTitle) {
@@ -305,9 +295,9 @@ export default class StaticScene extends React.Component {
       default:
         return currentTitle;
     }
-  }
+  };
 
-  getAdjustedInteractionPositions(posX, posY) {
+  getAdjustedInteractionPositions = (posX, posY) => {
     const interactionEm = 2.5;
     const wrapper = this.sceneWrapperRef.current;
     const wrapperSize = wrapper.getBoundingClientRect();
@@ -330,7 +320,7 @@ export default class StaticScene extends React.Component {
       posX: posX,
       posY: posY,
     };
-  }
+  };
 
   /**
    * Process HTML escaped string for use as attribute value,
@@ -338,12 +328,12 @@ export default class StaticScene extends React.Component {
    * @param {string} value HTML escaped string.
    * @returns {string} WARNING! Do NOT use for innerHTML.
    */
-   massageAttributeOutput(value) {
+  massageAttributeOutput = (value) => {
     const dparser = new DOMParser().parseFromString(value, 'text/html');
     const div = document.createElement('div');
-    div.innerHTML = dparser.documentElement.textContent;;
+    div.innerHTML = dparser.documentElement.textContent;
     return div.textContent || div.innerText || '';
-   };
+  };
 
   render() {
     if (!this.props.isActive) {
@@ -381,7 +371,7 @@ export default class StaticScene extends React.Component {
             alt={this.massageAttributeOutput(this.props.sceneParams.scenename)}
             className='image-scene'
             src={H5P.getPath(this.props.imageSrc.path, this.context.contentId)}
-            onLoad={this.onSceneLoaded.bind(this)}
+            onLoad={this.onSceneLoaded}
             ref={this.imageElementRef}
           />
           {
@@ -449,8 +439,8 @@ export default class StaticScene extends React.Component {
                   nextFocus={this.props.nextFocus}
                   topPosition={posY}
                   leftPosition={posX}
-                  mouseDownHandler={this.startDragging.bind(this, index)}
-                  clickHandler={this.props.showInteraction.bind(this, index)}
+                  mouseDownHandler={(event) => this.startDragging(index, event)}
+                  clickHandler={() => this.props.showInteraction(index)}
                   doubleClickHandler={() => {
                     this.context.trigger('doubleClickedInteraction', index);
                   }}
@@ -480,7 +470,7 @@ export default class StaticScene extends React.Component {
             title='Back'
             icon={Icons.GO_BACK}
             isHiddenBehindOverlay={this.props.isHiddenBehindOverlay}
-            clickHandler={this.goToPreviousScene.bind(this)}
+            clickHandler={this.goToPreviousScene}
             forceClickHandler={true}
             buttonClasses={backButtonClasses}
           />

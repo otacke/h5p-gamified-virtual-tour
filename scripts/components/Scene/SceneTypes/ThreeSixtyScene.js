@@ -41,7 +41,7 @@ export default class ThreeSixtyScene extends React.Component {
    * Locks the dragged Navigation Button to the pointer
    * @param {object} element The element the pointer is locked to (a navigation button).
    */
-  initializePointerLock(element) {
+  initializePointerLock = (element) => {
     // Not supported
     element.requestPointerLock = element.requestPointerLock
       || element.mozRequestPointerLock;
@@ -64,18 +64,18 @@ export default class ThreeSixtyScene extends React.Component {
         hasPointerLock: true,
       });
     }, 100);
-  }
+  };
 
 
   /**
    * Unlocks the Navigation Button from the pointer.
    */
-  cancelPointerLock() {
+  cancelPointerLock = () => {
     this.setState({
       willPointerLock: false,
       hasPointerLock: false,
     });
-  }
+  };
 
 
   /**
@@ -121,7 +121,7 @@ export default class ThreeSixtyScene extends React.Component {
   };
 
   // Since some interactions don't have titles this seeks to use the closest thing to a title to prevent "Untitled Text"
-  getInteractionTitle(action) {
+  getInteractionTitle = (action) => {
     const currentTitle = action.metadata.title;
     switch (currentTitle) {
       case 'Untitled Text':
@@ -131,7 +131,7 @@ export default class ThreeSixtyScene extends React.Component {
       default:
         return currentTitle;
     }
-  }
+  };
 
   /**
    * Called when a scene move is stopped after dragging ends.
@@ -207,7 +207,7 @@ export default class ThreeSixtyScene extends React.Component {
   /**
    * Loads the current ThreeSixty scene
    */
-  loadScene() {
+  loadScene = () => {
     if (!this.imageElement) {
       // Create image element used for loading on first load
       this.imageElement = document.createElement('img');
@@ -232,7 +232,7 @@ export default class ThreeSixtyScene extends React.Component {
       }
       this.imageElement.src = path;
     }
-  }
+  };
 
   /**
    * Triggeered when the scene is loaded.  Updates state.threeSixty in Main.js
@@ -254,7 +254,7 @@ export default class ThreeSixtyScene extends React.Component {
    * @param {object} threeSixty The ThreeSixty scene the hotspots are rendered into.
    * @param {Array} interactions The interactions to create hotspots for (undefined when there are none).
    */
-  addInteractionHotspots(threeSixty, interactions) {
+  addInteractionHotspots = (threeSixty, interactions) => {
     const list = interactions ? interactions.map(this.createInteraction) : [];
     this.renderedInteractions = list.length;
 
@@ -264,7 +264,7 @@ export default class ThreeSixtyScene extends React.Component {
       </H5PContext.Provider>,
       threeSixty.getCameraElement(),
     );
-  }
+  };
 
   /**
    * Creates a button for each interaction
@@ -311,14 +311,14 @@ export default class ThreeSixtyScene extends React.Component {
         isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
         nextFocus={ this.props.nextFocus }
         type={ `interaction-${  index}` }
-        clickHandler={this.props.showInteraction.bind(this, index)}
+        clickHandler={() => this.props.showInteraction(index)}
         doubleClickHandler={() => {
           this.context.trigger('doubleClickedInteraction', index);
         }}
         onFocus={ () => {
           this.handleInteractionFocus(interaction);
         }}
-        onFocusedInteraction={this.props.onFocusedInteraction.bind(this, index)}
+        onFocusedInteraction={() => this.props.onFocusedInteraction(index)}
         onBlur={this.props.onBlurInteraction}
         isFocused={this.props.focusedInteraction === index}
         rendered={this.state.isUpdated}

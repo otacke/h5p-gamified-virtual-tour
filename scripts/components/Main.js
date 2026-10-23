@@ -125,19 +125,19 @@ export default class Main extends React.Component {
     }
   }
 
-  setFocusedInteraction(focusedInteraction) {
+  setFocusedInteraction = (focusedInteraction) => {
     this.setState({
       focusedInteraction: focusedInteraction,
     });
-  }
+  };
 
-  blurInteraction() {
+  blurInteraction = () => {
     this.setState({
       focusedInteraction: null,
     });
-  }
+  };
 
-  navigateToScene(sceneId) {
+  navigateToScene = (sceneId) => {
     this.setState({
       sceneWaitingForLoad: this.props.currentScene,
       focusedInteraction: null,
@@ -171,7 +171,7 @@ export default class Main extends React.Component {
     }
 
     this.props.setCurrentSceneId(nextSceneId);
-  }
+  };
 
 
   /**
@@ -233,7 +233,7 @@ export default class Main extends React.Component {
     return this.audioPlayers[id];
   };
 
-  showInteraction(interactionIndex) {
+  showInteraction = (interactionIndex) => {
     const scene = this.context.params.scenes.find((scene) => {
       return scene.sceneId === this.props.currentScene;
     });
@@ -272,15 +272,15 @@ export default class Main extends React.Component {
         nextFocus: null,
       });
     }
-  }
+  };
 
-  hideInteraction() {
+  hideInteraction = () => {
     this.setState((prevState) => ({
       showingInteraction: false,
       currentInteraction: null,
       nextFocus: `interaction-${  prevState.currentInteraction}`,
     }));
-  }
+  };
 
   addThreeSixty = (threeSixty) => {
     this.props.addThreeSixty(threeSixty);
@@ -295,7 +295,7 @@ export default class Main extends React.Component {
     });
   };
 
-  centerScene() {
+  centerScene = () => {
     const sceneParams = this.context.params.scenes;
     const scene = sceneParams.find((scene) => {
       return scene.sceneId === this.props.currentScene;
@@ -305,13 +305,13 @@ export default class Main extends React.Component {
     }
 
     this.props.onSetCameraPos(scene.cameraStartPosition, true);
-  }
+  };
 
-  doneLoadingNextScene() {
+  doneLoadingNextScene = () => {
     this.setState({
       sceneWaitingForLoad: null,
     });
-  }
+  };
 
   render() {
     const sceneParams = this.context.params.scenes;
@@ -365,7 +365,7 @@ export default class Main extends React.Component {
         { showInteractionDialog &&
           <Dialog
             title={ dialogTitle }
-            onHideTextDialog={this.hideInteraction.bind(this)}
+            onHideTextDialog={this.hideInteraction}
             dialogClasses={dialogClasses}
           >
             <InteractionContent
@@ -398,19 +398,19 @@ export default class Main extends React.Component {
                 nextFocus={ this.state.nextFocus }
                 addThreeSixty={ this.addThreeSixty }
                 imageSrc={sceneParams.scenesrc}
-                navigateToScene={this.navigateToScene.bind(this)}
+                navigateToScene={this.navigateToScene}
                 forceStartCamera={this.props.forceStartCamera}
-                showInteraction={this.showInteraction.bind(this)}
+                showInteraction={this.showInteraction}
                 sceneHistory={this.state.sceneHistory}
                 audioIsPlaying={ this.state.audioIsPlaying }
                 sceneId={sceneParams.sceneId}
                 onSetCameraPos={ this.props.onSetCameraPos }
-                onBlurInteraction={this.blurInteraction.bind(this)}
-                onFocusedInteraction={this.setFocusedInteraction.bind(this)}
+                onBlurInteraction={this.blurInteraction}
+                onFocusedInteraction={this.setFocusedInteraction}
                 focusedInteraction={this.state.focusedInteraction}
                 isEditingInteraction={this.state.isEditingInteraction}
                 sceneWaitingForLoad={this.state.sceneWaitingForLoad}
-                doneLoadingNextScene={this.doneLoadingNextScene.bind(this)}
+                doneLoadingNextScene={this.doneLoadingNextScene}
                 canTakeFocus={this.state.childrenCanTakeFocus}
               />
             );
@@ -423,7 +423,7 @@ export default class Main extends React.Component {
           nextFocus={ this.state.nextFocus }
           onAudioIsPlaying={ this.handleAudioIsPlaying }
           onSceneDescription={ this.handleSceneDescription }
-          onCenterScene={ this.centerScene.bind(this) }
+          onCenterScene={ this.centerScene }
         />
       </div>
     );

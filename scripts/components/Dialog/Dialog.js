@@ -3,10 +3,6 @@ import './Dialog.css';
 import { H5PContext } from '../../context/H5PContext.js';
 
 export default class Dialog extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     // Focus must be set to the first focusable element
     this.title.focus();

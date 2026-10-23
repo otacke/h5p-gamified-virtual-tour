@@ -21,8 +21,8 @@ export default class Scene extends React.Component {
           sceneIcons={this.props.sceneIcons}
           sceneParams={this.props.sceneParams}
           imageSrc={this.props.imageSrc}
-          navigateToScene={this.props.navigateToScene.bind(this)}
-          showInteraction={this.props.showInteraction.bind(this)}
+          navigateToScene={this.props.navigateToScene}
+          showInteraction={this.props.showInteraction}
           sceneHistory={this.props.sceneHistory}
           audioIsPlaying={ this.props.audioIsPlaying }
           sceneId={ this.props.sceneId }
@@ -47,9 +47,9 @@ export default class Scene extends React.Component {
         sceneParams={this.props.sceneParams}
         addThreeSixty={ this.props.addThreeSixty }
         imageSrc={this.props.imageSrc}
-        navigateToScene={this.props.navigateToScene.bind(this)}
+        navigateToScene={this.props.navigateToScene}
         forceStartCamera={this.props.forceStartCamera}
-        showInteraction={this.props.showInteraction.bind(this)}
+        showInteraction={this.props.showInteraction}
         audioIsPlaying={ this.props.audioIsPlaying }
         sceneId={ this.props.sceneId }
         toggleCenterScene={ this.props.toggleCenterScene }

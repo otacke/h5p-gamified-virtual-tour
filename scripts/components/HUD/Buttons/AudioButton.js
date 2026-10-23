@@ -204,9 +204,9 @@ export default class AudioButton extends React.Component {
     let player = document.createElement('audio');
     if (player.canPlayType !== undefined) {
       // Add supported source files.
-      for (var i = 0; i < sources.length; i++) {
+      for (let i = 0; i < sources.length; i++) {
         if (player.canPlayType(sources[i].mime)) {
-          var source = document.createElement('source');
+          const source = document.createElement('source');
           source.src = H5P.getPath(sources[i].path, id);
           source.type = sources[i].mime;
           player.appendChild(source);

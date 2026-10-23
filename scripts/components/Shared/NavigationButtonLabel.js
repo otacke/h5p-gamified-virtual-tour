@@ -32,7 +32,6 @@ export default class NavigationButtonLabel extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onClick.bind(this);
     this.innerLabelDiv = React.createRef();
     this.navLabel = React.createRef();
 
@@ -50,7 +49,7 @@ export default class NavigationButtonLabel extends React.Component {
   /**
    * Handle expand button being clicked.
    */
-  onClick() {
+  onClick = () => {
     e.stopPropagation();
     if (!this.state.expandable) {
       return;
@@ -69,7 +68,31 @@ export default class NavigationButtonLabel extends React.Component {
         this.setState({ divHeight: this.getDivHeight(), isExpanded: false });
       }, 0);
     }
-  }
+  };
+
+  handleResize = () => {
+    if (
+      this.state.isExpanded &&
+      this.innerLabelDiv.current &&
+      this.state.divHeight !== this.innerLabelDiv.current.scrollHeight
+    ) {
+      // Font size changes when the screen resizes so we need to make sure it has the correct height
+      if (this.innerLabelDiv.current.scrollHeight !== 0 && this.props.staticScene) {
+        this.setState({
+          divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight : 0,
+        });
+      }
+      // If the interaction doesn't have a scrollheight and is expanded it means that we have moved scene
+      // The interactions in 360 scene is not proparaly remounted and this leads to
+      // Labels being expanded and not proparly shown when going back
+      else if (!this.props.staticScene && (this.state.isExpanded || this.state.divHeight !== '3em') ) {
+        this.setState({
+          isExpanded: false,
+          divHeight: '3em',
+        });
+      }
+    }
+  };
 
   componentDidUpdate(prevProps) {
     // Need to calculate if expand button should be shown and height
@@ -97,46 +120,14 @@ export default class NavigationButtonLabel extends React.Component {
         this.setExpandProperties();
       }
     }, MOUNT_TIMEOUT_MS);
-    this.context.on('resize', () => {
-      if (
-        this.state.isExpanded &&
-        this.innerLabelDiv.current &&
-        this.state.divHeight !== this.innerLabelDiv.current.scrollHeight
-      ) {
-        // Font size changes when the screen resizes so we need to make sure it has the correct height
-        if (this.innerLabelDiv.current.scrollHeight !== 0 && this.props.staticScene) {
-          this.setState({
-            divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight : 0,
-          });
-        }
-        // If the interaction doesn't have a scrollheight and is expanded it means that we have moved scene
-        // The interactions in 360 scene is not proparaly remounted and this leads to
-        // Labels being expanded and not proparly shown when going back
-        else if (!this.props.staticScene && (this.state.isExpanded || this.state.divHeight !== '3em') ) {
-          this.setState({
-            isExpanded: false,
-            divHeight: '3em',
-          });
-        }
-      }
-    });
+    this.context.on('resize', this.handleResize);
   }
 
   componentWillUnmount() {
-    this.context.off('resize', () => {
-      if (
-        this.state.isExpanded &&
-        this.innerLabelDiv.current &&
-        this.state.divHeight !== this.innerLabelDiv.current.scrollHeight
-      ) {
-        this.setState({
-          divHeight: this.innerLabelDiv.current ? this.innerLabelDiv.current.scrollHeight : 0,
-        });
-      }
-    });
+    this.context.off('resize', this.handleResize);
   }
 
-  setHeightProperties() {
+  setHeightProperties = () => {
     const isExpandable = this.isExpandable();
     this.setState({
       expandable: isExpandable,
@@ -146,9 +137,9 @@ export default class NavigationButtonLabel extends React.Component {
       // If not the calculated height will be incorrect
       innerLabelHeight: isExpandable ? '100%' : '',
     });
-  }
+  };
 
-  setExpandProperties() {
+  setExpandProperties = () => {
     const labelProperties = this.getOverflowProperties();
     if (labelProperties.expandDirection !== this.state.expandDirection) {
       this.setState({ expandDirection: labelProperties.expandDirection });
@@ -156,13 +147,13 @@ export default class NavigationButtonLabel extends React.Component {
     if (labelProperties.alignment !== this.state.alignment) {
       this.setState({ alignment: labelProperties.alignment });
     }
-  }
+  };
 
   /**
    * Return height of div based on scrollHeight.
    * @returns {string|null} Height of div based on scrollHeight.
    */
-  getDivHeight() {
+  getDivHeight = () => {
     if (!this.innerLabelDiv.current) {
       return null;
     }
@@ -173,13 +164,13 @@ export default class NavigationButtonLabel extends React.Component {
     const exceedsHeight = this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_LOW;
 
     return (exceedsWidth || exceedsHeight) ? '3em' : '1.5em';
-  }
+  };
 
   /**
    * Return if element can be expanded.
    * @returns {boolean} True if element can be expanded, else false.
    */
-  isExpandable() {
+  isExpandable = () => {
     // If not fully loaded the scrollheight might be wrong, therefore we check if it is to wide and two lines
     if (
       this.innerLabelDiv.current.scrollHeight > INNER_LABEL_HEIGHT_THRESHOLD_HIGH ||
@@ -192,13 +183,13 @@ export default class NavigationButtonLabel extends React.Component {
       return true;
     }
     return false;
-  }
+  };
 
   /**
    * Calculate if element will overflow when expanded.
    * @returns {object} {expandirection, alignment}
    */
-  getOverflowProperties() {
+  getOverflowProperties = () => {
     let height = this.innerLabelDiv.current.scrollHeight;
 
     // Get the right height from the top of the navigation button for entire label
@@ -223,7 +214,7 @@ export default class NavigationButtonLabel extends React.Component {
       this.props.topPosition,
       this.props.leftPosition,
       this.props.wrapperHeight);
-  }
+  };
 
   render() {
     const hoverOnly = this.props.hoverOnly ? 'hover-only' : '';
@@ -272,7 +263,7 @@ export default class NavigationButtonLabel extends React.Component {
             className="nav-label-expand-button"
             tabIndex={expandButtonTabIndex}
             aria-label={this.context.l10n.expandButtonAriaLabel}
-            onClick={this.onClick.bind(this)}>
+            onClick={this.onClick}>
             <div className="nav-label-expand-arrow" />
           </button>}
       </div>

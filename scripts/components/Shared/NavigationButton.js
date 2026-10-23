@@ -59,8 +59,6 @@ export default class NavigationButton extends React.Component {
     this.navButtonWrapper = React.createRef();
     this.navButton = React.createRef();
     this.expandButton = React.createRef();
-    this.onBlur = this.onBlur.bind(this);
-    this.onFocus = this.onFocus.bind(this);
     this.state = {
       isFocused: this.props.isFocused,
       expandButtonFocused: false,
@@ -68,13 +66,13 @@ export default class NavigationButton extends React.Component {
     };
   }
 
-  addFocusListener() {
+  addFocusListener = () => {
     if (this.navButtonWrapper) {
       this.navButtonWrapper.current.addEventListener('focus', this.onFocus);
     }
-  }
+  };
 
-  onFocus() {
+  onFocus = () => {
     // Already focused
     if (this.state.isFocused) {
       return;
@@ -87,9 +85,9 @@ export default class NavigationButton extends React.Component {
       this.props.onFocusedInteraction();
     }
 
-  }
+  };
 
-  onBlur(e) {
+  onBlur = (e) => {
     const navButtonWrapper = this.navButtonWrapper
       && this.navButtonWrapper.current;
 
@@ -112,7 +110,7 @@ export default class NavigationButton extends React.Component {
       this.props.onBlur();
     }
 
-  }
+  };
 
   componentDidMount() {
     if (this.props.onMount) {
@@ -177,7 +175,7 @@ export default class NavigationButton extends React.Component {
     }
   }
 
-  getStyle() {
+  getStyle = () => {
     const style = {};
     if (this.props.topPosition !== undefined) {
       style.top = `${this.props.topPosition  }%`;
@@ -187,9 +185,9 @@ export default class NavigationButton extends React.Component {
       style.left = `${this.props.leftPosition  }%`;
     }
     return style;
-  }
+  };
 
-  onClick() {
+  onClick = () => {
     const hasClickHandler = this.props.forceClickHandler
       || !this.context.extras.isEditor;
 
@@ -201,27 +199,27 @@ export default class NavigationButton extends React.Component {
         innerButtonFocused: false,
       });
     }
-  }
+  };
 
-  onDoubleClick() {
+  onDoubleClick = () => {
     if (this.props.doubleClickHandler) {
       this.props.doubleClickHandler();
     }
     this.setState({
       isFocused: false,
     });
-  }
+  };
 
-  onMouseDown(e) {
+  onMouseDown = (e) => {
     const hasMouseDownHandler = this.context.extras.isEditor
       && this.props.mouseDownHandler;
 
     if (hasMouseDownHandler) {
       this.props.mouseDownHandler(e);
     }
-  }
+  };
 
-  setFocus() {
+  setFocus = () => {
     const isFocusable = this.context.extras.isEditor
       && this.navButtonWrapper
       && this.navButtonWrapper.current;
@@ -230,7 +228,7 @@ export default class NavigationButton extends React.Component {
         preventScroll: true,
       });
     }
-  }
+  };
 
   handleFocus = (e) => {
     if (this.context.extras.isEditor) {
@@ -314,8 +312,8 @@ export default class NavigationButton extends React.Component {
         style={this.getStyle()}
         tabIndex={isWrapperTabbable ? '0' : undefined}
         onFocus={this.handleFocus}
-        onClick={this.onClick.bind(this)}
-        onBlur={this.onBlur.bind(this)}
+        onClick={this.onClick}
+        onBlur={this.onBlur}
       >
         <button
           type="button"
@@ -323,10 +321,10 @@ export default class NavigationButton extends React.Component {
           aria-label={labelText ? labelText : title}
           className='nav-button'
           tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
-          onClick={this.onClick.bind(this)}
-          onDoubleClick={this.onDoubleClick.bind(this)}
-          onMouseDown={this.onMouseDown.bind(this)}
-          onMouseUp={this.setFocus.bind(this)}
+          onClick={this.onClick}
+          onDoubleClick={this.onDoubleClick}
+          onMouseDown={this.onMouseDown}
+          onMouseUp={this.setFocus}
           onFocus={() => this.setState({ innerButtonFocused: true })}
           onBlur={() => this.setState({ innerButtonFocused: false })} />
         {this.props.children}
@@ -337,7 +335,7 @@ export default class NavigationButton extends React.Component {
             hoverOnly={hoverLabel}
             onMount={this.props.onMount}
             forwardRef={this.expandButton}
-            onFocus={this.handleExpandButtonFocus.bind(this)}
+            onFocus={this.handleExpandButtonFocus}
             onBlur={() => this.setState({ expandButtonFocused: false })}
             topPosition={this.props.topPosition * this.props.wrapperHeight / 100}
             wrapperHeight={this.props.wrapperHeight}
@@ -346,7 +344,7 @@ export default class NavigationButton extends React.Component {
             staticScene={this.props.staticScene}
             navButtonFocused={this.state.innerButtonFocused}
             rendered={this.props.rendered}
-            onDoubleClick={this.onDoubleClick.bind(this)}
+            onDoubleClick={this.onDoubleClick}
           />
         }
       </div>

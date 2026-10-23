@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './ContextMenu.css';
 import { H5PContext } from '../../context/H5PContext.js';
 
-export default class ContextMenu extends Component {
-
-  goToScene() {
+export default class ContextMenu extends React.Component {
+  goToScene = () => {
     this.context.trigger('goToScene', this.props.interactionIndex);
-  }
+  };
 
-  handlEdit() {
+  handleEdit = () => {
     this.context.trigger('editInteraction', this.props.interactionIndex);
-  }
+  };
 
-  handleDelete() {
+  handleDelete = () => {
     this.context.trigger('deleteInteraction', this.props.interactionIndex);
-  }
+  };
 
   render() {
     return (
@@ -24,7 +23,7 @@ export default class ContextMenu extends Component {
           <button
             type="button"
             className='go-to-scene'
-            onClick={this.goToScene.bind(this)}
+            onClick={this.goToScene}
             tabIndex="-1"
           >
             <div className='tooltip' dangerouslySetInnerHTML={{ __html: this.context.extras.l10n.goToScene }}></div>
@@ -33,7 +32,7 @@ export default class ContextMenu extends Component {
         <button
           type="button"
           className='edit'
-          onClick={this.handlEdit.bind(this)}
+          onClick={this.handleEdit}
           tabIndex="-1"
         >
           <div className='tooltip' dangerouslySetInnerHTML={{ __html: this.context.extras.l10n.edit }} />
@@ -41,7 +40,7 @@ export default class ContextMenu extends Component {
         <button
           type="button"
           className='delete'
-          onClick={this.handleDelete.bind(this)}
+          onClick={this.handleDelete}
           tabIndex="-1"
         >
           <div className='tooltip' dangerouslySetInnerHTML={{ __html: this.context.extras.l10n.delete }}/>

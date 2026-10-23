@@ -1,11 +1,7 @@
 import React from 'react';
 import './Button.css';
 
-export default class AudioButton extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+export default class Button extends React.Component {
   handleClick = () => {
     if (!this.props.disabled) {
       this.props.onClick();
