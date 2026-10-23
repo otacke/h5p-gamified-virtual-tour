@@ -168,19 +168,6 @@ export default class StaticScene extends React.Component {
   };
 
   /**
-   * Get x and y positions from position string.
-   * @param {string} positions Comma-separated x and y position.
-   * @returns {object} Object with x and y positions.
-   */
-  getPositions = (positions) => {
-    const pos = positions.split(',');
-    return {
-      x: pos[0],
-      y: pos[1],
-    };
-  };
-
-  /**
    * Get new interaction position after dragging.
    * @param {object} initialPos Initial position.
    * @param {object} mouseEvent Mouse event.
@@ -223,7 +210,7 @@ export default class StaticScene extends React.Component {
    */
   getNewInteractionPositions = (mouseEvent) => {
     const interaction = this.getDraggingInteraction();
-    const initialPos = this.getPositions(interaction.interactionpos);
+    const initialPos = interaction.interactionPosition;
 
     const xPos = this.getNewInteractionPosition(
       initialPos,
@@ -311,10 +298,10 @@ export default class StaticScene extends React.Component {
     }
 
     const interaction = this.getDraggingInteraction();
-    interaction.interactionpos = [
-      `${this.state.x  }%`,
-      `${this.state.y  }%`,
-    ].join(',');
+    interaction.interactionPosition = {
+      x: `${this.state.x}%`,
+      y: `${this.state.y}%`,
+    };
 
     this.setState({
       x: null,
@@ -460,7 +447,7 @@ export default class StaticScene extends React.Component {
           />
           {
             interactions.map((interaction, index) => {
-              const pos = this.getPositions(interaction.interactionpos);
+              const pos = interaction.interactionPosition;
               let posX = this.removePercentageDenotationFromPosition(pos.x);
               let posY = this.removePercentageDenotationFromPosition(pos.y);
               const hasUpdatedPositions = this.state.x !== null

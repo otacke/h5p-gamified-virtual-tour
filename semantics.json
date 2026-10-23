@@ -182,8 +182,18 @@
                     ]
                   },
                   {
-                    "name": "interactionpos",
-                    "type": "text"
+                    "name": "interactionPosition",
+                    "type": "group",
+                    "fields": [
+                      {
+                        "name": "x",
+                        "type": "text"
+                      },
+                      {
+                        "name": "y",
+                        "type": "text"
+                      }
+                    ]
                   }
                 ]
               }

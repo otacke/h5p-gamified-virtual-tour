@@ -316,13 +316,13 @@ export default class ThreeSixtyScene extends React.Component {
         key={`interaction-${  this.props.sceneId  }${index}`}
         onMount={ (el) => this.props.threeSixty.add(
           el,
-          ThreeSixtyScene.getPositionFromString(interaction.interactionpos),
+          ThreeSixtyScene.getYawPitchFromPosition(interaction.interactionPosition),
           this.context.extras.isEditor,
         )}
         onUnmount={ (el) => this.props.threeSixty.remove(this.props.threeSixty.find(el)) }
         onUpdate={ (el) => H5P.ThreeSixty.setElementPosition(
           this.props.threeSixty.find(el),
-          ThreeSixtyScene.getPositionFromString(interaction.interactionpos),
+          ThreeSixtyScene.getYawPitchFromPosition(interaction.interactionPosition),
         )}
         title={title}
         label={getLabelFromInteraction(interaction)}
@@ -355,16 +355,14 @@ export default class ThreeSixtyScene extends React.Component {
   };
 
   /**
-   * Convert position string to object.
-   * TODO: Use object in params instead of converting all the time.
-   * @param {string} position Comma-separated yaw and pitch.
+   * Get yaw and pitch from interaction position.
+   * @param {object} position Interaction position with x (yaw) and y (pitch).
    * @returns {object} Object with yaw and pitch.
    */
-  static getPositionFromString(position) {
-    position = position.split(',');
+  static getYawPitchFromPosition(position) {
     return {
-      yaw: position[0],
-      pitch: position[1],
+      yaw: position.x,
+      pitch: position.y,
     };
   }
 
@@ -373,7 +371,7 @@ export default class ThreeSixtyScene extends React.Component {
    * @param {object} interaction Interaction that gained focus.
    */
   handleInteractionFocus = (interaction) => {
-    this.props.onSetCameraPos(ThreeSixtyScene.getPositionFromString(interaction.interactionpos));
+    this.props.onSetCameraPos(ThreeSixtyScene.getYawPitchFromPosition(interaction.interactionPosition));
   };
 
   /**
