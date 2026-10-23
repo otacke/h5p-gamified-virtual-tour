@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import Main from './components/Main.js';
 import { H5PContext } from './context/H5PContext.js';
 import { sceneRenderingQualityMapping } from './components/Scene/SceneTypes/ThreeSixtyScene.js';
@@ -71,19 +71,7 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
 
     this.trigger('changedScene', sceneId);
 
-    ReactDOM.render(
-      <H5PContext.Provider value={this}>
-        <Main
-          forceStartScreen={this.forceStartScreen}
-          forceStartCamera={this.forceStartCamera}
-          currentScene={this.currentScene}
-          setCurrentSceneId={this.setCurrentSceneId}
-          addThreeSixty={ (tS) => this.threeSixty = tS }
-          onSetCameraPos={this.setCameraPosition}
-        />
-      </H5PContext.Provider>,
-      this.wrapper,
-    );
+    this.renderMain();
 
     window.requestAnimationFrame(() => {
       this.trigger('resize');
@@ -99,19 +87,9 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
       this.currentScene = this.forceStartScreen;
     }
 
-    ReactDOM.render(
-      <H5PContext.Provider value={this}>
-        <Main
-          forceStartScreen={this.forceStartScreen}
-          forceStartCamera={this.forceStartCamera}
-          currentScene={this.currentScene}
-          setCurrentSceneId={this.setCurrentSceneId}
-          addThreeSixty={ (tS) => this.threeSixty = tS }
-          onSetCameraPos={this.setCameraPosition}
-        />
-      </H5PContext.Provider>,
-      this.wrapper,
-    );
+    this.root = createRoot(this.wrapper);
+
+    this.renderMain();
   };
 
   reDraw = (forceStartScreen = this.currentScene) => {
@@ -126,7 +104,11 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
       return;
     }
 
-    ReactDOM.render(
+    this.renderMain();
+  };
+
+  renderMain = () => {
+    this.root.render(
       <H5PContext.Provider value={this}>
         <Main
           forceStartScreen={this.forceStartScreen}
@@ -137,7 +119,6 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
           onSetCameraPos={this.setCameraPosition}
         />
       </H5PContext.Provider>,
-      this.wrapper,
     );
   };
 

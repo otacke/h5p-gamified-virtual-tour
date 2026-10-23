@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import NavigationButton, { getIconFromInteraction, getLabelFromInteraction } from '../../Shared/NavigationButton.js';
 import { H5PContext } from '../../../context/H5PContext.js';
 import ContextMenu from '../../Shared/ContextMenu.js';
@@ -258,11 +258,20 @@ export default class ThreeSixtyScene extends React.Component {
     const list = interactions ? interactions.map(this.createInteraction) : [];
     this.renderedInteractions = list.length;
 
-    ReactDOM.render(
+    const cameraElement = threeSixty.getCameraElement();
+    if (!this.interactionHotspotRoot
+      || this.interactionHotspotRootElement !== cameraElement) {
+      if (this.interactionHotspotRoot) {
+        this.interactionHotspotRoot.unmount();
+      }
+      this.interactionHotspotRoot = createRoot(cameraElement);
+      this.interactionHotspotRootElement = cameraElement;
+    }
+
+    this.interactionHotspotRoot.render(
       <H5PContext.Provider value={this.context}>
         { list }
       </H5PContext.Provider>,
-      threeSixty.getCameraElement(),
     );
   };
 
