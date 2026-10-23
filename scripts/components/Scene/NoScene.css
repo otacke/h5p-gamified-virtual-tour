@@ -18,12 +18,12 @@
 .no-scene-wrapper:before {
   content: var(--icon-no-scene);
   font-family: "360-image", sans-serif;
-  font-size: 10em;
+  font-size: 10rem;
   color: #8d8f98;
   line-height: 0.75;
-  padding-left: 0.125em;
+  padding-left: 1.25rem;
 }
 
 .no-scene-wrapper .title {
-  font-size: 2em;
+  font-size: 2rem;
 }

@@ -6,12 +6,12 @@
   top: 50%;
   transform: translate(-50%, -50%);
 
-  width: 9em;
-  height: 9em;
+  width: 4.5rem;
+  height: 4.5rem;
 
   background: url('../../../assets/images/moving-icon.svg');
   background-size: 100% 100%;
-  font-size: 0.5em;
+  font-size: 0.5rem;
 }
 
 .h5p-three-sixty-scene .nav-button-wrapper.dragging.focused .context-menu {
@@ -50,7 +50,7 @@
 
 .three-sixty-scene-wrapper .loading-image-wrapper,
 .three-sixty-scene-wrapper .loading-image-wrapper img {
-  width: 7em;
+  width: 7rem;
 }
 
 .three-sixty-scene-wrapper .loading-image-wrapper img {

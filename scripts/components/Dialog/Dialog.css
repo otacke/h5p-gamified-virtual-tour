@@ -1,10 +1,10 @@
 @import '../../styles/icons.css';
 
 .h5p-text-dialog .nav-button-wrapper {
-  top: -1em;
-  right: -1em;
+  top: -1rem;
+  right: -1rem;
   left: auto;
-  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   border: 8px solid #fff;
   background-color: #ebebeb;
   border-radius: 50%;
@@ -33,7 +33,7 @@
   max-height: 90%;
   background: white;
   z-index: 1;
-  padding: 2em;
+  padding: 2rem;
   display: flex;
   box-sizing: border-box;
 }
@@ -41,16 +41,16 @@
 .h5p-text-dialog .close-button-wrapper {
   line-height: 1;
   position: absolute;
-  font-size: 1em;
+  font-size: 1rem;
   box-sizing: content-box;
-  width: 2em;
-  height: 2em;
+  width: 2rem;
+  height: 2rem;
   padding: 0;
 
-  top: -1em;
-  right: -1em;
+  top: -1rem;
+  right: -1rem;
 
-  box-shadow: 0 0 1em 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
   border: 8px solid #fff;
   background-color: #ebebeb;
   border-radius: 50%;
@@ -71,8 +71,8 @@
 
 .h5p-medium-tablet-size .h5p-text-dialog {
   width: 86%;
-  margin: 0em;
-  padding: 0.25em;
+  margin: 0;
+  padding: 0.25rem;
 }
 
 .h5p-text-content {
@@ -83,7 +83,7 @@
 }
 
 .h5p-text-content::-webkit-scrollbar {
-  width: 0.5em;
+  width: 0.5rem;
   background: #fff;
 }
 

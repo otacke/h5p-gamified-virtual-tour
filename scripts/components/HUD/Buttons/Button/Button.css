@@ -4,17 +4,17 @@
   pointer-events: auto;
   position: relative;
   float: left;
-  font-size: 2em;
+  font-size: 2rem;
 }
 
 .hud-btn {
-  font-size: 1em;
+  font-size: 2rem;
   background: #000;
   border-radius: 50%;
-  border: 0.1em solid transparent;
+  border: 0.2rem solid transparent;
   color: #fff;
-  width: 1em;
-  height: 1em;
+  width: 2rem;
+  height: 2rem;
   cursor: pointer;
   overflow: hidden;
   position: relative;
@@ -24,8 +24,8 @@
 }
 
 .btn-wrap .tooltip {
-  padding: 0.25em 1em;
-  font-size: 0.4375em;
+  padding: 0.21875rem 0.875rem;
+  font-size: 0.875rem;
   background: #000;
   color: #fff;
   position: absolute;
@@ -65,16 +65,16 @@
 }
 
 .hud-bottom-left .hud-btn {
-  margin-right: 0.25em;
+  margin-right: 0.5rem;
 }
 
 .hud-bottom-left .tooltip {
-  left: -0.25em;
+  left: -0.21875rem;
   bottom: 200%;
 }
 
 .btn-wrap .tooltip .text-wrap {
-  max-width: 30em;
+  max-width: 26.25rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -85,8 +85,8 @@
   background: #000;
   box-shadow: rgba(0, 0, 0, 0.4) 0 3px 10px;
   content: " ";
-  width: 0.75em;
-  height: 0.75em;
+  width: 0.65625rem;
+  height: 0.65625rem;
   position: absolute;
 }
 
