@@ -4,6 +4,10 @@ import { H5PContext } from '../../../context/H5PContext.js';
 import Button from './Button/Button.js';
 
 export default class AudioButton extends React.Component {
+  /**
+   * Create audio button component.
+   * @param {object} props Component props.
+   */
   constructor(props) {
     super(props);
 
@@ -14,7 +18,7 @@ export default class AudioButton extends React.Component {
   /**
    * Determine player ID from given props.
    * @param {object} props Component props (scene ID and scene audio track).
-   * @returns {string} The player ID, or null if no audio track applies.
+   * @returns {string} Player ID, or null if no audio track applies.
    */
   getPlayerId = (props) => {
     if (props.sceneId !== undefined && props.sceneAudioTrack && props.sceneAudioTrack.length) {
@@ -29,17 +33,17 @@ export default class AudioButton extends React.Component {
 
   /**
    * Get track from given player ID.
-   * @param {string} id Player ID ('global' or a scene ID).
-   * @returns {Array} The audio source files for the track.
+   * @param {string} id Player ID ('global' or scene ID).
+   * @returns {Array} Audio source files for track.
    */
   getTrack = (id) => {
     return (id === 'global' ? this.context.behavior.audio : this.props.sceneAudioTrack);
   };
 
   /**
-   * Get the audio player for the current track.
+   * Get audio player for current track.
    * @param {string} id Player ID.
-   * @returns {object} The audio player (HTMLAudioElement), or null if the track isn't playable.
+   * @returns {object} Audio player (HTMLAudioElement), or null if track isn't playable.
    */
   getPlayer = (id) => {
     if (!id) {
@@ -65,7 +69,7 @@ export default class AudioButton extends React.Component {
   };
 
   /**
-   * Handle audio button clicked
+   * Handle audio button click.
    */
   handleClick = () => {
     // Determine player ID
@@ -84,7 +88,7 @@ export default class AudioButton extends React.Component {
   };
 
   /**
-   * Handle audio started playing
+   * Handle audio playback start.
    */
   handlePlay = () => {
     this.setState({
@@ -93,7 +97,7 @@ export default class AudioButton extends React.Component {
   };
 
   /**
-   * Handle audio stopped playing
+   * Handle audio playback stop.
    */
   handleStop = () => {
     this.setState({
@@ -102,8 +106,8 @@ export default class AudioButton extends React.Component {
   };
 
   /**
-   * React - runs after render.
-   * @param {object} prevProps The props from the previous render.
+   * React - update after render.
+   * @param {object} prevProps Props from previous render.
    */
   componentDidUpdate(prevProps) {
     if (this.props.isPlaying && this.props.isPlaying !== prevProps.isPlaying) {
@@ -143,8 +147,8 @@ export default class AudioButton extends React.Component {
   }
 
   /**
-   * React - adds dom elements.
-   * @returns {React.Element|null} The rendered audio button, or null if no track applies.
+   * React - create DOM elements.
+   * @returns {React.Element|null} Rendered audio button, or null if no track applies.
    */
   render() {
     const id = this.getPlayerId(this.props);
@@ -164,40 +168,40 @@ export default class AudioButton extends React.Component {
   }
 
   /**
-   * Determine if the ID of the player belongs to a scene audio track.
-   * @param {string} id The player ID to check.
-   * @returns {boolean} Whether the player ID belongs to a scene audio track.
+   * Determine if player ID belongs to scene audio track.
+   * @param {string} id Player ID to check.
+   * @returns {boolean} Whether player ID belongs to scene audio track.
    */
   static isSceneAudio(id) {
     return id === 'global' || id?.startsWith('scene-');
   }
 
   /**
-   * Determine if the ID of the player belongs to an interaction audio track.
-   * @param {string} id The player ID to check.
-   * @returns {boolean} Whether the player ID belongs to an interaction audio track.
+   * Determine if player ID belongs to interaction audio track.
+   * @param {string} id Player ID to check.
+   * @returns {boolean} Whether player ID belongs to interaction audio track.
    */
   static isInteractionAudio(id) {
     return id?.startsWith('interaction-');
   }
 
   /**
-   * Determine if the ID of the player belongs to a video interaction.
-   * @param {string} id The player ID to check.
-   * @returns {boolean} Whether the player ID belongs to a video interaction.
+   * Determine if player ID belongs to video interaction.
+   * @param {string} id Player ID to check.
+   * @returns {boolean} Whether player ID belongs to video interaction.
    */
   static isVideoAudio(id) {
     return id?.startsWith('video-');
   }
 
   /**
-   * Help create the audio player and find the approperiate source.
-   * @param {number} id Content ID
-   * @param {Array} sources The audio source files (path and mime pairs) to add.
-   * @param {function} onPlay Callback
-   * @param {function} onStop Callback
-   * @param {boolean} loop Whether the audio should loop.
-   * @returns {object} The created audio player (HTMLAudioElement), or null if not supported.
+   * Create audio player and find appropriate source.
+   * @param {number} id Content ID.
+   * @param {Array} sources Audio source files (path and mime pairs) to add.
+   * @param {function} onPlay Callback.
+   * @param {function} onStop Callback.
+   * @param {boolean} loop Whether audio should loop.
+   * @returns {object} Created audio player (HTMLAudioElement), or null if not supported.
    */
   static createAudioPlayer(id, sources, onPlay, onStop, loop) {
     // Check if browser supports audio.

@@ -9,6 +9,10 @@ import AudioButton from './HUD/Buttons/AudioButton.js';
 import NoScene from './Scene/NoScene.js';
 
 export default class Main extends React.Component {
+  /**
+   * Create main component.
+   * @param {object} props Component props.
+   */
   constructor(props) {
     super(props);
 
@@ -34,6 +38,9 @@ export default class Main extends React.Component {
     };
   }
 
+  /**
+   * React - run after initial render.
+   */
   componentDidMount() {
     // Listen for focus to interaction
     this.context.on('focusInteraction', (e) => {
@@ -51,6 +58,11 @@ export default class Main extends React.Component {
     });
   }
 
+  /**
+   * React - update after render.
+   * @param {object} prevProps Props from previous render.
+   * @param {object} prevState State from previous render.
+   */
   componentDidUpdate(prevProps, prevState) {
     if (this.state.updateThreeSixty) {
       this.setState({
@@ -125,18 +137,29 @@ export default class Main extends React.Component {
     }
   }
 
+  /**
+   * Set focused interaction index.
+   * @param {number} focusedInteraction Index of focused interaction.
+   */
   setFocusedInteraction = (focusedInteraction) => {
     this.setState({
       focusedInteraction: focusedInteraction,
     });
   };
 
+  /**
+   * Blur focused interaction.
+   */
   blurInteraction = () => {
     this.setState({
       focusedInteraction: null,
     });
   };
 
+  /**
+   * Navigate to scene.
+   * @param {number} sceneId ID of scene to navigate to.
+   */
   navigateToScene = (sceneId) => {
     this.setState({
       sceneWaitingForLoad: this.props.currentScene,
@@ -175,8 +198,8 @@ export default class Main extends React.Component {
 
 
   /**
-   * The user wants to see the scene description, handling it.
-   * @param {string} text Scene description
+   * Show scene description in dialog.
+   * @param {string} text Scene description.
    */
   handleSceneDescription = (text) => {
     this.setState({
@@ -187,7 +210,7 @@ export default class Main extends React.Component {
   };
 
   /**
-   * The user wants to close the text dialog, handling it.
+   * Close text dialog.
    */
   handleCloseTextDialog = () => {
     this.setState({
@@ -198,10 +221,10 @@ export default class Main extends React.Component {
   };
 
   /**
-   * Get the audio player for the current track.
+   * Get audio player for current track.
    * @param {string} id Player ID.
-   * @param {object} [interaction] Parameters (Only needed initially)
-   * @returns {HTMLAudioElement|undefined} The audio player, or undefined if the track isn't playable.
+   * @param {object} [interaction] Interaction parameters (only needed initially).
+   * @returns {HTMLAudioElement|undefined} Audio player, or undefined if track isn't playable.
    */
   getAudioPlayer = (id, interaction) => {
     // Create player if none exist
@@ -233,6 +256,10 @@ export default class Main extends React.Component {
     return this.audioPlayers[id];
   };
 
+  /**
+   * Show interaction.
+   * @param {number} interactionIndex Index of interaction to show.
+   */
   showInteraction = (interactionIndex) => {
     const scene = this.context.params.scenes.find((scene) => {
       return scene.sceneId === this.props.currentScene;
@@ -274,6 +301,9 @@ export default class Main extends React.Component {
     }
   };
 
+  /**
+   * Hide interaction dialog.
+   */
   hideInteraction = () => {
     this.setState((prevState) => ({
       showingInteraction: false,
@@ -282,6 +312,10 @@ export default class Main extends React.Component {
     }));
   };
 
+  /**
+   * Add ThreeSixty instance.
+   * @param {object} threeSixty ThreeSixty scene instance.
+   */
   addThreeSixty = (threeSixty) => {
     this.props.addThreeSixty(threeSixty);
     this.setState({
@@ -289,12 +323,19 @@ export default class Main extends React.Component {
     });
   };
 
+  /**
+   * Set player ID of playing audio.
+   * @param {string} id Player ID, or null if no audio plays.
+   */
   handleAudioIsPlaying = (id) => {
     this.setState({
       audioIsPlaying: id, // Change the player
     });
   };
 
+  /**
+   * Center camera at scene start position.
+   */
   centerScene = () => {
     const sceneParams = this.context.params.scenes;
     const scene = sceneParams.find((scene) => {
@@ -307,12 +348,19 @@ export default class Main extends React.Component {
     this.props.onSetCameraPos(scene.cameraStartPosition, true);
   };
 
+  /**
+   * Mark next scene as loaded.
+   */
   doneLoadingNextScene = () => {
     this.setState({
       sceneWaitingForLoad: null,
     });
   };
 
+  /**
+   * React - create DOM elements.
+   * @returns {React.Element|null} Rendered main elements, or null if no scene.
+   */
   render() {
     const sceneParams = this.context.params.scenes;
     if (!sceneParams) {

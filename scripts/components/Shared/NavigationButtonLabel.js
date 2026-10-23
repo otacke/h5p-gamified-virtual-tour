@@ -4,15 +4,32 @@ import './NavigationButtonLabel.css';
 import { H5PContext } from '../../context/H5PContext.js';
 import { willOverflow } from './OverflowHelpers.js';
 
+/**
+ * Get label position from per-interaction or global settings.
+ * @param {object} globalLabel Global label settings.
+ * @param {object} label Interaction label settings.
+ * @returns {string} Label position.
+ */
 export const getLabelPos = (globalLabel, label) => {
   const useLabelPosition = label && label.labelPosition && label.labelPosition !== 'inherit';
   return useLabelPosition ? label.labelPosition : globalLabel.labelPosition;
 };
 
+/**
+ * Get label text.
+ * @param {object} label Interaction label settings.
+ * @returns {string} Label text.
+ */
 export const getLabelText = (label) => {
   return label && label.labelText ? label.labelText : '';
 };
 
+/**
+ * Determine if label only shows on hover.
+ * @param {object} globalLabel Global label settings.
+ * @param {object} label Interaction label settings.
+ * @returns {boolean} Whether label only shows on hover.
+ */
 export const isHoverLabel = (globalLabel, label) => {
   if (label.showLabel === 'inherit') {
     return globalLabel.showLabel ? false : true;
@@ -20,15 +37,20 @@ export const isHoverLabel = (globalLabel, label) => {
   return label.showLabel === 'show' ? false : true;
 };
 
-// Threshold for if the label should be multiline
+/** @constant {number} INNER_LABEL_HEIGHT_THRESHOLD_LOW Height threshold for multiline label. */
 const INNER_LABEL_HEIGHT_THRESHOLD_LOW = 22;
 
-// Threshold for if the label should be expandeble
+/** @constant {number} INNER_LABEL_HEIGHT_THRESHOLD_HIGH Height threshold for expandable label. */
 const INNER_LABEL_HEIGHT_THRESHOLD_HIGH = 44;
 
+/** @constant {number} MOUNT_TIMEOUT_MS Delay before setting height properties, in milliseconds. */
 const MOUNT_TIMEOUT_MS = 50;
 
 export default class NavigationButtonLabel extends React.Component {
+  /**
+   * Create navigation button label component.
+   * @param {object} props Component props.
+   */
   constructor(props) {
     super(props);
 
@@ -47,7 +69,8 @@ export default class NavigationButtonLabel extends React.Component {
   }
 
   /**
-   * Handle expand button being clicked.
+   * Handle expand button click.
+   * @param {object} e Click event.
    */
   onClick = (e) => {
     e.stopPropagation();
@@ -70,6 +93,9 @@ export default class NavigationButtonLabel extends React.Component {
     }
   };
 
+  /**
+   * Recalculate label height on resize.
+   */
   handleResize = () => {
     if (
       this.state.isExpanded &&
@@ -94,6 +120,10 @@ export default class NavigationButtonLabel extends React.Component {
     }
   };
 
+  /**
+   * React - update after render.
+   * @param {object} prevProps Props from previous render.
+   */
   componentDidUpdate(prevProps) {
     // Need to calculate if expand button should be shown and height
     if (this.props.labelText !== prevProps.labelText || this.props.hoverOnly !== prevProps.hoverOnly) {
@@ -113,6 +143,9 @@ export default class NavigationButtonLabel extends React.Component {
     }
   }
 
+  /**
+   * React - run after initial render.
+   */
   componentDidMount() {
     setTimeout(() => {
       this.setHeightProperties();
@@ -123,10 +156,16 @@ export default class NavigationButtonLabel extends React.Component {
     this.context.on('resize', this.handleResize);
   }
 
+  /**
+   * React - run before unmount.
+   */
   componentWillUnmount() {
     this.context.off('resize', this.handleResize);
   }
 
+  /**
+   * Set expandable state and label height.
+   */
   setHeightProperties = () => {
     const isExpandable = this.isExpandable();
     this.setState({
@@ -139,6 +178,9 @@ export default class NavigationButtonLabel extends React.Component {
     });
   };
 
+  /**
+   * Set expand direction and alignment.
+   */
   setExpandProperties = () => {
     const labelProperties = this.getOverflowProperties();
     if (labelProperties.expandDirection !== this.state.expandDirection) {
@@ -187,7 +229,7 @@ export default class NavigationButtonLabel extends React.Component {
 
   /**
    * Calculate if element will overflow when expanded.
-   * @returns {object} {expandirection, alignment}
+   * @returns {object} Object with expand direction and alignment.
    */
   getOverflowProperties = () => {
     let height = this.innerLabelDiv.current.scrollHeight;
@@ -216,6 +258,10 @@ export default class NavigationButtonLabel extends React.Component {
       this.props.wrapperHeight);
   };
 
+  /**
+   * React - create DOM elements.
+   * @returns {React.Element} Rendered label element.
+   */
   render() {
     const hoverOnly = this.props.hoverOnly ? 'hover-only' : '';
     const isExpanded = this.state.isExpanded ? 'is-expanded' : '';

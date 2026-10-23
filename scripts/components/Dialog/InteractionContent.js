@@ -4,6 +4,10 @@ import { H5PContext } from '../../context/H5PContext.js';
 import AudioButton from '../HUD/Buttons/AudioButton.js';
 
 export default class InteractionContent extends React.Component {
+  /**
+   * Create interaction content component.
+   * @param {object} props Component props.
+   */
   constructor(props) {
     super(props);
 
@@ -12,6 +16,10 @@ export default class InteractionContent extends React.Component {
     };
   }
 
+  /**
+   * React - update after render.
+   * @param {object} prevProps Props from previous render.
+   */
   componentDidUpdate(prevProps) {
     if (this.props.audioIsPlaying && this.props.audioIsPlaying !== prevProps.audioIsPlaying) {
       // The Audio Player has changed
@@ -34,6 +42,10 @@ export default class InteractionContent extends React.Component {
     }
   }
 
+  /**
+   * Initialize interaction content.
+   * @param {object} contentRef Container element to render interaction into.
+   */
   initializeContent(contentRef) {
     if (!contentRef || this.state.isInitialized) {
       return;
@@ -83,6 +95,10 @@ export default class InteractionContent extends React.Component {
     this.instance.on('resize', () => this.props.onResize());
   }
 
+  /**
+   * React - create DOM elements.
+   * @returns {React.Element} Rendered interaction content container.
+   */
   render() {
     return (
       <div ref={ (el) => this.initializeContent(el) } />

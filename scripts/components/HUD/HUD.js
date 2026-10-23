@@ -8,9 +8,9 @@ import { SceneTypes } from '../Scene/Scene.js';
 
 export default class HUD extends React.Component {
   /**
-   * Help pick the audio track for the given scene.
-   * @param {object} scene The current scene (may have its own audio track).
-   * @returns {object} The props object for the scene's audio button.
+   * Pick audio track props for scene.
+   * @param {object} scene Current scene (may have its own audio track).
+   * @returns {object} Props object for scene's audio button.
    */
   getSceneAudioTrack = (scene) => {
     const props = {
@@ -28,13 +28,16 @@ export default class HUD extends React.Component {
     return props;
   };
 
+  /**
+   * Show scene description.
+   */
   handleSceneDescription = () => {
     this.props.onSceneDescription(this.props.scene.scenedescription);
   };
 
   /**
    * React - create DOM elements.
-   * @returns {React.Element} The rendered HUD elements.
+   * @returns {React.Element} Rendered HUD elements.
    */
   render() {
     const isThreeSixty = this.props.scene.sceneType

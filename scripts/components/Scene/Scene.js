@@ -3,6 +3,7 @@ import { H5PContext } from '../../context/H5PContext.js';
 import ThreeSixtyScene from './SceneTypes/ThreeSixtyScene.js';
 import StaticScene from './SceneTypes/StaticScene.js';
 
+/** @constant {object} SceneTypes Scene type identifiers. */
 export const SceneTypes = {
   THREE_SIXTY_SCENE: '360',
   STATIC_SCENE: 'static',
@@ -11,6 +12,10 @@ export const SceneTypes = {
 
 export default class Scene extends React.Component {
 
+  /**
+   * React - create DOM elements.
+   * @returns {React.Element} Rendered scene element.
+   */
   render() {
     if (this.props.sceneParams.sceneType === SceneTypes.STATIC_SCENE) {
       return (

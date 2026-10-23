@@ -3,17 +3,27 @@ import './Dialog.css';
 import { H5PContext } from '../../context/H5PContext.js';
 
 export default class Dialog extends React.Component {
+  /**
+   * React - run after initial render.
+   */
   componentDidMount() {
     // Focus must be set to the first focusable element
     this.title.focus();
   }
 
+  /**
+   * Store dialog element reference.
+   * @param {object} el Dialog element.
+   */
   handleDialogRef = (el) => {
     if (el) {
       this.el = el;
     }
   };
 
+  /**
+   * Resize dialog to fit content.
+   */
   handleResize = () => {
     if (this.el) {
       // Reset to allow size growth
@@ -23,6 +33,10 @@ export default class Dialog extends React.Component {
     }
   };
 
+  /**
+   * React - create DOM elements.
+   * @returns {React.Element} Rendered dialog element.
+   */
   render() {
     let dialogClasses = ['h5p-text-dialog'];
     if (this.props.dialogClasses) {

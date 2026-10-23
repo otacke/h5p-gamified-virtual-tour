@@ -3,6 +3,7 @@ import './NavigationButton.css';
 import { H5PContext } from '../../context/H5PContext.js';
 import NavigationButtonLabel, { getLabelPos, getLabelText, isHoverLabel } from './NavigationButtonLabel.js';
 
+/** @constant {object} Icons CSS classes for button icons. */
 export const Icons = {
   INFO: 'h5p-info-button h5p-interaction-button',
   QUESTION: 'h5p-question-button h5p-interaction-button',
@@ -12,16 +13,28 @@ export const Icons = {
   AUDIO: 'h5p-audio-button h5p-interaction-button',
 };
 
+/** @constant {Array} infoInteractions Machine names of info-type interactions. */
 const infoInteractions = [
   'H5P.AdvancedText',
   'H5P.Image',
   'H5P.Video',
 ];
 
+/**
+ * Determine if machine name is info interaction.
+ * @param {string} machineName Machine name to check.
+ * @returns {boolean} Whether machine name is info interaction.
+ */
 const isInfoInteraction = (machineName) => {
   return infoInteractions.includes(machineName);
 };
 
+/**
+ * Get icon for interaction.
+ * @param {object} interaction Interaction to get icon for.
+ * @param {Array} scenes All scenes (for icon type of next scene).
+ * @returns {string} CSS class for icon.
+ */
 export const getIconFromInteraction = (interaction, scenes) => {
   const library = interaction.action.library;
   const machineName = H5P.libraryFromString(library).machineName;
@@ -48,11 +61,20 @@ export const getIconFromInteraction = (interaction, scenes) => {
   return icon;
 };
 
+/**
+ * Get label for interaction.
+ * @param {object} interaction Interaction to get label for.
+ * @returns {object} Label object.
+ */
 export const getLabelFromInteraction = (interaction) => {
   return { ...interaction.label, labelText: interaction.labelText };
 };
 
 export default class NavigationButton extends React.Component {
+  /**
+   * Create navigation button component.
+   * @param {object} props Component props.
+   */
   constructor(props) {
     super(props);
 
@@ -66,12 +88,18 @@ export default class NavigationButton extends React.Component {
     };
   }
 
+  /**
+   * Add focus listener to navigation button wrapper.
+   */
   addFocusListener = () => {
     if (this.navButtonWrapper) {
       this.navButtonWrapper.current.addEventListener('focus', this.onFocus);
     }
   };
 
+  /**
+   * Handle navigation button focused.
+   */
   onFocus = () => {
     // Already focused
     if (this.state.isFocused) {
@@ -87,6 +115,10 @@ export default class NavigationButton extends React.Component {
 
   };
 
+  /**
+   * Handle navigation button blurred.
+   * @param {object} e Blur event.
+   */
   onBlur = (e) => {
     const navButtonWrapper = this.navButtonWrapper
       && this.navButtonWrapper.current;
@@ -112,6 +144,9 @@ export default class NavigationButton extends React.Component {
 
   };
 
+  /**
+   * React - run after initial render.
+   */
   componentDidMount() {
     if (this.props.onMount) {
       // Let parent know this element should be added to the THREE world.
@@ -128,6 +163,10 @@ export default class NavigationButton extends React.Component {
     }
   }
 
+  /**
+   * React - update after render.
+   * @param {object} prevProps Props from previous render.
+   */
   componentDidUpdate(prevProps) {
     if (this.props.type && this.props.type === this.props.nextFocus && prevProps.nextFocus !== this.props.nextFocus) {
       this.skipFocus = true; // Prevent moving camera on next focus (makes for a better UX when using the mouse)
@@ -160,6 +199,9 @@ export default class NavigationButton extends React.Component {
     }
   }
 
+  /**
+   * React - run before unmount.
+   */
   componentWillUnmount() {
     if (this.navButtonWrapper) {
       this.navButtonWrapper.current.removeEventListener('focus', this.onFocus);
@@ -175,6 +217,10 @@ export default class NavigationButton extends React.Component {
     }
   }
 
+  /**
+   * Get style object with position.
+   * @returns {object} Style object with top and left positions.
+   */
   getStyle = () => {
     const style = {};
     if (this.props.topPosition !== undefined) {
@@ -187,6 +233,9 @@ export default class NavigationButton extends React.Component {
     return style;
   };
 
+  /**
+   * Handle navigation button clicked.
+   */
   onClick = () => {
     const hasClickHandler = this.props.forceClickHandler
       || !this.context.extras.isEditor;
@@ -201,6 +250,9 @@ export default class NavigationButton extends React.Component {
     }
   };
 
+  /**
+   * Handle navigation button double-clicked.
+   */
   onDoubleClick = () => {
     if (this.props.doubleClickHandler) {
       this.props.doubleClickHandler();
@@ -210,6 +262,10 @@ export default class NavigationButton extends React.Component {
     });
   };
 
+  /**
+   * Handle mouse down on navigation button.
+   * @param {object} e Mouse event.
+   */
   onMouseDown = (e) => {
     const hasMouseDownHandler = this.context.extras.isEditor
       && this.props.mouseDownHandler;
@@ -219,6 +275,9 @@ export default class NavigationButton extends React.Component {
     }
   };
 
+  /**
+   * Set focus to navigation button.
+   */
   setFocus = () => {
     const isFocusable = this.context.extras.isEditor
       && this.navButtonWrapper
@@ -230,6 +289,10 @@ export default class NavigationButton extends React.Component {
     }
   };
 
+  /**
+   * Handle focus event, focusing wrapper in editor.
+   * @param {object} e Focus event.
+   */
   handleFocus = (e) => {
     if (this.context.extras.isEditor) {
       if (this.navButtonWrapper && this.navButtonWrapper.current && this.navButtonWrapper === e.target) {
@@ -250,6 +313,9 @@ export default class NavigationButton extends React.Component {
     }
   };
 
+  /**
+   * Handle expand button focused.
+   */
   handleExpandButtonFocus = () => {
     this.setState({
       expandButtonFocused: true,
@@ -259,6 +325,10 @@ export default class NavigationButton extends React.Component {
     }
   };
 
+  /**
+   * React - create DOM elements.
+   * @returns {React.Element} Rendered navigation button element.
+   */
   render() {
     let wrapperClasses = [
       'nav-button-wrapper',

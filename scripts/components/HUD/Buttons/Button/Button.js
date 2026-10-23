@@ -2,6 +2,9 @@ import React from 'react';
 import './Button.css';
 
 export default class Button extends React.Component {
+  /**
+   * Trigger button click handler.
+   */
   handleClick = () => {
     if (!this.props.disabled) {
       this.props.onClick();
@@ -9,9 +12,9 @@ export default class Button extends React.Component {
   };
 
   /**
-   * React - after render.
-   * @param {object} prevProps The props from the previous render.
-   * @param {object} prevState The state from the previous render.
+   * React - update after render.
+   * @param {object} prevProps Props from previous render.
+   * @param {object} prevState State from previous render.
    */
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.nextFocus !== this.props.nextFocus && this.props.type === this.props.nextFocus) {
@@ -21,7 +24,7 @@ export default class Button extends React.Component {
 
   /**
    * React - create DOM elements.
-   * @returns {React.Element} The rendered button element.
+   * @returns {React.Element} Rendered button element.
    */
   render() {
     return (

@@ -3,18 +3,31 @@ import './ContextMenu.css';
 import { H5PContext } from '../../context/H5PContext.js';
 
 export default class ContextMenu extends React.Component {
+  /**
+   * Trigger go to scene event.
+   */
   goToScene = () => {
     this.context.trigger('goToScene', this.props.interactionIndex);
   };
 
+  /**
+   * Trigger edit interaction event.
+   */
   handleEdit = () => {
     this.context.trigger('editInteraction', this.props.interactionIndex);
   };
 
+  /**
+   * Trigger delete interaction event.
+   */
   handleDelete = () => {
     this.context.trigger('deleteInteraction', this.props.interactionIndex);
   };
 
+  /**
+   * React - create DOM elements.
+   * @returns {React.Element} Rendered context menu element.
+   */
   render() {
     return (
       <div className='context-menu'>

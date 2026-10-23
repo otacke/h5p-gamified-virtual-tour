@@ -4,20 +4,22 @@ import Main from './components/Main.js';
 import { H5PContext } from './context/H5PContext.js';
 import { sceneRenderingQualityMapping } from './components/Scene/SceneTypes/ThreeSixtyScene.js';
 
-// Default 16:9 widescreen aspect ratio fallback (ratio is height / width)
+/** @constant {number} DEFAULT_RATIO_HEIGHT Height of default 16:9 aspect ratio. */
 const DEFAULT_RATIO_HEIGHT = 9;
+/** @constant {number} DEFAULT_RATIO_WIDTH Width of default 16:9 aspect ratio. */
 const DEFAULT_RATIO_WIDTH = 16;
-// Breakpoints for responsive wrapper sizing
+/** @constant {number} PHONE_SIZE_MAX_WIDTH Breakpoint for phone-sized wrapper. */
 const PHONE_SIZE_MAX_WIDTH = 480;
+/** @constant {number} MEDIUM_TABLET_SIZE_MAX_WIDTH Breakpoint for medium tablet-sized wrapper. */
 const MEDIUM_TABLET_SIZE_MAX_WIDTH = 768;
 
 // Load library
 H5P = H5P || {};
 
 /**
- * H5P content library wrapper for the gamified virtual tour.
+ * H5P content library wrapper for gamified virtual tour.
  * @param {object} params Content library parameters as defined in semantics.json.
- * @param {number} contentId H5P content ID of the content instance.
+ * @param {number} contentId H5P content ID of content instance.
  * @param {object} extras Optional additional H5P options (e.g. forceStartScreen, forceStartCamera).
  */
 H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
@@ -66,6 +68,10 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     this.on('resize', this.handleResize);
   }
 
+  /**
+   * Set current scene ID.
+   * @param {number} sceneId ID of scene to display.
+   */
   setCurrentSceneId = (sceneId) => {
     this.currentScene = sceneId;
 
@@ -78,6 +84,9 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     });
   };
 
+  /**
+   * Create wrapper element and render main component.
+   */
   createElements = () => {
     this.wrapper = document.createElement('div');
     this.wrapper.classList.add('h5p-three-sixty-wrapper');
@@ -92,6 +101,10 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     this.renderMain();
   };
 
+  /**
+   * Re-draw content, switching scene if needed.
+   * @param {number} [forceStartScreen] ID of scene to display instead of current.
+   */
   reDraw = (forceStartScreen = this.currentScene) => {
     const sceneRenderingQuality = this.behavior.sceneRenderingQuality;
     if (sceneRenderingQuality !== this.sceneRenderingQuality
@@ -107,6 +120,9 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     this.renderMain();
   };
 
+  /**
+   * Render main component.
+   */
   renderMain = () => {
     this.root.render(
       <H5PContext.Provider value={this}>
@@ -122,6 +138,10 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     );
   };
 
+  /**
+   * Attach wrapper to container.
+   * @param {object} $container jQuery object wrapping container element.
+   */
   attach = ($container) => {
     if (!this.wrapper) {
       this.createElements();
@@ -132,10 +152,17 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     $container[0].classList.add('h5p-gamified-virtual-tour');
   };
 
+  /**
+   * Get wrapper bounding rect.
+   * @returns {object} Wrapper bounding rect.
+   */
   getRect = () => {
     return this.wrapper.getBoundingClientRect();
   };
 
+  /**
+   * Resize wrapper and scene.
+   */
   handleResize = () => {
     const isFullscreen = this.wrapper.parentElement.classList.contains('h5p-fullscreen')
       || this.wrapper.parentElement.classList.contains('h5p-semi-fullscreen');
@@ -169,11 +196,20 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     this.threeSixty.resize(updatedRect.width / updatedRect.height);
   };
 
+  /**
+   * Get wrapper aspect ratio.
+   * @returns {number} Wrapper aspect ratio.
+   */
   getRatio = () => {
     const rect = this.wrapper.getBoundingClientRect();
     return (rect.width / rect.height);
   };
 
+  /**
+   * Set camera position.
+   * @param {string} cameraPosition Comma-separated yaw and pitch.
+   * @param {boolean} [focus] Whether to focus scene.
+   */
   setCameraPosition = (cameraPosition, focus) => {
     if (this.currentScene === null || !this.threeSixty) {
       return;
@@ -186,6 +222,10 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     }
   };
 
+  /**
+   * Get camera position and field of view.
+   * @returns {object|undefined} Object with camera position and field of view, or undefined if no scene.
+   */
   getCamera = () => {
     if (this.currentScene === null || !this.threeSixty) {
       return;
@@ -197,6 +237,10 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     };
   };
 
+  /**
+   * Set scene rendering quality.
+   * @param {string} quality Rendering quality ('high', 'medium' or 'low').
+   */
   setSceneRenderingQuality = (quality) => {
     const segments = sceneRenderingQualityMapping[quality];
     this.threeSixty.setSegmentNumber(segments);
@@ -205,7 +249,7 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
 
   /**
    * Update parameters from editor.
-   * @param {object} params Parameters to update with. Passed by reference!
+   * @param {object} params Parameters to update with (passed by reference).
    */
   updateParams = (params) => {
     this.params = params;

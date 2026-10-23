@@ -1,15 +1,14 @@
 /**
- * Helper class with various methods for checking if a DOM element overflows
- * another.
+ * Helper class with various methods for checking if DOM element overflows another.
  */
 export class OverflowHelper {
 
   /**
-   * Create an instance of OverflowHelper.
-   * @param {number} elHeight The height of the element being checked.
-   * @param {number} topPosition The element's distance from the top of the container.
-   * @param {number} leftPosition The element's distance from the left of the container.
-   * @param {number} containerHeight The height of the container.
+   * Create instance of OverflowHelper.
+   * @param {number} elHeight Height of element being checked.
+   * @param {number} topPosition Distance of element from top of container.
+   * @param {number} leftPosition Distance of element from left of container.
+   * @param {number} containerHeight Height of container.
    */
   constructor(elHeight, topPosition, leftPosition, containerHeight) {
     this.height = elHeight;
@@ -21,16 +20,16 @@ export class OverflowHelper {
   }
 
   /**
-   * Check whether the DOM element is overflowing the container's top edge
-   * @returns {boolean} true if overflowing, false if not
+   * Check if DOM element overflows top edge of container.
+   * @returns {boolean} Whether element overflows top edge, false if not.
    */
   overflowsTop() {
     return this.height > this.topPosition;
   }
 
   /**
-   * Check whether the DOM element is overflowing the container's bottom edge
-   * @returns {boolean} true if overflowing, false if not
+   * Check if DOM element overflows bottom edge of container.
+   * @returns {boolean} Whether element overflows bottom edge, false if not.
    */
   overflowsBottom() {
     return this.height + this.topPosition >
@@ -39,13 +38,13 @@ export class OverflowHelper {
 }
 
 /**
- * Calculate correct alignment and expand direction for an element
- * @param {string} position The position of the element relative to its trigger ('left', 'right', 'top', 'bottom').
- * @param {number} height The height of the element.
- * @param {number} topPosition The element's distance from the top of the wrapper.
- * @param {number} leftPosition The element's distance from the left of the wrapper.
- * @param {number} wrapperHeight The height of the wrapper.
- * @returns {object} {expandDirection, alignment}
+ * Calculate correct alignment and expand direction for element.
+ * @param {string} position Position of element relative to its trigger ('left', 'right', 'top', 'bottom').
+ * @param {number} height Height of element.
+ * @param {number} topPosition Distance of element from top of wrapper.
+ * @param {number} leftPosition Distance of element from left of wrapper.
+ * @param {number} wrapperHeight Height of wrapper.
+ * @returns {object} Object with expand direction and alignment.
  */
 export const willOverflow = (position, height, topPosition, leftPosition, wrapperHeight) => {
   const overflowHelper = new OverflowHelper(height, topPosition, leftPosition, wrapperHeight);
