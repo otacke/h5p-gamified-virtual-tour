@@ -365,15 +365,24 @@ export default class ThreeSixtyScene extends React.Component {
     this.props.onSetCameraPos(interaction.interactionpos);
   };
 
+  handleDoubleClickedInteraction = () => {
+    this.cancelPointerLock();
+  };
+
   /**
    * React -
    */
   componentDidMount() {
     this.loadScene();
 
-    this.context.on('doubleClickedInteraction', () => {
-      this.cancelPointerLock();
-    });
+    this.context.on('doubleClickedInteraction', this.handleDoubleClickedInteraction);
+  }
+
+  /**
+   * React -
+   */
+  componentWillUnmount() {
+    this.context.off('doubleClickedInteraction', this.handleDoubleClickedInteraction);
   }
 
   /**
