@@ -1,6 +1,12 @@
 @import '@styles/icons.css';
 @import '@styles/colors.css';
 
+.bottom .nav-button {
+  top: auto;
+  left: 0.75em;
+  bottom: 0.5em;
+}
+
 .nav-button-wrapper {
   position: absolute;
   display: inline-flex;
@@ -74,21 +80,6 @@
     }
   }
 
-  &.h5p-interaction-button {
-    .nav-button {
-      background: var(--interaction-bg);
-
-      &:active {
-        background: var(--interaction-active-bg);
-        border-color: var(--interaction-active-border);
-      }
-    }
-
-    &:hover .nav-button {
-      background: var(--interaction-hover-bg);
-    }
-  }
-
   &.disabled .nav-button {
     opacity: 0.5;
   }
@@ -105,6 +96,21 @@
 
     &:active {
       border-color: var(--active-border);
+    }
+  }
+
+  &.h5p-interaction-button {
+    .nav-button {
+      background: var(--interaction-bg);
+
+      &:active {
+        background: var(--interaction-active-bg);
+        border-color: var(--interaction-active-border);
+      }
+    }
+
+    &:hover .nav-button {
+      background: var(--interaction-hover-bg);
     }
   }
 
@@ -132,10 +138,4 @@
   &.h5p-audio-button.active .nav-button:before {
     content: var(--icon-audio-off);
   }
-}
-
-.bottom .nav-button {
-  top: auto;
-  left: 0.75em;
-  bottom: 0.5em;
 }

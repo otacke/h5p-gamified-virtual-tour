@@ -12,104 +12,6 @@
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   border: 0;
 
-  /* The different allignment the label has */
-
-  &.top {
-    bottom: calc(var(--button-size) / 2);
-    /* center-horizontally */
-    transform: translateX(-50%);
-    left: 50%;
-
-    .nav-label {
-      padding-bottom: 1.5em;
-
-      .nav-label-inner {
-        text-align: center;
-      }
-    }
-
-    .nav-label-expand-button {
-      bottom: unset;
-      top: -1.1em;
-
-      .nav-label-expand-arrow {
-        &:before {
-          transform: rotate(0deg) translate(-50%, -50%);
-          top: var(--arrow-up-top);
-        }
-
-        &:after {
-          transform: rotate(0deg) translate(-50%, -50%);
-        }
-      }
-    }
-
-    &.is-expanded .nav-label-expand-button .nav-label-expand-arrow {
-      &:before {
-        transform: rotate(180deg) translate(50%, 50%);
-        top: var(--arrow-down-top);
-      }
-
-      &:after {
-        transform: rotate(180deg) translate(50%, 50%);
-      }
-    }
-  }
-
-  &.bottom {
-    top: calc(var(--button-size) / 2);
-    /* center-horizontally */
-    transform: translateX(-50%);
-    left: 50%;
-
-    .nav-label {
-      text-align: center;
-      padding-top: 1.5em;
-
-      .nav-label-inner {
-        text-align: center;
-      }
-    }
-  }
-
-  &.left {
-    right: calc(var(--button-size) / 2);
-    /* center-vertically */
-    top: 50%;
-    transform: translateY(-50%);
-
-    .nav-label {
-      /* The font-size is varying, so if em is used the padding will be to small in some cases */
-      padding-right: 23px;
-    }
-  }
-
-  &.right {
-    left: calc(var(--button-size) / 2);
-    /* center-vertically */
-    top: 50%;
-    transform: translateY(-50%);
-
-    .nav-label {
-      /* The font-size is varying, so if em is used the padding will be to small in some cases */
-      padding-left: 23px;
-    }
-  }
-
-  &.left.is-multiline,
-  &.right.is-multiline {
-    top: 0.2em;
-    transform: none;
-  }
-
-  /* If expansion has to be done in another direction than the alignment,
-  this applies to right and left aligned elements */
-  &.left.expand-up,
-  &.right.expand-up {
-    top: unset;
-    bottom: 0;
-  }
-
   &.hover-only {
     visibility: hidden;
 
@@ -121,24 +23,6 @@
 
     .nav-label-expand-arrow {
       display: none;
-    }
-
-    .nav-button-wrapper:hover & {
-      visibility: visible;
-
-      .nav-label {
-        max-width: var(--label-max-width);
-        max-height: 3em;
-      }
-    }
-
-    .nav-button-wrapper &.show-label {
-      visibility: visible;
-
-      .nav-label {
-        max-width: var(--label-max-width);
-        max-height: 3em;
-      }
     }
   }
 
@@ -222,7 +106,22 @@
     }
   }
 
-  &.expand-up {
+  /* The different allignment the label has */
+
+  &.top {
+    bottom: calc(var(--button-size) / 2);
+    /* center-horizontally */
+    transform: translateX(-50%);
+    left: 50%;
+
+    .nav-label {
+      padding-bottom: 1.5em;
+
+      .nav-label-inner {
+        text-align: center;
+      }
+    }
+
     .nav-label-expand-button {
       bottom: unset;
       top: -1.1em;
@@ -238,15 +137,74 @@
         }
       }
     }
+  }
 
-    &.is-expanded .nav-label-expand-button .nav-label-expand-arrow {
+  &.bottom {
+    top: calc(var(--button-size) / 2);
+    /* center-horizontally */
+    transform: translateX(-50%);
+    left: 50%;
+
+    .nav-label {
+      text-align: center;
+      padding-top: 1.5em;
+
+      .nav-label-inner {
+        text-align: center;
+      }
+    }
+  }
+
+  &.left {
+    right: calc(var(--button-size) / 2);
+    /* center-vertically */
+    top: 50%;
+    transform: translateY(-50%);
+
+    .nav-label {
+      /* The font-size is varying, so if em is used the padding will be to small in some cases */
+      padding-right: 23px;
+    }
+  }
+
+  &.right {
+    left: calc(var(--button-size) / 2);
+    /* center-vertically */
+    top: 50%;
+    transform: translateY(-50%);
+
+    .nav-label {
+      /* The font-size is varying, so if em is used the padding will be to small in some cases */
+      padding-left: 23px;
+    }
+  }
+
+  &.left.is-multiline,
+  &.right.is-multiline {
+    top: 0.2em;
+    transform: none;
+  }
+
+  /* If expansion has to be done in another direction than the alignment,
+  this applies to right and left aligned elements */
+  &.left.expand-up,
+  &.right.expand-up {
+    top: unset;
+    bottom: 0;
+  }
+
+  &.expand-up .nav-label-expand-button {
+    bottom: unset;
+    top: -1.1em;
+
+    .nav-label-expand-arrow {
       &:before {
-        transform: rotate(180deg) translate(50%, 50%);
-        top: var(--arrow-down-top);
+        transform: rotate(0deg) translate(-50%, -50%);
+        top: var(--arrow-up-top);
       }
 
       &:after {
-        transform: rotate(180deg) translate(50%, 50%);
+        transform: rotate(0deg) translate(-50%, -50%);
       }
     }
   }
@@ -288,6 +246,46 @@
 
     .nav-label-inner {
       white-space: initial;
+    }
+  }
+
+  &.top.is-expanded .nav-label-expand-button .nav-label-expand-arrow {
+    &:before {
+      transform: rotate(180deg) translate(50%, 50%);
+      top: var(--arrow-down-top);
+    }
+
+    &:after {
+      transform: rotate(180deg) translate(50%, 50%);
+    }
+  }
+
+  &.expand-up.is-expanded .nav-label-expand-button .nav-label-expand-arrow {
+    &:before {
+      transform: rotate(180deg) translate(50%, 50%);
+      top: var(--arrow-down-top);
+    }
+
+    &:after {
+      transform: rotate(180deg) translate(50%, 50%);
+    }
+  }
+
+  .nav-button-wrapper:hover &.hover-only {
+    visibility: visible;
+
+    .nav-label {
+      max-width: var(--label-max-width);
+      max-height: 3em;
+    }
+  }
+
+  .nav-button-wrapper &.hover-only.show-label {
+    visibility: visible;
+
+    .nav-label {
+      max-width: var(--label-max-width);
+      max-height: 3em;
     }
   }
 }

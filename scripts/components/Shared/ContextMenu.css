@@ -58,18 +58,6 @@
       color: #0061a2;
     }
 
-    &:hover {
-      border-color: #61bfff;
-
-      .tooltip {
-        display: block;
-      }
-    }
-
-    &:hover:before {
-      color: #003c65;
-    }
-
     .tooltip {
       display: none;
       position: absolute;
@@ -80,6 +68,18 @@
       color: white;
       padding: 0.25em 0.5em;
       border-radius: 0.2em;
+    }
+
+    &:hover {
+      border-color: #61bfff;
+
+      .tooltip {
+        display: block;
+      }
+    }
+
+    &:hover:before {
+      color: #003c65;
     }
   }
 
