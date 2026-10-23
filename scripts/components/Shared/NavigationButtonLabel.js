@@ -49,7 +49,7 @@ export default class NavigationButtonLabel extends React.Component {
   /**
    * Handle expand button being clicked.
    */
-  onClick = () => {
+  onClick = (e) => {
     e.stopPropagation();
     if (!this.state.expandable) {
       return;
