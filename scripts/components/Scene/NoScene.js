@@ -1,5 +1,5 @@
 import React from 'react';
-import './NoScene.css';
+import '@components/Scene/NoScene.css';
 import PropTypes from 'prop-types';
 
 /**

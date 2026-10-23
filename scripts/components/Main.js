@@ -1,12 +1,12 @@
 import React from 'react';
-import Scene, { SceneTypes } from './Scene/Scene.js';
-import Dialog from './Dialog/Dialog.js';
-import InteractionContent from './Dialog/InteractionContent.js';
-import { H5PContext } from '../context/H5PContext.js';
-import './Main.css';
-import HUD from './HUD/HUD.js';
-import AudioButton from './HUD/Buttons/AudioButton.js';
-import NoScene from './Scene/NoScene.js';
+import Scene, { SceneTypes } from '@components/Scene/Scene.js';
+import Dialog from '@components/Dialog/Dialog.js';
+import InteractionContent from '@components/Dialog/InteractionContent.js';
+import { H5PContext } from '@context/H5PContext.js';
+import '@components/Main.css';
+import HUD from '@components/HUD/HUD.js';
+import AudioButton from '@components/HUD/Buttons/AudioButton.js';
+import NoScene from '@components/Scene/NoScene.js';
 
 export default class Main extends React.Component {
   /**

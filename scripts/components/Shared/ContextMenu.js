@@ -1,6 +1,6 @@
 import React from 'react';
-import './ContextMenu.css';
-import { H5PContext } from '../../context/H5PContext.js';
+import '@components/Shared/ContextMenu.css';
+import { H5PContext } from '@context/H5PContext.js';
 
 export default class ContextMenu extends React.Component {
   /**

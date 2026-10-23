@@ -1,5 +1,5 @@
-@import '../../styles/icons.css';
-@import '../../styles/colors.css';
+@import '@styles/icons.css';
+@import '@styles/colors.css';
 
 .nav-button-wrapper {
   position: absolute;

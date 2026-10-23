@@ -1,7 +1,7 @@
 import React from 'react';
-import { H5PContext } from '../../context/H5PContext.js';
-import ThreeSixtyScene from './SceneTypes/ThreeSixtyScene.js';
-import StaticScene from './SceneTypes/StaticScene.js';
+import { H5PContext } from '@context/H5PContext.js';
+import ThreeSixtyScene from '@components/Scene/SceneTypes/ThreeSixtyScene.js';
+import StaticScene from '@components/Scene/SceneTypes/StaticScene.js';
 
 /** @constant {object} SceneTypes Scene type identifiers. */
 export const SceneTypes = {

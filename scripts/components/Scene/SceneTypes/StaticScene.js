@@ -1,10 +1,10 @@
 import React from 'react';
-import './StaticScene.css';
+import '@components/Scene/SceneTypes/StaticScene.css';
 import NavigationButton,
-  { getIconFromInteraction, getLabelFromInteraction, Icons } from '../../Shared/NavigationButton.js';
-import { H5PContext } from '../../../context/H5PContext.js';
-import { SceneTypes } from '../Scene.js';
-import ContextMenu from '../../Shared/ContextMenu.js';
+  { getIconFromInteraction, getLabelFromInteraction, Icons } from '@components/Shared/NavigationButton.js';
+import { H5PContext } from '@context/H5PContext.js';
+import { SceneTypes } from '@components/Scene/Scene.js';
+import ContextMenu from '@components/Shared/ContextMenu.js';
 
 /** @constant {number} DRAG_TIMEOUT_MS Delay before drag interaction begins, in milliseconds. */
 const DRAG_TIMEOUT_MS = 50;

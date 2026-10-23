@@ -1,6 +1,6 @@
 import React from 'react';
-import './Dialog.css';
-import { H5PContext } from '../../context/H5PContext.js';
+import '@components/Dialog/Dialog.css';
+import { H5PContext } from '@context/H5PContext.js';
 
 export default class Dialog extends React.Component {
   /**

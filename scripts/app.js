@@ -1,8 +1,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import Main from './components/Main.js';
-import { H5PContext } from './context/H5PContext.js';
-import { sceneRenderingQualityMapping } from './components/Scene/SceneTypes/ThreeSixtyScene.js';
+import Main from '@components/Main.js';
+import { H5PContext } from '@context/H5PContext.js';
+import { sceneRenderingQualityMapping } from '@components/Scene/SceneTypes/ThreeSixtyScene.js';
 
 /** @constant {number} DEFAULT_RATIO_HEIGHT Height of default 16:9 aspect ratio. */
 const DEFAULT_RATIO_HEIGHT = 9;

@@ -1,7 +1,7 @@
 import React from 'react';
-import './InteractionContent.css';
-import { H5PContext } from '../../context/H5PContext.js';
-import AudioButton from '../HUD/Buttons/AudioButton.js';
+import '@components/Dialog/InteractionContent.css';
+import { H5PContext } from '@context/H5PContext.js';
+import AudioButton from '@components/HUD/Buttons/AudioButton.js';
 
 export default class InteractionContent extends React.Component {
   /**

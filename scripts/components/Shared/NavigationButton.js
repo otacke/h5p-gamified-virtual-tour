@@ -1,7 +1,11 @@
 import React from 'react';
-import './NavigationButton.css';
-import { H5PContext } from '../../context/H5PContext.js';
-import NavigationButtonLabel, { getLabelPos, getLabelText, isHoverLabel } from './NavigationButtonLabel.js';
+import '@components/Shared/NavigationButton.css';
+import { H5PContext } from '@context/H5PContext.js';
+import NavigationButtonLabel, {
+  getLabelPos,
+  getLabelText,
+  isHoverLabel,
+} from '@components/Shared/NavigationButtonLabel.js';
 
 /** @constant {object} Icons CSS classes for button icons. */
 export const Icons = {

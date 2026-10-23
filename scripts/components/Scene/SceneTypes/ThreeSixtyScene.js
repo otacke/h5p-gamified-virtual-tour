@@ -1,10 +1,13 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import NavigationButton, { getIconFromInteraction, getLabelFromInteraction } from '../../Shared/NavigationButton.js';
-import { H5PContext } from '../../../context/H5PContext.js';
-import ContextMenu from '../../Shared/ContextMenu.js';
-import loading from '../../../assets/images/loading.svg';
-import './ThreeSixtyScene.css';
+import NavigationButton, {
+  getIconFromInteraction,
+  getLabelFromInteraction,
+} from '@components/Shared/NavigationButton.js';
+import { H5PContext } from '@context/H5PContext.js';
+import ContextMenu from '@components/Shared/ContextMenu.js';
+import loading from '@assets/images/loading.svg';
+import '@components/Scene/SceneTypes/ThreeSixtyScene.css';
 
 /** @constant {object} sceneRenderingQualityMapping Segment counts per rendering quality. */
 export const sceneRenderingQualityMapping = {

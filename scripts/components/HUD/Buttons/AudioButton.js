@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { H5PContext } from '../../../context/H5PContext.js';
-import Button from './Button/Button.js';
+import { H5PContext } from '@context/H5PContext.js';
+import Button from '@components/HUD/Buttons/Button/Button.js';
 
 export default class AudioButton extends React.Component {
   /**

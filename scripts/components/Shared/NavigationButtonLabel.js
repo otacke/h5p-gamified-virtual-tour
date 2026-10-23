@@ -1,8 +1,8 @@
 import React from 'react';
-import './NavigationButton.css';
-import './NavigationButtonLabel.css';
-import { H5PContext } from '../../context/H5PContext.js';
-import { willOverflow } from './OverflowHelpers.js';
+import '@components/Shared/NavigationButton.css';
+import '@components/Shared/NavigationButtonLabel.css';
+import { H5PContext } from '@context/H5PContext.js';
+import { willOverflow } from '@components/Shared/OverflowHelpers.js';
 
 /**
  * Get label position from per-interaction or global settings.

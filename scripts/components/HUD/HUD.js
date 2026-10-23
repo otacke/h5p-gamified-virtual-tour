@@ -1,10 +1,10 @@
 import React from 'react';
-import './HUD.css';
+import '@components/HUD/HUD.css';
 
-import { H5PContext } from '../../context/H5PContext.js';
-import AudioButton from './Buttons/AudioButton.js';
-import Button from './Buttons/Button/Button.js';
-import { SceneTypes } from '../Scene/Scene.js';
+import { H5PContext } from '@context/H5PContext.js';
+import AudioButton from '@components/HUD/Buttons/AudioButton.js';
+import Button from '@components/HUD/Buttons/Button/Button.js';
+import { SceneTypes } from '@components/Scene/Scene.js';
 
 export default class HUD extends React.Component {
   /**
