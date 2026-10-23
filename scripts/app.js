@@ -207,7 +207,7 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
 
   /**
    * Set camera position.
-   * @param {string} cameraPosition Comma-separated yaw and pitch.
+   * @param {object} cameraPosition Camera position with yaw and pitch.
    * @param {boolean} [focus] Whether to focus scene.
    */
   setCameraPosition = (cameraPosition, focus) => {
@@ -215,8 +215,7 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
       return;
     }
 
-    const [yaw, pitch] = cameraPosition.split(',');
-    this.threeSixty.setCameraPosition(parseFloat(yaw), parseFloat(pitch));
+    this.threeSixty.setCameraPosition(parseFloat(cameraPosition.yaw), parseFloat(cameraPosition.pitch));
     if (focus) {
       this.threeSixty.focus();
     }

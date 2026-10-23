@@ -35,7 +35,12 @@
                 "label": "Popis scény",
                 "description": "Text, který může popsat scénu pro koncového uživatele"
               },
-              {},
+              {
+                "fields": [
+                  {},
+                  {}
+                ]
+              },
               {
                 "entity": "interaction",
                 "field": {

@@ -35,7 +35,12 @@
                 "label": "Descripción de la Escena",
                 "description": "Un texto que puede describir la escena para el usuario final"
               },
-              {},
+              {
+                "fields": [
+                  {},
+                  {}
+                ]
+              },
               {
                 "entity": "interaction",
                 "field": {

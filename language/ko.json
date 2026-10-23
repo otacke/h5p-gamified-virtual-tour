@@ -35,7 +35,12 @@
                 "label": "장면 설명",
                 "description": "사용자에게 장면을 설명하기 위한 텍스트"
               },
-              {},
+              {
+                "fields": [
+                  {},
+                  {}
+                ]
+              },
               {
                 "entity": "interaction",
                 "field": {

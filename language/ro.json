@@ -35,7 +35,12 @@
                 "label": "Descriere scenă",
                 "description": "Un text care poate descrie scena pentru utilizatorul final"
               },
-              {},
+              {
+                "fields": [
+                  {},
+                  {}
+                ]
+              },
               {
                 "field": {
                   "fields": [

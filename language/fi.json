@@ -35,7 +35,12 @@
                 "label": "Dioraaman kuvausteksti",
                 "description": "Teksti joka kuvailee dioraamaa käyttäjälle"
               },
-              {},
+              {
+                "fields": [
+                  {},
+                  {}
+                ]
+              },
               {
                 "entity": "interaction",
                 "field": {

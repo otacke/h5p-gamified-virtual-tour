@@ -35,7 +35,12 @@
                 "label": "Vaizdo aprašymas",
                 "description": "Tekstas, kuris gali apibūdinti vaizdą naudotojui"
               },
-              {},
+              {
+                "fields": [
+                  {},
+                  {}
+                ]
+              },
               {
                 "entity": "interaction",
                 "field": {

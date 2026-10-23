@@ -35,7 +35,12 @@
                 "label": "Scènebeschrijving",
                 "description": "Een tekst die de scène beschrijft voor de eindgebruiker"
               },
-              {},
+              {
+                "fields": [
+                  {},
+                  {}
+                ]
+              },
               {
                 "entity": "interaction",
                 "field": {

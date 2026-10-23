@@ -35,7 +35,12 @@
                 "label": "Scene Description",
                 "description": "A text that can describe the scene for the end-user"
               },
-              {},
+              {
+                "fields": [
+                  {},
+                  {}
+                ]
+              },
               {
                 "entity": "interaction",
                 "field": {

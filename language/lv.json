@@ -35,7 +35,12 @@
                 "label": "Ainas apraksts",
                 "description": "Teksts, kas var aprakstīt ainu gala lietotājam"
               },
-              {},
+              {
+                "fields": [
+                  {},
+                  {}
+                ]
+              },
               {
                 "entity": "interaction",
                 "field": {

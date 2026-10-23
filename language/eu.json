@@ -35,7 +35,12 @@
                 "label": "Eszenaren deskribapena",
                 "description": "Erabiltzaileari eszena deskribatzen dion testua"
               },
-              {},
+              {
+                "fields": [
+                  {},
+                  {}
+                ]
+              },
               {
                 "entity": "interaction",
                 "field": {

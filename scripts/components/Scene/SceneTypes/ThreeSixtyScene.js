@@ -165,13 +165,11 @@ export default class ThreeSixtyScene extends React.Component {
     // Determine camera position
     let cameraPosition = this.state.cameraPosition;
     if (!cameraPosition) {
-      const startPosition = this.props.sceneParams.cameraStartPosition
-        .split(',')
-        .map(parseFloat);
+      const startPosition = this.props.sceneParams.cameraStartPosition;
 
       cameraPosition = {
-        yaw: startPosition[0],
-        pitch: startPosition[1],
+        yaw: parseFloat(startPosition.yaw),
+        pitch: parseFloat(startPosition.pitch),
       };
     }
 
@@ -375,7 +373,7 @@ export default class ThreeSixtyScene extends React.Component {
    * @param {object} interaction Interaction that gained focus.
    */
   handleInteractionFocus = (interaction) => {
-    this.props.onSetCameraPos(interaction.interactionpos);
+    this.props.onSetCameraPos(ThreeSixtyScene.getPositionFromString(interaction.interactionpos));
   };
 
   /**

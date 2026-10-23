@@ -35,7 +35,12 @@
                 "label": "Maelezo ya onyesho",
                 "description": "Maandishi yanayoweza kuelezea onyesho kwa mtumiaji wa mwisho"
               },
-              {},
+              {
+                "fields": [
+                  {},
+                  {}
+                ]
+              },
               {
                 "entity": "interaction",
                 "field": {

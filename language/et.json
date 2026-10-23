@@ -35,7 +35,12 @@
                 "label": "Stseeni kirjeldus",
                 "description": "Tekst, mis saab stseeni kirjeldada lõpp-kasutaja jaoks"
               },
-              {},
+              {
+                "fields": [
+                  {},
+                  {}
+                ]
+              },
               {
                 "entity": "interaction",
                 "field": {

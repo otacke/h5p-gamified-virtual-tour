@@ -82,7 +82,17 @@
             },
             {
               "name": "cameraStartPosition",
-              "type": "text"
+              "type": "group",
+              "fields": [
+                {
+                  "name": "yaw",
+                  "type": "text"
+                },
+                {
+                  "name": "pitch",
+                  "type": "text"
+                }
+              ]
             },
             {
               "name": "interactions",
