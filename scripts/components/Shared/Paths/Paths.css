@@ -1,0 +1,7 @@
+.paths-overlay {
+  left: 0;
+  overflow: visible;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+}

@@ -5,9 +5,17 @@ import NavigationButton,
 import { H5PContext } from '@context/H5PContext.js';
 import { SceneTypes } from '@components/Scene/Scene.js';
 import ContextMenu from '@components/Shared/ContextMenu.js';
+import StaticPaths from '@components/Shared/Paths/StaticPaths.js';
+import { getValidPaths } from '@components/Shared/Paths/pathVisuals.js';
 
 /** @constant {number} DRAG_TIMEOUT_MS Delay before drag interaction begins, in milliseconds. */
 const DRAG_TIMEOUT_MS = 50;
+
+/** @constant {number} BUTTON_SIZE_EM Interaction button size (2.5em at 0.92em font size of button). */
+const BUTTON_SIZE_EM = 2.3;
+
+/** @constant {number} DEFAULT_FONT_SIZE_PX Font size of scene if not scaled yet. */
+const DEFAULT_FONT_SIZE_PX = 16;
 
 /** @constant {number} LABEL_ALIGNMENT_THRESHOLD X position beyond which label aligns to left. */
 const LABEL_ALIGNMENT_THRESHOLD = 91.5;
@@ -394,6 +402,71 @@ export default class StaticScene extends React.Component {
   };
 
   /**
+   * Get rendered position of interaction, respecting dragging and overflow.
+   * @param {object} interaction Interaction parameters.
+   * @param {number} index Index of interaction in scene.
+   * @returns {object} Object with posX, posY and unadjustedPosX in percent.
+   */
+  getInteractionRenderPosition = (interaction, index) => {
+    const pos = interaction.interactionPosition;
+    let posX = this.removePercentageDenotationFromPosition(pos.x);
+    let posY = this.removePercentageDenotationFromPosition(pos.y);
+    const hasUpdatedPositions = this.state.x !== null && this.state.y !== null
+      && this.state.draggingInteractionIndex === index;
+    if (hasUpdatedPositions) {
+      posX = this.state.x;
+      posY = this.state.y;
+    }
+
+    const unadjustedPosX = posX;
+
+    if (this.sceneWrapperRef && this.sceneWrapperRef.current) {
+      // Adjust interaction position if overflowing
+      const pos = this.getAdjustedInteractionPositions(parseFloat(posX), parseFloat(posY));
+      if (pos) {
+        posX = pos.posX;
+        posY = pos.posY;
+      }
+    }
+
+    return { posX, posY, unadjustedPosX };
+  };
+
+  /**
+   * Render paths between connected interactions.
+   * @param {object[]} interactionPositions Rendered positions of interactions in same order as interactions.
+   * @returns {React.Element|null} Rendered paths, or null if scene has not been laid out yet.
+   */
+  renderPaths = (interactionPositions) => {
+    const wrapper = this.sceneWrapperRef.current;
+    if (!wrapper) {
+      return null;
+    }
+
+    const interactions = this.props.sceneParams.interactions || [];
+    const positions = {};
+    interactions.forEach((interaction, index) => {
+      positions[interaction.id] = {
+        x: parseFloat(interactionPositions[index].posX),
+        y: parseFloat(interactionPositions[index].posY),
+      };
+    });
+
+    const fontSize = parseFloat(wrapper.style.fontSize) || DEFAULT_FONT_SIZE_PX;
+
+    return (
+      <StaticPaths
+        paths={getValidPaths(this.props.sceneParams)}
+        positions={positions}
+        width={wrapper.clientWidth}
+        height={wrapper.clientHeight}
+        buttonSize={BUTTON_SIZE_EM * fontSize}
+        globalVisuals={this.context.behavior.paths}
+      />
+    );
+  };
+
+  /**
    * React - create DOM elements.
    * @returns {React.Element|null} Rendered static scene element, or null if not active.
    */
@@ -403,6 +476,7 @@ export default class StaticScene extends React.Component {
     }
 
     const interactions = this.props.sceneParams.interactions || [];
+    const interactionPositions = interactions.map(this.getInteractionRenderPosition);
 
     const hasPreviousScene = this.props.sceneHistory.length > 0;
     const isShowingBackButton = this.props.sceneParams.showBackButton
@@ -433,17 +507,10 @@ export default class StaticScene extends React.Component {
             onLoad={this.onSceneLoaded}
             ref={this.imageElementRef}
           />
+          {this.renderPaths(interactionPositions)}
           {
             interactions.map((interaction, index) => {
-              const pos = interaction.interactionPosition;
-              let posX = this.removePercentageDenotationFromPosition(pos.x);
-              let posY = this.removePercentageDenotationFromPosition(pos.y);
-              const hasUpdatedPositions = this.state.x !== null && this.state.y !== null
-                && this.state.draggingInteractionIndex === index;
-              if (hasUpdatedPositions) {
-                posX = this.state.x;
-                posY = this.state.y;
-              }
+              const { posX, posY, unadjustedPosX } = interactionPositions[index];
 
               const buttonClasses = [];
               if (this.props.audioIsPlaying === `interaction-${  this.props.sceneId  }-${  index}`) {
@@ -454,17 +521,8 @@ export default class StaticScene extends React.Component {
                 buttonClasses.push('dragging');
               }
 
-              if (posX > LABEL_ALIGNMENT_THRESHOLD) {
+              if (unadjustedPosX > LABEL_ALIGNMENT_THRESHOLD) {
                 buttonClasses.push('left-aligned');
-              }
-
-              if (this.sceneWrapperRef && this.sceneWrapperRef.current) {
-                // Adjust interaction position if overflowing
-                const pos = this.getAdjustedInteractionPositions(parseFloat(posX), parseFloat(posY));
-                if (pos) {
-                  posX = pos.posX;
-                  posY = pos.posY;
-                }
               }
 
               let title;
