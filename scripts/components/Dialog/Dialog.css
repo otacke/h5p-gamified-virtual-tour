@@ -100,8 +100,8 @@
       }
 
       &:before {
-        content: var(--icon-close);
-        font-family: "360-image", sans-serif;
+        content: var(--icon-h5ptheme-close);
+        font-family: "h5p-theme", sans-serif;
         vertical-align: text-bottom;
       }
     }

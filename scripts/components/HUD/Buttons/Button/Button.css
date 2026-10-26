@@ -23,7 +23,7 @@
 
     &:before {
       content: var(--icon-no-icon);
-      font-family: "360-image", sans-serif;
+      font-family: "H5PFontAwesome4", sans-serif;
       font-size: 40%;
       left: 50%;
       position: absolute;
@@ -47,29 +47,28 @@
     }
 
     &.audio-track:before {
-      content: var(--icon-audio-on);
+      content: var(--icon-fontawesome-audio-on);
     }
 
     &.scene-description:before {
-      content: var(--icon-scene-description);
+      content: var(--icon-fontawesome-scene-description);
+      font-size: 1rem;
     }
 
     &.reset:before {
-      content: var(--icon-reset);
+      content: var(--icon-fontawesome-reset);
     }
 
     &.overview-map:before {
-      content: var(--icon-overview-map);
-      font-family: "H5PFontAwesome4", sans-serif;
+      content: var(--icon-fontawesome-overview-map);
     }
 
     &.checklist:before {
-      content: var(--icon-checklist);
-      font-family: "H5PFontAwesome4", sans-serif;
+      content: var(--icon-fontawesome-checklist);
     }
 
     &.audio-track.active:before {
-      content: var(--icon-audio-off);
+      content: var(--icon-fontawesome-audio-off);
     }
   }
 

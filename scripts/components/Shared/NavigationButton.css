@@ -67,7 +67,7 @@
 
     &:before {
       color: white;
-      font-family: "360-image", sans-serif;
+      font-family: "H5PFontAwesome4", sans-serif;
       font-size: 1.25em;
       height: 1.025em;
       left: 50%;
@@ -88,7 +88,7 @@
     width: 2em;
 
     &:before {
-      content: var(--icon-go-back);
+      content: var(--icon-fontawesome-go-back);
       font-size: 1em;
     }
 
@@ -113,27 +113,27 @@
   }
 
   &.h5p-question-button .nav-button:before {
-    content: var(--icon-question);
+    content: var(--icon-fontawesome-interaction);
   }
 
   &.h5p-info-button .nav-button:before {
-    content: var(--icon-info);
+    content: var(--icon-fontawesome-info);
     font-size: 1.6em;
   }
 
   &.h5p-go-to-scene-button .nav-button:before {
-    content: var(--icon-go-to-scene);
+    content: var(--icon-fontawesome-go-to-scene);
   }
 
   &.h5p-audio-button .nav-button:before {
-    content: var(--icon-audio-on);
+    content: var(--icon-fontawesome-audio-on);
   }
 
   &.h5p-scene-description-button .nav-button:before {
-    content: var(--icon-scene-description);
+    content: var(--icon-fontawesome-scene-description);
   }
 
   &.h5p-audio-button.active .nav-button:before {
-    content: var(--icon-audio-off);
+    content: var(--icon-fontawesome-audio-off);
   }
 }

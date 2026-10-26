@@ -73,11 +73,6 @@ export default {
         include: join(__dirname, 'scripts/assets/images'),
         type: 'asset/resource',
       },
-      {
-        test: /\.(eot|svg|ttf|woff)$/,
-        include: join(__dirname, 'scripts/assets/fonts'),
-        type: 'asset/resource',
-      },
     ],
   },
   stats: {

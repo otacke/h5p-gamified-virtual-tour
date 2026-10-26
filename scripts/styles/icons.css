@@ -1,21 +1,18 @@
 .h5p-gamified-virtual-tour {
-  --icon-audio-off: '\e904';
-  --icon-audio-on: '\e90a';
-  /* FontAwesome 4.5 icon, needs font-family H5PFontAwesome4 */
-  --icon-checklist: '\f0ca';
-  --icon-close: '\e916';
-  --icon-delete: '\e910';
-  --icon-edit: '\e90f';
-  --icon-go-back: '\e903';
-  --icon-go-to-scene: '\e907';
-  /* 360-image icons */
-  --icon-info: '\e906';
-  --icon-no-icon: '\1F605';
-  --icon-no-scene: '\e900';
-  /* FontAwesome 4.5 icon, needs font-family H5PFontAwesome4 */
-  --icon-overview-map: '\f278';
-  --icon-question: '\e905';
-  --icon-reset: '\e901';
-  --icon-scene-description: '\e909';
-  --icon-triangle-arrow: '\e913';
+  --icon-fontawesome-audio-off: '\f026';
+  --icon-fontawesome-audio-on: '\f028';
+  --icon-fontawesome-checklist: '\f0ca';
+  --icon-fontawesome-delete: '\f014';
+  --icon-fontawesome-edit: '\f040';
+  --icon-fontawesome-go-back: '\f177';
+  --icon-fontawesome-go-to-scene: '\f124';
+  --icon-fontawesome-info: '\f055';
+  --icon-fontawesome-interaction: '\f0a6';
+  --icon-fontawesome-no-scene: '\f03e';
+  --icon-fontawesome-overview-map: '\f278';
+  --icon-fontawesome-reset: '\f03d';
+  --icon-fontawesome-scene-description: '\f129';
+  --icon-fontawesome-triangle-arrow: '\f0d8';
+  --icon-h5ptheme-close: '\e910';
+  --icon-no-icon: '\1F605'; /* Emoji, shown if no icon is set */
 }

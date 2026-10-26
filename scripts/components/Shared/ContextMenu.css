@@ -54,7 +54,7 @@
 
     &:before {
       color: #0061a2;
-      font-family: "360-image", sans-serif;
+      font-family: "H5PFontAwesome4", sans-serif;
     }
 
     .tooltip {
@@ -83,15 +83,15 @@
   }
 
   .go-to-scene:before {
-    content: var(--icon-go-to-scene);
+    content: var(--icon-fontawesome-go-to-scene);
   }
 
   .edit:before {
-    content: var(--icon-edit);
+    content: var(--icon-fontawesome-edit);
   }
 
   .delete:before {
-    content: var(--icon-delete);
+    content: var(--icon-fontawesome-delete);
   }
 }
 

@@ -79,8 +79,8 @@
 
       &:before {
         color: #ffffff;
-        content: var(--icon-triangle-arrow);
-        font-family: "360-image", sans-serif;
+        content: var(--icon-fontawesome-triangle-arrow);
+        font-family: "H5PFontAwesome4", sans-serif;
         font-size: 1.1em;
         height: 1.025em;
         left: -50%;
@@ -92,8 +92,8 @@
 
       &:after {
         color: #000000;
-        content: var(--icon-triangle-arrow);
-        font-family: "360-image", sans-serif;
+        content: var(--icon-fontawesome-triangle-arrow);
+        font-family: "H5PFontAwesome4", sans-serif;
         font-size: 1.1em;
         height: 1.025em;
         left: -50%;
