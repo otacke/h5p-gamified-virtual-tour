@@ -1,5 +1,6 @@
 import React from 'react';
 import PathShape from '@components/Shared/Paths/PathShape.js';
+import PathHitArea from '@components/Shared/Paths/PathHitArea.js';
 import { getPathVisuals, getStrokeWidth } from '@components/Shared/Paths/pathVisuals.js';
 import '@components/Shared/Paths/Paths.css';
 
@@ -30,9 +31,10 @@ const getButtonCenter = (position, width, height, radius) => {
  * @param {number} props.height Height of scene in px.
  * @param {number} props.buttonSize Size of interaction button in px.
  * @param {object} [props.globalVisuals] Global path visuals.
+ * @param {function} [props.onPathClick] Callback with path when path is clicked, paths are not clickable if not set.
  * @returns {React.Element|null} Rendered paths, or null if scene has no size yet.
  */
-const StaticPaths = ({ paths, positions, width, height, buttonSize, globalVisuals }) => {
+const StaticPaths = ({ paths, positions, width, height, buttonSize, globalVisuals, onPathClick }) => {
   if (!width || !height || !paths.length) {
     return null;
   }
@@ -58,14 +60,16 @@ const StaticPaths = ({ paths, positions, width, height, buttonSize, globalVisual
     ];
 
     const visuals = getPathVisuals(globalVisuals, path);
+    const strokeWidth = getStrokeWidth(visuals, buttonSize);
 
     return (
-      <PathShape
-        key={`${path.from}-${path.to}`}
-        points={points}
-        visuals={visuals}
-        strokeWidth={getStrokeWidth(visuals, buttonSize)}
-      />
+      <React.Fragment key={`${path.from}-${path.to}`}>
+        <PathShape points={points} visuals={visuals} strokeWidth={strokeWidth} />
+        {
+          onPathClick &&
+          <PathHitArea points={points} strokeWidth={strokeWidth} onClick={() => onPathClick(path)} />
+        }
+      </React.Fragment>
     );
   });
 

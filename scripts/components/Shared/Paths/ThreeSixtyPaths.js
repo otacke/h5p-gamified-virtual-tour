@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import PathShape from '@components/Shared/Paths/PathShape.js';
+import PathHitArea from '@components/Shared/Paths/PathHitArea.js';
 import { getPathVisuals, getStrokeWidth, getValidPaths } from '@components/Shared/Paths/pathVisuals.js';
 import '@components/Shared/Paths/Paths.css';
 
@@ -167,6 +168,7 @@ const getShapes = (camera, frame) => {
 
     return {
       key: `${path.from}-${path.to}`,
+      path: path,
       polylines: polylines,
       visuals: visuals,
       strokeWidth: getStrokeWidth(visuals, frame.buttonSize),
@@ -222,14 +224,18 @@ const getFrame = (threeSixty, container, props) => {
  * @param {object} props.sceneParams Scene parameters.
  * @param {object} [props.globalVisuals] Global path visuals.
  * @param {function} [props.getInteractionPosition] Get current yaw and pitch of interaction, e.g. while dragged.
+ * @param {function} [props.onPathClick] Callback with path when path is clicked, paths are not clickable if not set.
  * @returns {React.Element|null} Rendered paths, or null if nothing to draw.
  */
-const ThreeSixtyPaths = ({ threeSixty, sceneParams, globalVisuals, getInteractionPosition }) => {
+const ThreeSixtyPaths = ({ threeSixty, sceneParams, globalVisuals, getInteractionPosition, onPathClick }) => {
   const [container, setContainer] = useState(null);
+  const [hitContainer, setHitContainer] = useState(null);
   const [drawing, setDrawing] = useState(null);
 
   const latestProps = useRef();
-  latestProps.current = { sceneParams, globalVisuals, getInteractionPosition };
+  latestProps.current = { sceneParams, globalVisuals, getInteractionPosition, onPathClick };
+
+  const isClickable = Boolean(onPathClick);
 
   useEffect(() => {
     const pathsContainer = document.createElement('div');
@@ -238,6 +244,15 @@ const ThreeSixtyPaths = ({ threeSixty, sceneParams, globalVisuals, getInteractio
     // Place paths between panorama and interactions
     threeSixty.getElement().insertBefore(pathsContainer, threeSixty.getCameraElement());
     setContainer(pathsContainer);
+
+    // Camera controls cover whole scene, so clickable areas need to be on top of them
+    let hitAreasContainer = null;
+    if (isClickable) {
+      hitAreasContainer = document.createElement('div');
+      hitAreasContainer.classList.add('paths-overlay-container');
+      threeSixty.getElement().append(hitAreasContainer);
+    }
+    setHitContainer(hitAreasContainer);
 
     const camera = new H5P.ThreeJS.PerspectiveCamera();
     camera.rotation.order = 'YXZ';
@@ -271,27 +286,51 @@ const ThreeSixtyPaths = ({ threeSixty, sceneParams, globalVisuals, getInteractio
     return () => {
       window.cancelAnimationFrame(animationFrameId);
       pathsContainer.remove();
+      hitAreasContainer?.remove();
     };
-  }, [threeSixty]);
+  }, [threeSixty, isClickable]);
 
   if (!container || !drawing) {
     return null;
   }
 
-  return createPortal(
-    <svg className='paths-overlay' width={drawing.width} height={drawing.height} aria-hidden='true'>
+  return (
+    <>
       {
-        drawing.shapes.map((shape) => shape.polylines.map((points, index) => (
-          <PathShape
-            key={`${shape.key}-${index}`}
-            points={points}
-            visuals={shape.visuals}
-            strokeWidth={shape.strokeWidth}
-          />
-        )))
+        createPortal(
+          <svg className='paths-overlay' width={drawing.width} height={drawing.height} aria-hidden='true'>
+            {
+              drawing.shapes.map((shape) => shape.polylines.map((points, index) => (
+                <PathShape
+                  key={`${shape.key}-${index}`}
+                  points={points}
+                  visuals={shape.visuals}
+                  strokeWidth={shape.strokeWidth}
+                />
+              )))
+            }
+          </svg>,
+          container,
+        )
       }
-    </svg>,
-    container,
+      {
+        hitContainer && createPortal(
+          <svg className='paths-overlay' width={drawing.width} height={drawing.height} aria-hidden='true'>
+            {
+              drawing.shapes.map((shape) => shape.polylines.map((points, index) => (
+                <PathHitArea
+                  key={`${shape.key}-${index}`}
+                  points={points}
+                  strokeWidth={shape.strokeWidth}
+                  onClick={() => latestProps.current.onPathClick(shape.path)}
+                />
+              )))
+            }
+          </svg>,
+          hitContainer,
+        )
+      }
+    </>
   );
 };
 

@@ -377,6 +377,14 @@ export default class ThreeSixtyScene extends React.Component {
   }
 
   /**
+   * Let editor know that path was clicked.
+   * @param {object} path Clicked path with from and to interaction IDs.
+   */
+  handlePathClick = (path) => {
+    this.context.trigger('editPath', { from: path.from, to: path.to });
+  };
+
+  /**
    * Get current position of interaction, following it while it is being dragged in editor.
    * @param {object} interaction Interaction parameters.
    * @returns {object} Position with yaw and pitch in radians.
@@ -559,6 +567,7 @@ export default class ThreeSixtyScene extends React.Component {
             sceneParams={this.props.sceneParams}
             globalVisuals={this.context.behavior.paths}
             getInteractionPosition={this.getInteractionPosition}
+            onPathClick={this.context.extras.isEditor ? this.handlePathClick : undefined}
           />
         }
         {

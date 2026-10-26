@@ -433,6 +433,14 @@ export default class StaticScene extends React.Component {
   };
 
   /**
+   * Let editor know that path was clicked.
+   * @param {object} path Clicked path with from and to interaction IDs.
+   */
+  handlePathClick = (path) => {
+    this.context.trigger('editPath', { from: path.from, to: path.to });
+  };
+
+  /**
    * Render paths between connected interactions.
    * @param {object[]} interactionPositions Rendered positions of interactions in same order as interactions.
    * @returns {React.Element|null} Rendered paths, or null if scene has not been laid out yet.
@@ -462,6 +470,7 @@ export default class StaticScene extends React.Component {
         height={wrapper.clientHeight}
         buttonSize={BUTTON_SIZE_EM * fontSize}
         globalVisuals={this.context.behavior.paths}
+        onPathClick={this.context.extras.isEditor ? this.handlePathClick : undefined}
       />
     );
   };
