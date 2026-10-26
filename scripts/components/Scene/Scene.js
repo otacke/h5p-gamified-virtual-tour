@@ -38,6 +38,7 @@ export default class Scene extends React.Component {
           doneLoadingNextScene={this.props.doneLoadingNextScene}
           canTakeFocus={this.props.canTakeFocus}
           lockedInteractions={this.props.lockedInteractions}
+          restrictedInteractions={this.props.restrictedInteractions}
         />
       );
     }
@@ -68,6 +69,7 @@ export default class Scene extends React.Component {
         doneLoadingNextScene={this.props.doneLoadingNextScene}
         canTakeFocus={this.props.canTakeFocus}
         lockedInteractions={this.props.lockedInteractions}
+        restrictedInteractions={this.props.restrictedInteractions}
       />
     );
   }

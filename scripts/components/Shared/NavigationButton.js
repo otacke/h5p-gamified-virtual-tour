@@ -340,6 +340,10 @@ export default class NavigationButton extends React.Component {
       wrapperClasses.push('locked');
     }
 
+    if (this.props.hasRestrictions) {
+      wrapperClasses.push('has-restrictions');
+    }
+
     // only apply custom focus if we have children that are shown on focus
     if (this.state.isFocused && this.props.children) {
       wrapperClasses.push('focused');

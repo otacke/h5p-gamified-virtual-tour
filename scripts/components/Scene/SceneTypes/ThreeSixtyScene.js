@@ -317,6 +317,7 @@ export default class ThreeSixtyScene extends React.Component {
       <NavigationButton
         key={`interaction-${  this.props.sceneId  }${index}`}
         isLocked={(this.props.lockedInteractions ?? []).includes(interaction.id)}
+        hasRestrictions={(this.props.restrictedInteractions ?? []).includes(interaction.id)}
         onMount={ (el) => {
           this.interactionElements[interaction.id] = el;
           this.props.threeSixty.add(
@@ -505,7 +506,8 @@ export default class ThreeSixtyScene extends React.Component {
     const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);
     const hasChangedFocus = prevProps.focusedInteraction !== this.props.focusedInteraction;
     const hasChangedLocks =
-      (prevProps.lockedInteractions ?? []).join() !== (this.props.lockedInteractions ?? []).join();
+      (prevProps.lockedInteractions ?? []).join() !== (this.props.lockedInteractions ?? []).join() ||
+      (prevProps.restrictedInteractions ?? []).join() !== (this.props.restrictedInteractions ?? []).join();
 
     const hasChangedInteractions = this.props.sceneParams.interactions
       && (this.renderedInteractions !== this.props.sceneParams.interactions.length);

@@ -212,6 +212,21 @@ export default class Main extends React.Component {
   };
 
   /**
+   * Get IDs of interactions of scene that have restrictions, for highlighting them in editor.
+   * @param {object} sceneParams Scene parameters.
+   * @returns {string[]} IDs of interactions with restrictions, empty outside of editor.
+   */
+  getRestrictedInteractions = (sceneParams) => {
+    if (!this.context.extras.isEditor) {
+      return [];
+    }
+
+    return (sceneParams.interactions ?? [])
+      .filter((interaction) => this.getRestrictions(sceneParams, interaction).hasRestrictions())
+      .map((interaction) => interaction.id);
+  };
+
+  /**
    * Re-render periodically while current scene has time restrictions, so interactions unlock in time.
    */
   updateTimeRestrictionTimer = () => {
@@ -624,6 +639,9 @@ export default class Main extends React.Component {
                 canTakeFocus={this.state.childrenCanTakeFocus}
                 lockedInteractions={
                   sceneParams.sceneId === this.props.currentScene ? this.getLockedInteractions(sceneParams) : []
+                }
+                restrictedInteractions={
+                  sceneParams.sceneId === this.props.currentScene ? this.getRestrictedInteractions(sceneParams) : []
                 }
               />
             );

@@ -133,6 +133,24 @@
     content: var(--icon-fontawesome-scene-description);
   }
 
+  &.has-restrictions .nav-button:after {
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 0 0.2em rgba(0, 0, 0, 0.4);
+    color: #212121;
+    content: var(--icon-fontawesome-lock);
+    font-family: "H5PFontAwesome4", sans-serif;
+    font-size: 0.6em;
+    height: 1.6em;
+    line-height: 1.6em;
+    position: absolute;
+    right: -0.4em;
+    text-align: center;
+    top: -0.4em;
+    width: 1.6em;
+    z-index: 2;
+  }
+
   &.locked .nav-button:before {
     content: var(--icon-fontawesome-lock);
     font-size: 1.25em;
