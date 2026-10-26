@@ -65,15 +65,20 @@
       border: 0.25em solid var(--active-border);
     }
 
+    /* Cover whole button and center glyph, independent of glyph's advance width and line height */
     &:before {
+      align-items: center;
       color: white;
+      display: flex;
       font-family: "H5PFontAwesome4", sans-serif;
       font-size: 1.25em;
-      height: 1.025em;
-      left: 50%;
+      height: 100%;
+      justify-content: center;
+      left: 0;
+      line-height: 1;
       position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
+      top: 0;
+      width: 100%;
       z-index: 1;
     }
   }
