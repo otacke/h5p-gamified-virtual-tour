@@ -360,6 +360,10 @@
         {
           "label": "Ετικέτα για όταν δεν υπάρχει περιεχόμενο",
           "default": "Δεν υπάρχει περιεχόμενο"
+        },
+        {
+          "label": "Label for button to show and hide the overview map",
+          "default": "Overview map"
         }
       ]
     }

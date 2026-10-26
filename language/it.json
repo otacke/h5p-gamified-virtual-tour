@@ -360,6 +360,10 @@
         {
           "label": "Label for when there is no content",
           "default": "No content"
+        },
+        {
+          "label": "Label for button to show and hide the overview map",
+          "default": "Overview map"
         }
       ]
     }

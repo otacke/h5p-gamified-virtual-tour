@@ -1,0 +1,17 @@
+.hud {
+  .hud-panel {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 0.25rem;
+    bottom: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.4) 0 3px 10px;
+    box-sizing: border-box;
+    max-height: calc(100% - 2rem);
+    max-width: 20rem;
+    overflow: auto;
+    padding: 0.5rem;
+    pointer-events: auto;
+    position: absolute;
+    right: 1rem;
+    width: 35%;
+  }
+}

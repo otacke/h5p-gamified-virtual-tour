@@ -360,6 +360,10 @@
         {
           "label": "Vignette pour les cas où il n'y a pas de contenu",
           "default": "Pas de contenu"
+        },
+        {
+          "label": "Label for button to show and hide the overview map",
+          "default": "Overview map"
         }
       ]
     }

@@ -35,6 +35,7 @@ export default class Button extends React.Component {
           className={ `hud-btn ${  this.props.type}` }
           onClick={ this.handleClick }
           aria-label={ this.props.label }
+          aria-pressed={ this.props.isPressed }
           disabled={ !!this.props.disabled }
           tabIndex={ this.props.isHiddenBehindOverlay ? '-1' : undefined }
         />

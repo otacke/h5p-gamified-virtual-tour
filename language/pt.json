@@ -360,6 +360,10 @@
         {
           "label": "Etiqueta para quando não houver guia do autor do conteúdo",
           "default": "Sem guia do autor do conteúdo"
+        },
+        {
+          "label": "Label for button to show and hide the overview map",
+          "default": "Overview map"
         }
       ]
     }

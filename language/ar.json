@@ -360,6 +360,10 @@
         {
           "label": "التسمية في حالة عدم وجود دليل تأليف المحتوى",
           "default": "لا يوجد دليل تأليف المحتوى"
+        },
+        {
+          "label": "Label for button to show and hide the overview map",
+          "default": "Overview map"
         }
       ]
     }

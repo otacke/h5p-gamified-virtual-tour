@@ -360,6 +360,10 @@
         {
           "label": "Etiketė, kai nėra turinio",
           "default": "Nėra turinio"
+        },
+        {
+          "label": "Label for button to show and hide the overview map",
+          "default": "Overview map"
         }
       ]
     }

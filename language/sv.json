@@ -360,6 +360,10 @@
         {
           "label": "Etikett för när det inte finns något innehåll",
           "default": "Inget innehåll"
+        },
+        {
+          "label": "Label for button to show and hide the overview map",
+          "default": "Overview map"
         }
       ]
     }

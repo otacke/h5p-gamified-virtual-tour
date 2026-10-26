@@ -5,6 +5,13 @@ import { H5PContext } from '@context/H5PContext.js';
 import AudioButton from '@components/HUD/Buttons/AudioButton.js';
 import Button from '@components/HUD/Buttons/Button/Button.js';
 import { SceneTypes } from '@components/Scene/Scene.js';
+import OverviewMap from '@components/HUD/Panels/OverviewMap.js';
+
+/** @constant {object} HudPanels Identifiers of panels that can be toggled in HUD. */
+export const HudPanels = {
+  OVERVIEW_MAP: 'overviewMap',
+  CHECKLIST: 'checklist',
+};
 
 export default class HUD extends React.Component {
   /**
@@ -36,11 +43,22 @@ export default class HUD extends React.Component {
   };
 
   /**
+   * Show or hide overview map.
+   */
+  handleToggleOverviewMap = () => {
+    this.props.onToggleHudPanel(HudPanels.OVERVIEW_MAP);
+  };
+
+  /**
    * React - create DOM elements.
    * @returns {React.Element} Rendered HUD elements.
    */
   render() {
     const isThreeSixty = this.props.scene.sceneType === SceneTypes.THREE_SIXTY_SCENE;
+
+    const overviewMap = this.context.behavior.overviewMap;
+    const hasOverviewMap = overviewMap?.show === true && !!overviewMap.image?.path;
+    const isShowingOverviewMap = hasOverviewMap && this.props.hudPanel === HudPanels.OVERVIEW_MAP;
 
     return (
       <div className="hud" aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }>
@@ -65,7 +83,26 @@ export default class HUD extends React.Component {
               onClick={ this.props.onCenterScene }
             />
           }
+          {
+            hasOverviewMap &&
+            <Button
+              type={ 'overview-map' }
+              label={ this.context.l10n.overviewMap }
+              isPressed={ isShowingOverviewMap }
+              isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+              nextFocus={ this.props.nextFocus }
+              onClick={ this.handleToggleOverviewMap }
+            />
+          }
         </div>
+        {
+          isShowingOverviewMap &&
+          <OverviewMap
+            image={ overviewMap.image }
+            position={ this.props.scene.overviewMapPosition }
+            label={ this.context.l10n.overviewMap }
+          />
+        }
       </div>
     );
   }

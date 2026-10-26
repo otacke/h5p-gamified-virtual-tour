@@ -360,6 +360,10 @@
         {
           "label": "내용이 없을 때 라벨",
           "default": "내용 없음"
+        },
+        {
+          "label": "Label for button to show and hide the overview map",
+          "default": "Overview map"
         }
       ]
     }

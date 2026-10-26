@@ -360,6 +360,10 @@
         {
           "label": "Besedilo za zaslon brez vsebine",
           "default": "Ni vsebine"
+        },
+        {
+          "label": "Label for button to show and hide the overview map",
+          "default": "Overview map"
         }
       ]
     }

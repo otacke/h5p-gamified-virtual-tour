@@ -1,0 +1,23 @@
+.hud {
+  .overview-map {
+    .overview-map-image-wrapper {
+      position: relative;
+
+      .overview-map-image {
+        display: block;
+        width: 100%;
+      }
+
+      .overview-map-marker {
+        background: var(--interaction-bg);
+        border: 0.15rem solid #fff;
+        border-radius: 50%;
+        box-shadow: rgba(0, 0, 0, 0.5) 0 0 0.25rem;
+        height: 0.75rem;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        width: 0.75rem;
+      }
+    }
+  }
+}

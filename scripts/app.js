@@ -51,6 +51,7 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
       expandButtonAriaLabel: 'Expand the visual label',
       backgroundLoading: 'Loading background image...',
       noContent: 'No content',
+      overviewMap: 'Overview map',
       ...params.l10n,
     };
 

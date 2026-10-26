@@ -31,6 +31,7 @@ export default class Main extends React.Component {
       nextFocus: null,
       sceneWaitingForLoad: null,
       updateThreeSixty: false,
+      hudPanel: null,
       labelBehavior: {
         showLabel: true,
         labelPosition: 'right',
@@ -330,6 +331,16 @@ export default class Main extends React.Component {
   };
 
   /**
+   * Show panel in HUD, or hide it if it is already shown. Only one panel can be shown at a time.
+   * @param {string} panel Identifier of panel to toggle.
+   */
+  toggleHudPanel = (panel) => {
+    this.setState((prevState) => ({
+      hudPanel: prevState.hudPanel === panel ? null : panel,
+    }));
+  };
+
+  /**
    * Center camera at scene start position.
    */
   centerScene = () => {
@@ -465,6 +476,8 @@ export default class Main extends React.Component {
           onAudioIsPlaying={ this.handleAudioIsPlaying }
           onSceneDescription={ this.handleSceneDescription }
           onCenterScene={ this.centerScene }
+          hudPanel={ this.state.hudPanel }
+          onToggleHudPanel={ this.toggleHudPanel }
         />
       </div>
     );
