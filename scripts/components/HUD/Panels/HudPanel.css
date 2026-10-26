@@ -1,17 +1,17 @@
 .hud {
   .hud-panel {
     background: rgba(255, 255, 255, 0.95);
-    border-radius: 0.25rem;
-    bottom: 1rem;
+    border-radius: calc(0.25 * var(--h5p-theme-spacing-s, 1rem));
+    bottom: var(--h5p-theme-spacing-s, 1rem);
     box-shadow: rgba(0, 0, 0, 0.4) 0 3px 10px;
     box-sizing: border-box;
-    max-height: calc(100% - 2rem);
-    max-width: 20rem;
+    max-height: calc(100% - var(--h5p-theme-spacing-l, 2rem));
+    max-width: calc(20 * var(--h5p-theme-spacing-s, 1rem));
     overflow: auto;
-    padding: 0.5rem;
+    padding: var(--h5p-theme-spacing-xxs, 0.5rem);
     pointer-events: auto;
     position: absolute;
-    right: 1rem;
+    right: var(--h5p-theme-spacing-s, 1rem);
     width: 35%;
   }
 }

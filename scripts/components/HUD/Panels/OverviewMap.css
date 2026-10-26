@@ -10,13 +10,13 @@
 
       .overview-map-marker {
         background: var(--interaction-bg);
-        border: 0.15rem solid #fff;
+        border: calc(0.15 * var(--h5p-theme-spacing-s, 1rem)) solid #fff;
         border-radius: 50%;
-        box-shadow: rgba(0, 0, 0, 0.5) 0 0 0.25rem;
-        height: 0.75rem;
+        box-shadow: rgba(0, 0, 0, 0.5) 0 0 calc(0.25 * var(--h5p-theme-spacing-s, 1rem));
+        height: calc(0.75 * var(--h5p-theme-spacing-s, 1rem));
         position: absolute;
         transform: translate(-50%, -50%);
-        width: 0.75rem;
+        width: calc(0.75 * var(--h5p-theme-spacing-s, 1rem));
       }
     }
   }

@@ -4,7 +4,7 @@
 
     .checklist-title {
       font-weight: bold;
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--h5p-theme-spacing-xxs, 0.5rem);
     }
 
     .checklist-items {
@@ -15,15 +15,15 @@
       .checklist-item {
         align-items: baseline;
         display: flex;
-        gap: 0.5rem;
-        padding: 0.25rem 0;
+        gap: var(--h5p-theme-spacing-xxs, 0.5rem);
+        padding: calc(0.25 * var(--h5p-theme-spacing-s, 1rem)) 0;
 
         &:before {
           color: #8d8f98;
           content: '\f096';
           flex-shrink: 0;
           font-family: "H5PFontAwesome4", sans-serif;
-          width: 1rem;
+          width: var(--h5p-theme-spacing-s, 1rem);
         }
 
         &.done:before {

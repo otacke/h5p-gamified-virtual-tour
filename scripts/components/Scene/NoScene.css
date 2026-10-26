@@ -17,13 +17,13 @@
       color: #8d8f98;
       content: var(--icon-fontawesome-no-scene);
       font-family: "H5PFontAwesome4", sans-serif;
-      font-size: 10rem;
+      font-size: calc(10 * var(--h5p-theme-font-size-m, 1rem));
       line-height: 0.75;
-      padding-left: 1.25rem;
+      padding-left: calc(1.25 * var(--h5p-theme-spacing-s, 1rem));
     }
 
     .title {
-      font-size: 2rem;
+      font-size: calc(2 * var(--h5p-theme-font-size-m, 1rem));
     }
   }
 }

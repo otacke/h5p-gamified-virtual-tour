@@ -4,13 +4,13 @@
       background: url('@assets/images/moving-icon.svg');
       background-size: 100% 100%;
       content: " ";
-      font-size: 0.5rem;
-      height: 4.5rem;
+      font-size: calc(0.5 * var(--h5p-theme-font-size-m, 1rem));
+      height: calc(4.5 * var(--h5p-theme-spacing-s, 1rem));
       left: 50%;
       position: absolute;
       top: 50%;
       transform: translate(-50%, -50%);
-      width: 4.5rem;
+      width: calc(4.5 * var(--h5p-theme-spacing-s, 1rem));
     }
 
     &.focused .context-menu {
@@ -42,14 +42,14 @@
 
       .loading-image-wrapper {
         margin: auto;
-        width: 7rem;
+        width: calc(7 * var(--h5p-theme-spacing-s, 1rem));
 
         & img {
           animation-duration: 1.5s;
           animation-iteration-count: infinite;
           animation-name: spinning;
           animation-timing-function: linear;
-          width: 7rem;
+          width: calc(7 * var(--h5p-theme-spacing-s, 1rem));
         }
       }
 
