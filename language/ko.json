@@ -109,6 +109,10 @@
                     },
                     {
                       "label": "ID"
+                    },
+                    {
+                      "label": "Connected interactions",
+                      "description": "Interactions of this scene that will be connected to this interaction by a path."
                     }
                   ]
                 }
@@ -128,6 +132,71 @@
               {
                 "label": "오디오 트랙",
                 "description": "이 장면에 맞는 오디오 트랙을 추가합니다."
+              },
+              {
+                "label": "Paths",
+                "entity": "path",
+                "field": {
+                  "label": "Path",
+                  "fields": [
+                    {
+                      "label": "From"
+                    },
+                    {
+                      "label": "To"
+                    },
+                    {
+                      "label": "Visual settings",
+                      "options": [
+                        {
+                          "label": "Use global settings"
+                        },
+                        {
+                          "label": "Use custom settings"
+                        }
+                      ]
+                    },
+                    {
+                      "label": "Custom visual settings",
+                      "fields": [
+                        {
+                          "label": "Path color"
+                        },
+                        {
+                          "label": "Path width",
+                          "options": [
+                            {
+                              "label": "Thin"
+                            },
+                            {
+                              "label": "Medium"
+                            },
+                            {
+                              "label": "Thick"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "Path style",
+                          "options": [
+                            {
+                              "label": "Solid"
+                            },
+                            {
+                              "label": "Dotted"
+                            },
+                            {
+                              "label": "Dashed"
+                            },
+                            {
+                              "label": "Double"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
               }
             ]
           }
@@ -185,6 +254,45 @@
             {
               "label": "라벨 표시",
               "description": "선택되지 않은 경우 - 레이블은 마우스 커서 위에만 표시됩니다."
+            }
+          ]
+        },
+        {
+          "label": "Paths",
+          "fields": [
+            {
+              "label": "Path color"
+            },
+            {
+              "label": "Path width",
+              "options": [
+                {
+                  "label": "Thin"
+                },
+                {
+                  "label": "Medium"
+                },
+                {
+                  "label": "Thick"
+                }
+              ]
+            },
+            {
+              "label": "Path style",
+              "options": [
+                {
+                  "label": "Solid"
+                },
+                {
+                  "label": "Dotted"
+                },
+                {
+                  "label": "Dashed"
+                },
+                {
+                  "label": "Double"
+                }
+              ]
             }
           ]
         }

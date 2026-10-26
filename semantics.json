@@ -206,6 +206,17 @@
                     "type": "text",
                     "label": "ID",
                     "widget": "none"
+                  },
+                  {
+                    "name": "neighbors",
+                    "type": "select",
+                    "label": "Connected interactions",
+                    "description": "Interactions of this scene that will be connected to this interaction by a path.",
+                    "widget": "gamifiedVirtualTourNeighbors",
+                    "importance": "medium",
+                    "multiple": true,
+                    "optional": true,
+                    "options": []
                   }
                 ]
               }
@@ -238,6 +249,124 @@
               "widgetExtensions": [
                 "AudioRecorder"
               ]
+            },
+            {
+              "name": "paths",
+              "type": "list",
+              "label": "Paths",
+              "entity": "path",
+              "field": {
+                "name": "path",
+                "type": "group",
+                "label": "Path",
+                "fields": [
+                  {
+                    "name": "from",
+                    "type": "text",
+                    "label": "From",
+                    "widget": "none"
+                  },
+                  {
+                    "name": "to",
+                    "type": "text",
+                    "label": "To",
+                    "widget": "none"
+                  },
+                  {
+                    "name": "visualsType",
+                    "type": "select",
+                    "label": "Visual settings",
+                    "default": "global",
+                    "options": [
+                      {
+                        "value": "global",
+                        "label": "Use global settings"
+                      },
+                      {
+                        "value": "custom",
+                        "label": "Use custom settings"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "customVisuals",
+                    "type": "group",
+                    "label": "Custom visual settings",
+                    "expanded": true,
+                    "widget": "showWhen",
+                    "showWhen": {
+                      "rules": [
+                        {
+                          "field": "visualsType",
+                          "equals": "custom"
+                        }
+                      ]
+                    },
+                    "fields": [
+                      {
+                        "name": "colorPath",
+                        "type": "text",
+                        "label": "Path color",
+                        "optional": true,
+                        "default": "rgba(0, 0, 0, 0.7)",
+                        "widget": "colorSelector",
+                        "spectrum": {
+                          "showInput": true,
+                          "showInitial": true,
+                          "showAlpha": true,
+                          "preferredFormat": "rgb"
+                        }
+                      },
+                      {
+                        "name": "pathWidth",
+                        "type": "select",
+                        "label": "Path width",
+                        "default": "0.2",
+                        "optional": false,
+                        "options": [
+                          {
+                            "value": "0.1",
+                            "label": "Thin"
+                          },
+                          {
+                            "value": "0.2",
+                            "label": "Medium"
+                          },
+                          {
+                            "value": "0.3",
+                            "label": "Thick"
+                          }
+                        ]
+                      },
+                      {
+                        "name": "pathStyle",
+                        "type": "select",
+                        "label": "Path style",
+                        "default": "dotted",
+                        "optional": false,
+                        "options": [
+                          {
+                            "value": "solid",
+                            "label": "Solid"
+                          },
+                          {
+                            "value": "dotted",
+                            "label": "Dotted"
+                          },
+                          {
+                            "value": "dashed",
+                            "label": "Dashed"
+                          },
+                          {
+                            "value": "double",
+                            "label": "Double"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
             }
           ]
         }
@@ -331,6 +460,74 @@
             "label": "Display Labels",
             "description": "If unchecked - labels will show only on mouse over",
             "default": true
+          }
+        ]
+      },
+      {
+        "name": "paths",
+        "type": "group",
+        "label": "Paths",
+        "importance": "low",
+        "fields": [
+          {
+            "name": "colorPath",
+            "type": "text",
+            "label": "Path color",
+            "optional": true,
+            "default": "rgba(0, 0, 0, 0.7)",
+            "widget": "colorSelector",
+            "spectrum": {
+              "showInput": true,
+              "showInitial": true,
+              "showAlpha": true,
+              "preferredFormat": "rgb"
+            }
+          },
+          {
+            "name": "pathWidth",
+            "type": "select",
+            "label": "Path width",
+            "default": "0.2",
+            "optional": false,
+            "options": [
+              {
+                "value": "0.1",
+                "label": "Thin"
+              },
+              {
+                "value": "0.2",
+                "label": "Medium"
+              },
+              {
+                "value": "0.3",
+                "label": "Thick"
+              }
+            ]
+          },
+          {
+            "name": "pathStyle",
+            "type": "select",
+            "label": "Path style",
+            "default": "dotted",
+            "optional": false,
+            "options": [
+              {
+                "value": "solid",
+                "label": "Solid"
+              },
+              {
+                "value": "dotted",
+                "label": "Dotted"
+              },
+              {
+                "value": "dashed",
+                "label": "Dashed"
+              },
+              {
+                "value": "double",
+                "label": "Double"
+              }
+            ]
           }
         ]
       }
