@@ -367,6 +367,31 @@
                   }
                 ]
               }
+            },
+            {
+              "name": "overviewMapPosition",
+              "type": "group",
+              "label": "Position on overview map",
+              "description": "Mark where this scene is located on the overview map.",
+              "widget": "imageCoordinateSelector",
+              "imageFieldPath": "../behaviour/overviewMap/image",
+              "optional": true,
+              "fields": [
+                {
+                  "name": "x",
+                  "type": "number",
+                  "label": "X",
+                  "min": 0,
+                  "max": 100
+                },
+                {
+                  "name": "y",
+                  "type": "number",
+                  "label": "Y",
+                  "min": 0,
+                  "max": 100
+                }
+              ]
             }
           ]
         }
@@ -528,6 +553,28 @@
                 "label": "Double"
               }
             ]
+          }
+        ]
+      },
+      {
+        "name": "overviewMap",
+        "type": "group",
+        "label": "Overview map",
+        "importance": "low",
+        "fields": [
+          {
+            "name": "show",
+            "type": "boolean",
+            "label": "Show overview map",
+            "description": "Users can toggle an overview map that shows where the current scene is located. Set the position of each scene in the scene settings.",
+            "default": false,
+            "optional": true
+          },
+          {
+            "name": "image",
+            "type": "image",
+            "label": "Overview map image",
+            "optional": true
           }
         ]
       }

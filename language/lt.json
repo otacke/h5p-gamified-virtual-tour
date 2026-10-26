@@ -197,6 +197,18 @@
                     }
                   ]
                 }
+              },
+              {
+                "label": "Position on overview map",
+                "description": "Mark where this scene is located on the overview map.",
+                "fields": [
+                  {
+                    "label": "X"
+                  },
+                  {
+                    "label": "Y"
+                  }
+                ]
               }
             ]
           }
@@ -293,6 +305,18 @@
                   "label": "Double"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "label": "Overview map",
+          "fields": [
+            {
+              "label": "Show overview map",
+              "description": "Users can toggle an overview map that shows where the current scene is located. Set the position of each scene in the scene settings."
+            },
+            {
+              "label": "Overview map image"
             }
           ]
         }
