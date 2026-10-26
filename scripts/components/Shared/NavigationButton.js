@@ -393,7 +393,6 @@ export default class NavigationButton extends React.Component {
           aria-label={ariaLabel}
           className='nav-button'
           tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
-          onClick={this.onClick}
           onDoubleClick={this.onDoubleClick}
           onMouseDown={this.onMouseDown}
           onMouseUp={this.setFocus}
