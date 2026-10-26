@@ -58,6 +58,16 @@
       content: var(--icon-reset);
     }
 
+    &.overview-map:before {
+      content: var(--icon-overview-map);
+      font-family: "H5PFontAwesome4", sans-serif;
+    }
+
+    &.checklist:before {
+      content: var(--icon-checklist);
+      font-family: "H5PFontAwesome4", sans-serif;
+    }
+
     &.audio-track.active:before {
       content: var(--icon-audio-off);
     }

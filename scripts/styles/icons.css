@@ -1,6 +1,8 @@
 .h5p-gamified-virtual-tour {
   --icon-audio-off: '\e904';
   --icon-audio-on: '\e90a';
+  /* FontAwesome 4.5 icon, needs font-family H5PFontAwesome4 */
+  --icon-checklist: '\f0ca';
   --icon-close: '\e916';
   --icon-delete: '\e910';
   --icon-edit: '\e90f';
@@ -10,6 +12,8 @@
   --icon-info: '\e906';
   --icon-no-icon: '\1F605';
   --icon-no-scene: '\e900';
+  /* FontAwesome 4.5 icon, needs font-family H5PFontAwesome4 */
+  --icon-overview-map: '\f278';
   --icon-question: '\e905';
   --icon-reset: '\e901';
   --icon-scene-description: '\e909';
