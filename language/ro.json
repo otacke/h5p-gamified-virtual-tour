@@ -199,14 +199,33 @@
                 }
               },
               {
-                "label": "Position on overview map",
-                "description": "Mark where this scene is located on the overview map.",
+                "label": "Overview map marker",
                 "fields": [
                   {
-                    "label": "X"
+                    "label": "Position",
+                    "description": "Mark where this scene is located on the overview map.",
+                    "fields": [
+                      {
+                        "label": "X"
+                      },
+                      {
+                        "label": "Y"
+                      }
+                    ]
                   },
                   {
-                    "label": "Y"
+                    "label": "Color",
+                    "options": [
+                      {
+                        "label": "Use default color"
+                      },
+                      {
+                        "label": "Use custom color"
+                      }
+                    ]
+                  },
+                  {
+                    "label": "Custom color"
                   }
                 ]
               }
@@ -317,6 +336,10 @@
             },
             {
               "label": "Overview map image"
+            },
+            {
+              "label": "Default marker color",
+              "description": "Color of the marker for the current scene, unless the scene uses a custom color."
             }
           ]
         }

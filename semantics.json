@@ -369,27 +369,74 @@
               }
             },
             {
-              "name": "overviewMapPosition",
+              "name": "overviewMapMarker",
               "type": "group",
-              "label": "Position on overview map",
-              "description": "Mark where this scene is located on the overview map.",
-              "widget": "imageCoordinateSelector",
-              "imageFieldPath": "../behaviour/overviewMap/image",
-              "optional": true,
+              "label": "Overview map marker",
+              "importance": "low",
+              "expanded": true,
               "fields": [
                 {
-                  "name": "x",
-                  "type": "number",
-                  "label": "X",
-                  "min": 0,
-                  "max": 100
+                  "name": "position",
+                  "type": "group",
+                  "label": "Position",
+                  "description": "Mark where this scene is located on the overview map.",
+                  "widget": "imageCoordinateSelector",
+                  "imageFieldPath": "../../behaviour/overviewMap/image",
+                  "optional": true,
+                  "fields": [
+                    {
+                      "name": "x",
+                      "type": "number",
+                      "label": "X",
+                      "min": 0,
+                      "max": 100
+                    },
+                    {
+                      "name": "y",
+                      "type": "number",
+                      "label": "Y",
+                      "min": 0,
+                      "max": 100
+                    }
+                  ]
                 },
                 {
-                  "name": "y",
-                  "type": "number",
-                  "label": "Y",
-                  "min": 0,
-                  "max": 100
+                  "name": "colorType",
+                  "type": "select",
+                  "label": "Color",
+                  "default": "global",
+                  "options": [
+                    {
+                      "value": "global",
+                      "label": "Use default color"
+                    },
+                    {
+                      "value": "custom",
+                      "label": "Use custom color"
+                    }
+                  ]
+                },
+                {
+                  "name": "color",
+                  "type": "text",
+                  "label": "Custom color",
+                  "optional": true,
+                  "default": "#373e94",
+                  "widget": "showWhen",
+                  "showWhen": {
+                    "widget": "colorSelector",
+                    "rules": [
+                      {
+                        "field": "colorType",
+                        "equals": "custom"
+                      }
+                    ]
+                  },
+                  "spectrum": {
+                    "showInput": true,
+                    "showInitial": true,
+                    "preferredFormat": "hex"
+                  }
                 }
               ]
             }
@@ -575,6 +622,20 @@
             "type": "image",
             "label": "Overview map image",
             "optional": true
+          },
+          {
+            "name": "markerColor",
+            "type": "text",
+            "label": "Default marker color",
+            "description": "Color of the marker for the current scene, unless the scene uses a custom color.",
+            "optional": true,
+            "default": "#373e94",
+            "widget": "colorSelector",
+            "spectrum": {
+              "showInput": true,
+              "showInitial": true,
+              "preferredFormat": "hex"
+            }
           }
         ]
       }

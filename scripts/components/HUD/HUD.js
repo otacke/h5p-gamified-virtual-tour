@@ -95,6 +95,9 @@ export default class HUD extends React.Component {
     const hasOverviewMap = overviewMap?.show === true && !!overviewMap.image?.path;
     const isShowingOverviewMap = hasOverviewMap && this.props.hudPanel === HudPanels.OVERVIEW_MAP;
 
+    const marker = this.props.scene.overviewMapMarker;
+    const markerColor = (marker?.colorType === 'custom' && marker.color) ? marker.color : overviewMap?.markerColor;
+
     // Checklist is only meaningful for users, not for authors
     const checklistItems = this.context.extras.isEditor ? [] : this.getChecklistItems();
     const isShowingChecklist = checklistItems.length > 0 && this.props.hudPanel === HudPanels.CHECKLIST;
@@ -149,7 +152,8 @@ export default class HUD extends React.Component {
           isShowingOverviewMap &&
           <OverviewMap
             image={ overviewMap.image }
-            position={ this.props.scene.overviewMapPosition }
+            position={ marker?.position }
+            markerColor={ markerColor }
             label={ this.context.l10n.overviewMap }
           />
         }
