@@ -7,6 +7,7 @@ import Button from '@components/HUD/Buttons/Button/Button.js';
 import { SceneTypes } from '@components/Scene/Scene.js';
 import OverviewMap from '@components/HUD/Panels/OverviewMap.js';
 import Checklist from '@components/HUD/Panels/Checklist.js';
+import { isInteractionDone } from '@scripts/services/progress.js';
 
 /** @constant {object} HudPanels Identifiers of panels that can be toggled in HUD. */
 export const HudPanels = {
@@ -68,7 +69,7 @@ export default class HUD extends React.Component {
           interaction.action.metadata?.title ||
           H5P.libraryFromString(interaction.action.library).machineName,
         ),
-        isDone: (this.props.completedInteractions ?? []).includes(interaction.id),
+        isDone: isInteractionDone(this.props.interactionStates ?? {}, interaction.id),
       }));
   };
 

@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import Main from '@components/Main.js';
 import { H5PContext } from '@context/H5PContext.js';
 import { sceneRenderingQualityMapping } from '@components/Scene/SceneTypes/ThreeSixtyScene.js';
+import { getInitialInteractionStates } from '@scripts/services/progress.js';
 
 /** @constant {number} DEFAULT_RATIO_HEIGHT Height of default 16:9 aspect ratio. */
 const DEFAULT_RATIO_HEIGHT = 9;
@@ -66,7 +67,7 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     this.contentId = contentId;
     this.extras = extras;
     this.sceneRenderingQuality = this.behavior.sceneRenderingQuality || 'high';
-    this.completedInteractions = extras.previousState?.completedInteractions ?? [];
+    this.interactionStates = getInitialInteractionStates(extras.previousState);
 
     this.on('resize', this.handleResize);
   }
@@ -135,19 +136,19 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
           setCurrentSceneId={this.setCurrentSceneId}
           addThreeSixty={ (tS) => this.threeSixty = tS }
           onSetCameraPos={this.setCameraPosition}
-          initialCompletedInteractions={this.completedInteractions}
-          onCompletedInteractionsChanged={this.handleCompletedInteractionsChanged}
+          initialInteractionStates={this.interactionStates}
+          onInteractionStatesChanged={this.handleInteractionStatesChanged}
         />
       </H5PContext.Provider>,
     );
   };
 
   /**
-   * Store IDs of completed interactions for resuming.
-   * @param {string[]} completedInteractions IDs of completed interactions.
+   * Store progress and scores of interactions for resuming.
+   * @param {object} interactionStates States of interactions, keyed by interaction ID.
    */
-  handleCompletedInteractionsChanged = (completedInteractions) => {
-    this.completedInteractions = completedInteractions;
+  handleInteractionStatesChanged = (interactionStates) => {
+    this.interactionStates = interactionStates;
   };
 
   /**
@@ -155,12 +156,12 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
    * @returns {object|undefined} Current state, or undefined if there is nothing to resume.
    */
   getCurrentState = () => {
-    if (!this.completedInteractions.length) {
+    if (!Object.keys(this.interactionStates).length) {
       return;
     }
 
     return {
-      completedInteractions: this.completedInteractions,
+      interactionStates: this.interactionStates,
     };
   };
 

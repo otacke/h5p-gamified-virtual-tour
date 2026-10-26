@@ -8,6 +8,7 @@ import HUD from '@components/HUD/HUD.js';
 import AudioButton from '@components/HUD/Buttons/AudioButton.js';
 import NoScene from '@components/Scene/NoScene.js';
 import { isCompletingStatement, isInstanceTask } from '@scripts/services/h5p-util.js';
+import { mergeInteractionState } from '@scripts/services/progress.js';
 
 export default class Main extends React.Component {
   /**
@@ -33,7 +34,7 @@ export default class Main extends React.Component {
       sceneWaitingForLoad: null,
       updateThreeSixty: false,
       hudPanel: null,
-      completedInteractions: this.props.initialCompletedInteractions ?? [],
+      interactionStates: this.props.initialInteractionStates ?? {},
       labelBehavior: {
         showLabel: true,
         labelPosition: 'right',
@@ -287,7 +288,7 @@ export default class Main extends React.Component {
         const player = this.getAudioPlayer(playerId, interaction);
         if (player) {
           player.play();
-          this.markInteractionCompleted(interaction.id);
+          this.updateInteractionState(interaction.id, { progress: 'cleared' });
         }
       }
     }
@@ -302,36 +303,53 @@ export default class Main extends React.Component {
   };
 
   /**
-   * Mark interaction as completed for checklist.
+   * Update progress and score of interaction.
    * @param {string} interactionId ID of interaction.
+   * @param {object} changes Changes with progress, score and maxScore.
    */
-  markInteractionCompleted = (interactionId) => {
-    if (!interactionId || this.state.completedInteractions.includes(interactionId)) {
+  updateInteractionState = (interactionId, changes) => {
+    if (!interactionId) {
       return;
     }
 
     this.setState((prevState) => ({
-      completedInteractions: [...prevState.completedInteractions, interactionId],
+      interactionStates: {
+        ...prevState.interactionStates,
+        [interactionId]: mergeInteractionState(prevState.interactionStates[interactionId], changes),
+      },
     }), () => {
-      this.props.onCompletedInteractionsChanged?.(this.state.completedInteractions);
+      this.props.onInteractionStatesChanged?.(this.state.interactionStates);
     });
   };
 
   /**
-   * Track completion of interaction's content instance.
+   * Track progress and score of interaction's content instance.
    * @param {object} instance H5P instance of interaction's content.
    * @param {object} interaction Interaction parameters.
    */
   handleInstanceCreated = (instance, interaction) => {
     if (!isInstanceTask(instance)) {
-      this.markInteractionCompleted(interaction.id);
+      this.updateInteractionState(interaction.id, { progress: 'cleared' });
       return;
     }
 
+    this.updateInteractionState(interaction.id, { progress: 'opened' });
+
     instance.on('xAPI', (event) => {
-      if (isCompletingStatement(event, instance)) {
-        this.markInteractionCompleted(interaction.id);
+      if (!isCompletingStatement(event, instance)) {
+        return;
       }
+
+      const score = event.getScore();
+      const maxScore = event.getMaxScore();
+      const hasScore = typeof score === 'number' && typeof maxScore === 'number';
+      const isSuccess = event.getVerifiedStatementValue(['result', 'success']) === true ||
+        (hasScore && maxScore > 0 && score >= maxScore);
+
+      this.updateInteractionState(interaction.id, {
+        progress: isSuccess ? 'cleared' : 'completed',
+        ...(hasScore && { score: score, maxScore: maxScore }),
+      });
     });
   };
 
@@ -516,7 +534,7 @@ export default class Main extends React.Component {
           onCenterScene={ this.centerScene }
           hudPanel={ this.state.hudPanel }
           onToggleHudPanel={ this.toggleHudPanel }
-          completedInteractions={ this.state.completedInteractions }
+          interactionStates={ this.state.interactionStates }
           onShowInteraction={ this.showInteraction }
         />
       </div>
