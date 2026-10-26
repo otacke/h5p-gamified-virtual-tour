@@ -17,7 +17,7 @@ const OverviewMap = ({ image, position, label }) => {
   const hasPosition = typeof position?.x === 'number' && typeof position?.y === 'number';
 
   return (
-    <div className='hud-panel overview-map' role='region' aria-label={label}>
+    <div className='hud-panel overview-map-panel' role='region' aria-label={label}>
       <div className='overview-map-image-wrapper'>
         <img className='overview-map-image' src={H5P.getPath(image.path, context.contentId)} alt='' />
         {

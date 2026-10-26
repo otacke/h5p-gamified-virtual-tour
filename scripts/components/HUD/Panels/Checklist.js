@@ -10,7 +10,7 @@ import '@components/HUD/Panels/Checklist.css';
  * @returns {React.Element} Rendered checklist.
  */
 const Checklist = ({ items, l10n }) => (
-  <div className='hud-panel checklist' role='region' aria-label={l10n.checklist}>
+  <div className='hud-panel checklist-panel' role='region' aria-label={l10n.checklist}>
     <div className='checklist-title'>{l10n.checklist}</div>
     <ul className='checklist-items'>
       {

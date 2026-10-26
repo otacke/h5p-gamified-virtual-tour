@@ -95,7 +95,8 @@ export default class HUD extends React.Component {
     const hasOverviewMap = overviewMap?.show === true && !!overviewMap.image?.path;
     const isShowingOverviewMap = hasOverviewMap && this.props.hudPanel === HudPanels.OVERVIEW_MAP;
 
-    const checklistItems = this.getChecklistItems();
+    // Checklist is only meaningful for users, not for authors
+    const checklistItems = this.context.extras.isEditor ? [] : this.getChecklistItems();
     const isShowingChecklist = checklistItems.length > 0 && this.props.hudPanel === HudPanels.CHECKLIST;
 
     return (
