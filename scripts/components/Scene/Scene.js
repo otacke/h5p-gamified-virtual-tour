@@ -37,6 +37,7 @@ export default class Scene extends React.Component {
           sceneWaitingForLoad={this.props.sceneWaitingForLoad}
           doneLoadingNextScene={this.props.doneLoadingNextScene}
           canTakeFocus={this.props.canTakeFocus}
+          lockedInteractions={this.props.lockedInteractions}
         />
       );
     }
@@ -66,6 +67,7 @@ export default class Scene extends React.Component {
         sceneWaitingForLoad={this.props.sceneWaitingForLoad}
         doneLoadingNextScene={this.props.doneLoadingNextScene}
         canTakeFocus={this.props.canTakeFocus}
+        lockedInteractions={this.props.lockedInteractions}
       />
     );
   }

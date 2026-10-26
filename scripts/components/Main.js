@@ -17,6 +17,7 @@ import {
 } from '@scripts/services/progress.js';
 import Restrictions from '@scripts/services/restrictions/Restrictions.js';
 import { getInteractionLabel } from '@scripts/services/interaction-util.js';
+import { showRestrictionsDialog } from '@components/Dialog/RestrictionsDialog.js';
 
 /** @constant {number} TIME_RESTRICTION_CHECK_INTERVAL_MS Interval for re-checking time restrictions. */
 const TIME_RESTRICTION_CHECK_INTERVAL_MS = 2500;
@@ -200,6 +201,17 @@ export default class Main extends React.Component {
   };
 
   /**
+   * Get IDs of locked interactions of scene.
+   * @param {object} sceneParams Scene parameters.
+   * @returns {string[]} IDs of interactions whose access restrictions are not met.
+   */
+  getLockedInteractions = (sceneParams) => {
+    return (sceneParams.interactions ?? [])
+      .filter((interaction) => this.isInteractionLocked(sceneParams, interaction))
+      .map((interaction) => interaction.id);
+  };
+
+  /**
    * Re-render periodically while current scene has time restrictions, so interactions unlock in time.
    */
   updateTimeRestrictionTimer = () => {
@@ -345,6 +357,16 @@ export default class Main extends React.Component {
       return scene.sceneId === this.props.currentScene;
     });
     const interaction = scene.interactions[interactionIndex];
+
+    if (this.isInteractionLocked(scene, interaction)) {
+      showRestrictionsDialog({
+        container: this.context.container,
+        instance: this.context,
+        criteria: this.getRestrictions(scene, interaction).getCriteria(),
+        l10n: this.context.l10n,
+      });
+      return;
+    }
 
     const library = H5P.libraryFromString(interaction.action.library);
     const machineName = library.machineName;
@@ -600,6 +622,9 @@ export default class Main extends React.Component {
                 sceneWaitingForLoad={this.state.sceneWaitingForLoad}
                 doneLoadingNextScene={this.doneLoadingNextScene}
                 canTakeFocus={this.state.childrenCanTakeFocus}
+                lockedInteractions={
+                  sceneParams.sceneId === this.props.currentScene ? this.getLockedInteractions(sceneParams) : []
+                }
               />
             );
           })
@@ -615,6 +640,7 @@ export default class Main extends React.Component {
           hudPanel={ this.state.hudPanel }
           onToggleHudPanel={ this.toggleHudPanel }
           interactionStates={ this.state.interactionStates }
+          lockedInteractions={ this.getLockedInteractions(scene) }
           onShowInteraction={ this.showInteraction }
         />
       </div>

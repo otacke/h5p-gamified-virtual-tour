@@ -554,6 +554,7 @@ export default class StaticScene extends React.Component {
                 <NavigationButton
                   key={index}
                   title={title}
+                  isLocked={(this.props.lockedInteractions ?? []).includes(interaction.id)}
                   icon={getIconFromInteraction(interaction, scenes)}
                   label={getLabelFromInteraction(interaction)}
                   type={`interaction-${  index}`}

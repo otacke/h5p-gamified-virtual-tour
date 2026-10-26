@@ -5,7 +5,7 @@ import '@components/HUD/Panels/Checklist.css';
 /**
  * Render checklist of interactions with their completion state.
  * @param {object} props Component props.
- * @param {object[]} props.items Items with id, index of interaction in scene, label and isDone.
+ * @param {object[]} props.items Items with id, index of interaction in scene, label, isDone and isLocked.
  * @param {object} props.l10n Localization with checklist, checklistItemDone and checklistItemNotDone.
  * @param {boolean} [props.isHiddenBehindOverlay] Whether checklist is hidden behind dialog.
  * @param {function} props.onItemClick Callback with index of interaction when item is clicked.
@@ -17,7 +17,10 @@ const Checklist = ({ items, l10n, isHiddenBehindOverlay, onItemClick }) => (
     <ul className='checklist-items'>
       {
         items.map((item) => (
-          <li key={item.id} className={`checklist-item${item.isDone ? ' done' : ''}`}>
+          <li
+            key={item.id}
+            className={['checklist-item', item.isDone && 'done', item.isLocked && 'locked'].filter(Boolean).join(' ')}
+          >
             <button
               type='button'
               className='checklist-item-button'
@@ -26,7 +29,10 @@ const Checklist = ({ items, l10n, isHiddenBehindOverlay, onItemClick }) => (
             >
               <span className='checklist-item-label'>{item.label}</span>
               <span className='checklist-item-status'>
-                {item.isDone ? l10n.checklistItemDone : l10n.checklistItemNotDone}
+                {[
+                  item.isDone ? l10n.checklistItemDone : l10n.checklistItemNotDone,
+                  item.isLocked && l10n.locked,
+                ].filter(Boolean).join(', ')}
               </span>
             </button>
           </li>

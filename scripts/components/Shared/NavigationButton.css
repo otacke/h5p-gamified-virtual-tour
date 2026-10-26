@@ -133,6 +133,11 @@
     content: var(--icon-fontawesome-scene-description);
   }
 
+  &.locked .nav-button:before {
+    content: var(--icon-fontawesome-lock);
+    font-size: 1.25em;
+  }
+
   &.h5p-audio-button.active .nav-button:before {
     content: var(--icon-fontawesome-audio-off);
   }

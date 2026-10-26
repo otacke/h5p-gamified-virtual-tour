@@ -336,6 +336,10 @@ export default class NavigationButton extends React.Component {
       wrapperClasses.push(this.props.icon);
     }
 
+    if (this.props.isLocked) {
+      wrapperClasses.push('locked');
+    }
+
     // only apply custom focus if we have children that are shown on focus
     if (this.state.isFocused && this.props.children) {
       wrapperClasses.push('focused');
@@ -367,6 +371,7 @@ export default class NavigationButton extends React.Component {
     let hoverLabel = isHoverLabel(this.context.behavior.label, label);
 
     const labelText = getLabelText(label);
+    const ariaLabel = [labelText || title, this.props.isLocked && this.context.l10n.locked].filter(Boolean).join('. ');
     return (
 
       <div
@@ -381,7 +386,7 @@ export default class NavigationButton extends React.Component {
         <button
           type="button"
           ref={this.navButton}
-          aria-label={labelText ? labelText : title}
+          aria-label={ariaLabel}
           className='nav-button'
           tabIndex={ isInnerButtonTabbable ? undefined : '-1'}
           onClick={this.onClick}

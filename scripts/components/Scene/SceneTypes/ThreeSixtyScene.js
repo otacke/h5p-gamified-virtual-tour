@@ -316,6 +316,7 @@ export default class ThreeSixtyScene extends React.Component {
     return (
       <NavigationButton
         key={`interaction-${  this.props.sceneId  }${index}`}
+        isLocked={(this.props.lockedInteractions ?? []).includes(interaction.id)}
         onMount={ (el) => {
           this.interactionElements[interaction.id] = el;
           this.props.threeSixty.add(
@@ -503,6 +504,8 @@ export default class ThreeSixtyScene extends React.Component {
     // Need to respond to audio in order to update the icon of the interaction
     const audioHasChanged = (prevProps.audioIsPlaying !== this.props.audioIsPlaying);
     const hasChangedFocus = prevProps.focusedInteraction !== this.props.focusedInteraction;
+    const hasChangedLocks =
+      (prevProps.lockedInteractions ?? []).join() !== (this.props.lockedInteractions ?? []).join();
 
     const hasChangedInteractions = this.props.sceneParams.interactions
       && (this.renderedInteractions !== this.props.sceneParams.interactions.length);
@@ -510,6 +513,7 @@ export default class ThreeSixtyScene extends React.Component {
     let shouldUpdateInteractionHotspots = hasChangedInteractions
         || audioHasChanged
         || hasChangedFocus
+        || hasChangedLocks
         || isHiddenBehindOverlayHasChanged
         || this.props.isEditingInteraction;
 

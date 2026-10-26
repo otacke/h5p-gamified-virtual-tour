@@ -211,8 +211,9 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     }
 
     // Append elements to DOM
-    $container[0].appendChild(this.wrapper);
-    $container[0].classList.add('h5p-gamified-virtual-tour');
+    this.container = $container[0];
+    this.container.appendChild(this.wrapper);
+    this.container.classList.add('h5p-gamified-virtual-tour');
   };
 
   /**

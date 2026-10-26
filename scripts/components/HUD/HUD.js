@@ -58,6 +58,7 @@ export default class HUD extends React.Component {
         index: index,
         label: getInteractionLabel(interaction),
         isDone: isInteractionDone(this.props.interactionStates ?? {}, interaction.id),
+        isLocked: (this.props.lockedInteractions ?? []).includes(interaction.id),
       }));
   };
 

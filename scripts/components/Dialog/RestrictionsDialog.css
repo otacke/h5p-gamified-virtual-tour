@@ -1,0 +1,37 @@
+.h5p-gamified-virtual-tour {
+  .restrictions-dialog {
+    .restriction-criteria {
+      text-align: left;
+
+      .criterion {
+        list-style: none;
+
+        &:before {
+          display: inline-block;
+          font-family: "H5PFontAwesome4", sans-serif;
+          margin-right: 0.5em;
+          width: 1em;
+        }
+
+        &.met:before {
+          color: #2c611a;
+          content: var(--icon-fontawesome-check);
+        }
+
+        &.not-met:before {
+          color: #a32a2a;
+          content: var(--icon-fontawesome-times);
+        }
+
+        .criterion-status {
+          clip-path: inset(50%);
+          height: 1px;
+          overflow: hidden;
+          position: absolute;
+          white-space: nowrap;
+          width: 1px;
+        }
+      }
+    }
+  }
+}
