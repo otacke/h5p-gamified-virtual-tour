@@ -54,13 +54,15 @@ export default class HUD extends React.Component {
 
   /**
    * Get checklist items for all interactions of scene except for navigation buttons.
-   * @returns {object[]} Items with id, label and isDone.
+   * @returns {object[]} Items with id, index of interaction in scene, label and isDone.
    */
   getChecklistItems = () => {
     return (this.props.scene.interactions ?? [])
-      .filter((interaction) => H5P.libraryFromString(interaction.action.library).machineName !== 'H5P.GoToScene')
-      .map((interaction) => ({
+      .map((interaction, index) => ({ interaction, index }))
+      .filter(({ interaction }) => H5P.libraryFromString(interaction.action.library).machineName !== 'H5P.GoToScene')
+      .map(({ interaction, index }) => ({
         id: interaction.id,
+        index: index,
         label: decodeHTML(
           interaction.labelText ||
           interaction.action.metadata?.title ||
@@ -159,7 +161,12 @@ export default class HUD extends React.Component {
         }
         {
           isShowingChecklist &&
-          <Checklist items={ checklistItems } l10n={ this.context.l10n } />
+          <Checklist
+            items={ checklistItems }
+            l10n={ this.context.l10n }
+            isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+            onItemClick={ this.props.onShowInteraction }
+          />
         }
       </div>
     );

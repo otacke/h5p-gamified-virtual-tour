@@ -517,6 +517,7 @@ export default class Main extends React.Component {
           hudPanel={ this.state.hudPanel }
           onToggleHudPanel={ this.toggleHudPanel }
           completedInteractions={ this.state.completedInteractions }
+          onShowInteraction={ this.showInteraction }
         />
       </div>
     );

@@ -31,6 +31,21 @@
           content: '\f046';
         }
 
+        .checklist-item-button {
+          background: none;
+          border: none;
+          color: inherit;
+          cursor: pointer;
+          font: inherit;
+          padding: 0;
+          text-align: left;
+
+          &:hover,
+          &:focus-visible {
+            text-decoration: underline;
+          }
+        }
+
         .checklist-item-status {
           clip-path: inset(50%);
           height: 1px;
