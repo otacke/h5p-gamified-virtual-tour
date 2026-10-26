@@ -6,6 +6,7 @@ import NavigationButton, {
 } from '@components/Shared/NavigationButton.js';
 import { H5PContext } from '@context/H5PContext.js';
 import ContextMenu from '@components/Shared/ContextMenu.js';
+import ThreeSixtyPaths from '@components/Shared/Paths/ThreeSixtyPaths.js';
 import loading from '@assets/images/loading.svg';
 import '@components/Scene/SceneTypes/ThreeSixtyScene.css';
 
@@ -33,6 +34,7 @@ export default class ThreeSixtyScene extends React.Component {
 
     this.sceneRef = React.createRef();
     this.renderedInteractions = 0;
+    this.interactionElements = {}; // Button elements of interactions, keyed by interaction ID
 
     this.state = {
       imagePath: null, // Path of current loaded image
@@ -314,12 +316,20 @@ export default class ThreeSixtyScene extends React.Component {
     return (
       <NavigationButton
         key={`interaction-${  this.props.sceneId  }${index}`}
-        onMount={ (el) => this.props.threeSixty.add(
-          el,
-          ThreeSixtyScene.getYawPitchFromPosition(interaction.interactionPosition),
-          this.context.extras.isEditor,
-        )}
-        onUnmount={ (el) => this.props.threeSixty.remove(this.props.threeSixty.find(el)) }
+        onMount={ (el) => {
+          this.interactionElements[interaction.id] = el;
+          this.props.threeSixty.add(
+            el,
+            ThreeSixtyScene.getYawPitchFromPosition(interaction.interactionPosition),
+            this.context.extras.isEditor,
+          );
+        }}
+        onUnmount={ (el) => {
+          if (this.interactionElements[interaction.id] === el) {
+            delete this.interactionElements[interaction.id];
+          }
+          this.props.threeSixty.remove(this.props.threeSixty.find(el));
+        }}
         onUpdate={ (el) => H5P.ThreeSixty.setElementPosition(
           this.props.threeSixty.find(el),
           ThreeSixtyScene.getYawPitchFromPosition(interaction.interactionPosition),
@@ -365,6 +375,24 @@ export default class ThreeSixtyScene extends React.Component {
       pitch: position.y,
     };
   }
+
+  /**
+   * Get current position of interaction, following it while it is being dragged in editor.
+   * @param {object} interaction Interaction parameters.
+   * @returns {object} Position with yaw and pitch in radians.
+   */
+  getInteractionPosition = (interaction) => {
+    const element = this.interactionElements[interaction.id];
+    const threeElement = element && this.props.threeSixty?.find(element);
+    if (threeElement) {
+      return { yaw: -threeElement.rotation.y, pitch: threeElement.rotation.x };
+    }
+
+    return {
+      yaw: parseFloat(interaction.interactionPosition.x),
+      pitch: parseFloat(interaction.interactionPosition.y),
+    };
+  };
 
   /**
    * Handle interaction focused, setting camera to interaction position.
@@ -524,6 +552,15 @@ export default class ThreeSixtyScene extends React.Component {
           ref={this.sceneRef}
           aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }
         />
+        {
+          this.props.threeSixty && this.state.isUpdated &&
+          <ThreeSixtyPaths
+            threeSixty={this.props.threeSixty}
+            sceneParams={this.props.sceneParams}
+            globalVisuals={this.context.behavior.paths}
+            getInteractionPosition={this.getInteractionPosition}
+          />
+        }
         {
           (!this.state.isRendered) &&
           <div className='loading-overlay'>
