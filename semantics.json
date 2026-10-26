@@ -217,6 +217,393 @@
                     "multiple": true,
                     "optional": true,
                     "options": []
+                  },
+                  {
+                    "name": "accessRestrictions",
+                    "type": "group",
+                    "label": "Access restrictions",
+                    "description": "Define restrictions for unlocking this interaction.",
+                    "importance": "low",
+                    "fields": [
+                      {
+                        "name": "allOrAnyRestrictionSet",
+                        "type": "select",
+                        "label": "All or any restriction set",
+                        "description": "Choose if all or any of the following restriction sets need to be met.",
+                        "optional": true,
+                        "options": [
+                          {
+                            "value": "all",
+                            "label": "All"
+                          },
+                          {
+                            "value": "any",
+                            "label": "Any"
+                          }
+                        ],
+                        "default": "all"
+                      },
+                      {
+                        "name": "restrictionSetList",
+                        "type": "list",
+                        "optional": true,
+                        "label": "Restriction sets",
+                        "entity": "restriction set",
+                        "widgets": [
+                          {
+                            "name": "VerticalTabs",
+                            "label": "Default"
+                          }
+                        ],
+                        "field": {
+                          "name": "restrictionSetGroup",
+                          "type": "group",
+                          "label": "Restriction set",
+                          "fields": [
+                            {
+                              "name": "allOrAnyRestriction",
+                              "type": "select",
+                              "label": "All or any restriction",
+                              "description": "Choose if all or any of the following restrictions need to be met.",
+                              "options": [
+                                {
+                                  "value": "all",
+                                  "label": "All"
+                                },
+                                {
+                                  "value": "any",
+                                  "label": "Any"
+                                }
+                              ],
+                              "default": "any"
+                            },
+                            {
+                              "name": "restrictionList",
+                              "type": "list",
+                              "label": "Restrictions",
+                              "entity": "restriction",
+                              "optional": true,
+                              "field": {
+                                "name": "restrictionGroup",
+                                "type": "group",
+                                "label": "Restriction",
+                                "fields": [
+                                  {
+                                    "name": "restrictionType",
+                                    "label": "Restriction type",
+                                    "type": "select",
+                                    "optional": true,
+                                    "options": [
+                                      {
+                                        "value": "totalScore",
+                                        "label": "Total score"
+                                      },
+                                      {
+                                        "value": "interactionScore",
+                                        "label": "Interaction score"
+                                      },
+                                      {
+                                        "value": "interactionScorePercentage",
+                                        "label": "Interaction score percentage"
+                                      },
+                                      {
+                                        "value": "interactionProgress",
+                                        "label": "Interaction progress"
+                                      },
+                                      {
+                                        "value": "time",
+                                        "label": "Time"
+                                      }
+                                    ],
+                                    "default": "totalScore"
+                                  },
+                                  {
+                                    "name": "totalScoreGroup",
+                                    "type": "group",
+                                    "label": "Total score",
+                                    "expanded": true,
+                                    "fields": [
+                                      {
+                                        "name": "totalScoreOperator",
+                                        "label": "Operator for total score",
+                                        "type": "select",
+                                        "optional": true,
+                                        "options": [
+                                          {
+                                            "value": "lessThan",
+                                            "label": "less than"
+                                          },
+                                          {
+                                            "value": "equalTo",
+                                            "label": "equal to"
+                                          },
+                                          {
+                                            "value": "notEqualTo",
+                                            "label": "not equal to"
+                                          },
+                                          {
+                                            "value": "greaterThan",
+                                            "label": "greater than"
+                                          }
+                                        ],
+                                        "default": "greaterThan"
+                                      },
+                                      {
+                                        "name": "totalScoreValue",
+                                        "label": "Value of total score to compare to",
+                                        "type": "number",
+                                        "optional": true
+                                      }
+                                    ],
+                                    "widget": "gamifiedVirtualTourShowWhen",
+                                    "gamifiedVirtualTourShowWhen": {
+                                      "rules": [
+                                        {
+                                          "field": "restrictionType",
+                                          "equals": "totalScore"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "name": "interactionScoreGroup",
+                                    "type": "group",
+                                    "label": "Interaction score",
+                                    "expanded": true,
+                                    "fields": [
+                                      {
+                                        "name": "interactionScoreId",
+                                        "type": "select",
+                                        "label": "Interaction to get score from",
+                                        "optional": true,
+                                        "options": []
+                                      },
+                                      {
+                                        "name": "interactionScoreOperator",
+                                        "label": "Operator for interaction score",
+                                        "type": "select",
+                                        "optional": true,
+                                        "options": [
+                                          {
+                                            "value": "lessThan",
+                                            "label": "less than"
+                                          },
+                                          {
+                                            "value": "equalTo",
+                                            "label": "equal to"
+                                          },
+                                          {
+                                            "value": "notEqualTo",
+                                            "label": "not equal to"
+                                          },
+                                          {
+                                            "value": "greaterThan",
+                                            "label": "greater than"
+                                          }
+                                        ],
+                                        "default": "greaterThan"
+                                      },
+                                      {
+                                        "name": "interactionScoreValue",
+                                        "label": "Interaction score to compare to",
+                                        "type": "number",
+                                        "optional": true
+                                      }
+                                    ],
+                                    "widget": "gamifiedVirtualTourShowWhen",
+                                    "gamifiedVirtualTourShowWhen": {
+                                      "rules": [
+                                        {
+                                          "field": "restrictionType",
+                                          "equals": "interactionScore"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "name": "interactionScorePercentageGroup",
+                                    "type": "group",
+                                    "label": "Interaction score percentage",
+                                    "expanded": true,
+                                    "fields": [
+                                      {
+                                        "name": "interactionScorePercentageId",
+                                        "type": "select",
+                                        "label": "Interaction to get score percentage from",
+                                        "optional": true,
+                                        "options": []
+                                      },
+                                      {
+                                        "name": "interactionScorePercentageOperator",
+                                        "label": "Operator for interaction score percentage",
+                                        "type": "select",
+                                        "optional": true,
+                                        "options": [
+                                          {
+                                            "value": "lessThan",
+                                            "label": "less than"
+                                          },
+                                          {
+                                            "value": "equalTo",
+                                            "label": "equal to"
+                                          },
+                                          {
+                                            "value": "notEqualTo",
+                                            "label": "not equal to"
+                                          },
+                                          {
+                                            "value": "greaterThan",
+                                            "label": "greater than"
+                                          }
+                                        ],
+                                        "default": "greaterThan"
+                                      },
+                                      {
+                                        "name": "interactionScorePercentageValue",
+                                        "label": "Interaction score percentage to compare to",
+                                        "type": "number",
+                                        "optional": true
+                                      }
+                                    ],
+                                    "widget": "gamifiedVirtualTourShowWhen",
+                                    "gamifiedVirtualTourShowWhen": {
+                                      "rules": [
+                                        {
+                                          "field": "restrictionType",
+                                          "equals": "interactionScorePercentage"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "name": "interactionProgressGroup",
+                                    "type": "group",
+                                    "label": "Interaction progress",
+                                    "expanded": true,
+                                    "fields": [
+                                      {
+                                        "name": "interactionProgressId",
+                                        "type": "select",
+                                        "label": "Interaction to get progress from",
+                                        "optional": true,
+                                        "options": []
+                                      },
+                                      {
+                                        "name": "interactionProgressOperator",
+                                        "label": "Operator for interaction progress",
+                                        "type": "select",
+                                        "optional": true,
+                                        "options": [
+                                          {
+                                            "value": "is",
+                                            "label": "is"
+                                          },
+                                          {
+                                            "value": "isNot",
+                                            "label": "is not"
+                                          }
+                                        ],
+                                        "default": "is"
+                                      },
+                                      {
+                                        "name": "interactionProgressValue",
+                                        "label": "Progress to compare to",
+                                        "type": "select",
+                                        "optional": true,
+                                        "options": [
+                                          {
+                                            "value": "unstarted",
+                                            "label": "not started"
+                                          },
+                                          {
+                                            "value": "opened",
+                                            "label": "started"
+                                          },
+                                          {
+                                            "value": "completed",
+                                            "label": "completed"
+                                          },
+                                          {
+                                            "value": "cleared",
+                                            "label": "completed successfully"
+                                          }
+                                        ],
+                                        "default": "completed"
+                                      }
+                                    ],
+                                    "widget": "gamifiedVirtualTourShowWhen",
+                                    "gamifiedVirtualTourShowWhen": {
+                                      "rules": [
+                                        {
+                                          "field": "restrictionType",
+                                          "equals": "interactionProgress"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  {
+                                    "name": "timeGroup",
+                                    "type": "group",
+                                    "label": "Time",
+                                    "expanded": true,
+                                    "fields": [
+                                      {
+                                        "name": "timeOperator",
+                                        "label": "Operator for time",
+                                        "type": "select",
+                                        "optional": true,
+                                        "options": [
+                                          {
+                                            "value": "before",
+                                            "label": "before"
+                                          },
+                                          {
+                                            "value": "is",
+                                            "label": "on (same day)"
+                                          },
+                                          {
+                                            "value": "isNot",
+                                            "label": "not on (other day)"
+                                          },
+                                          {
+                                            "value": "after",
+                                            "label": "after"
+                                          }
+                                        ],
+                                        "default": "before"
+                                      },
+                                      {
+                                        "name": "timeValue",
+                                        "label": "Time to compare to",
+                                        "type": "text",
+                                        "widget": "datetime",
+                                        "optional": true
+                                      }
+                                    ],
+                                    "widget": "gamifiedVirtualTourShowWhen",
+                                    "gamifiedVirtualTourShowWhen": {
+                                      "rules": [
+                                        {
+                                          "field": "restrictionType",
+                                          "equals": "time"
+                                        }
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "name": "dummy",
+                        "type": "boolean",
+                        "label": "Dummy",
+                        "widget": "none",
+                        "optional": true
+                      }
+                    ]
                   }
                 ]
               }

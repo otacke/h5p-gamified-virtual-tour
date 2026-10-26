@@ -113,6 +113,224 @@
                     {
                       "label": "Connected interactions",
                       "description": "Interactions of this scene that will be connected to this interaction by a path."
+                    },
+                    {
+                      "label": "Access restrictions",
+                      "description": "Define restrictions for unlocking this interaction.",
+                      "fields": [
+                        {
+                          "label": "All or any restriction set",
+                          "description": "Choose if all or any of the following restriction sets need to be met.",
+                          "options": [
+                            {
+                              "label": "All"
+                            },
+                            {
+                              "label": "Any"
+                            }
+                          ]
+                        },
+                        {
+                          "label": "Restriction sets",
+                          "entity": "restriction set",
+                          "widgets": [
+                            {
+                              "label": "Default"
+                            }
+                          ],
+                          "field": {
+                            "label": "Restriction set",
+                            "fields": [
+                              {
+                                "label": "All or any restriction",
+                                "description": "Choose if all or any of the following restrictions need to be met.",
+                                "options": [
+                                  {
+                                    "label": "All"
+                                  },
+                                  {
+                                    "label": "Any"
+                                  }
+                                ]
+                              },
+                              {
+                                "label": "Restrictions",
+                                "entity": "restriction",
+                                "field": {
+                                  "label": "Restriction",
+                                  "fields": [
+                                    {
+                                      "label": "Restriction type",
+                                      "options": [
+                                        {
+                                          "label": "Total score"
+                                        },
+                                        {
+                                          "label": "Interaction score"
+                                        },
+                                        {
+                                          "label": "Interaction score percentage"
+                                        },
+                                        {
+                                          "label": "Interaction progress"
+                                        },
+                                        {
+                                          "label": "Time"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "label": "Total score",
+                                      "fields": [
+                                        {
+                                          "label": "Operator for total score",
+                                          "options": [
+                                            {
+                                              "label": "less than"
+                                            },
+                                            {
+                                              "label": "equal to"
+                                            },
+                                            {
+                                              "label": "not equal to"
+                                            },
+                                            {
+                                              "label": "greater than"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "label": "Value of total score to compare to"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "label": "Interaction score",
+                                      "fields": [
+                                        {
+                                          "label": "Interaction to get score from"
+                                        },
+                                        {
+                                          "label": "Operator for interaction score",
+                                          "options": [
+                                            {
+                                              "label": "less than"
+                                            },
+                                            {
+                                              "label": "equal to"
+                                            },
+                                            {
+                                              "label": "not equal to"
+                                            },
+                                            {
+                                              "label": "greater than"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "label": "Interaction score to compare to"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "label": "Interaction score percentage",
+                                      "fields": [
+                                        {
+                                          "label": "Interaction to get score percentage from"
+                                        },
+                                        {
+                                          "label": "Operator for interaction score percentage",
+                                          "options": [
+                                            {
+                                              "label": "less than"
+                                            },
+                                            {
+                                              "label": "equal to"
+                                            },
+                                            {
+                                              "label": "not equal to"
+                                            },
+                                            {
+                                              "label": "greater than"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "label": "Interaction score percentage to compare to"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "label": "Interaction progress",
+                                      "fields": [
+                                        {
+                                          "label": "Interaction to get progress from"
+                                        },
+                                        {
+                                          "label": "Operator for interaction progress",
+                                          "options": [
+                                            {
+                                              "label": "is"
+                                            },
+                                            {
+                                              "label": "is not"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "label": "Progress to compare to",
+                                          "options": [
+                                            {
+                                              "label": "not started"
+                                            },
+                                            {
+                                              "label": "started"
+                                            },
+                                            {
+                                              "label": "completed"
+                                            },
+                                            {
+                                              "label": "completed successfully"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "label": "Time",
+                                      "fields": [
+                                        {
+                                          "label": "Operator for time",
+                                          "options": [
+                                            {
+                                              "label": "before"
+                                            },
+                                            {
+                                              "label": "on (same day)"
+                                            },
+                                            {
+                                              "label": "not on (other day)"
+                                            },
+                                            {
+                                              "label": "after"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "label": "Time to compare to"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "label": "Dummy"
+                        }
+                      ]
                     }
                   ]
                 }

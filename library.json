@@ -73,6 +73,16 @@
       "machineName": "H5PEditor.ImageCoordinateSelector",
       "majorVersion": 1,
       "minorVersion": 2
+    },
+    {
+      "machineName": "H5PEditor.VerticalTabs",
+      "majorVersion": 1,
+      "minorVersion": 3
+    },
+    {
+      "machineName": "H5PEditor.DateTime",
+      "majorVersion": 1,
+      "minorVersion": 0
     }
   ]
 }
