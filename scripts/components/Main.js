@@ -8,7 +8,18 @@ import HUD from '@components/HUD/HUD.js';
 import AudioButton from '@components/HUD/Buttons/AudioButton.js';
 import NoScene from '@components/Scene/NoScene.js';
 import { isCompletingStatement, isInstanceTask } from '@scripts/services/h5p-util.js';
-import { mergeInteractionState } from '@scripts/services/progress.js';
+import {
+  getInteractionProgress,
+  getInteractionScore,
+  getInteractionScorePercentage,
+  getTotalScore,
+  mergeInteractionState,
+} from '@scripts/services/progress.js';
+import Restrictions from '@scripts/services/restrictions/Restrictions.js';
+import { getInteractionLabel } from '@scripts/services/interaction-util.js';
+
+/** @constant {number} TIME_RESTRICTION_CHECK_INTERVAL_MS Interval for re-checking time restrictions. */
+const TIME_RESTRICTION_CHECK_INTERVAL_MS = 2500;
 
 export default class Main extends React.Component {
   /**
@@ -46,6 +57,8 @@ export default class Main extends React.Component {
    * React - run after initial render.
    */
   componentDidMount() {
+    this.updateTimeRestrictionTimer();
+
     // Listen for focus to interaction
     this.context.on('focusInteraction', (e) => {
       this.setState({
@@ -68,6 +81,8 @@ export default class Main extends React.Component {
    * @param {object} prevState State from previous render.
    */
   componentDidUpdate(prevProps, prevState) {
+    this.updateTimeRestrictionTimer();
+
     if (this.state.updateThreeSixty) {
       this.setState({
         updateThreeSixty: false,
@@ -137,6 +152,71 @@ export default class Main extends React.Component {
       lastPlayer.currentTime = 0;
     }
   }
+
+  /**
+   * React - run before unmount.
+   */
+  componentWillUnmount() {
+    window.clearInterval(this.timeRestrictionTimer);
+  }
+
+  /**
+   * Get access restrictions of interaction.
+   * @param {object} sceneParams Parameters of scene containing interaction.
+   * @param {object} interaction Interaction parameters.
+   * @returns {Restrictions} Restrictions of interaction.
+   */
+  getRestrictions = (sceneParams, interaction) => {
+    const states = this.state.interactionStates;
+
+    return new Restrictions(interaction.accessRestrictions, {
+      l10n: this.context.l10n,
+      callbacks: {
+        getTotalScore: () => getTotalScore(states),
+        getInteractionScore: (id) => getInteractionScore(states, id),
+        getInteractionScorePercentage: (id) => getInteractionScorePercentage(states, id),
+        getInteractionProgress: (id) => getInteractionProgress(states, id),
+        getInteractionLabel: (id) => {
+          const referenced = (sceneParams.interactions ?? []).find((other) => other.id === id);
+          return referenced ? getInteractionLabel(referenced) : null;
+        },
+        getTime: () => new Date(),
+      },
+    });
+  };
+
+  /**
+   * Determine whether interaction is locked. Interactions are never locked in editor.
+   * @param {object} sceneParams Parameters of scene containing interaction.
+   * @param {object} interaction Interaction parameters.
+   * @returns {boolean} True, if access restrictions of interaction are not met.
+   */
+  isInteractionLocked = (sceneParams, interaction) => {
+    if (this.context.extras.isEditor) {
+      return false;
+    }
+
+    return !this.getRestrictions(sceneParams, interaction).isMet();
+  };
+
+  /**
+   * Re-render periodically while current scene has time restrictions, so interactions unlock in time.
+   */
+  updateTimeRestrictionTimer = () => {
+    const sceneParams = (this.context.params.scenes ?? []).find((scene) => scene.sceneId === this.props.currentScene);
+    const interactions = sceneParams?.interactions ?? [];
+    const hasTimeRestrictions = !this.context.extras.isEditor && interactions.some((interaction) => {
+      return this.getRestrictions(sceneParams, interaction).includesTime();
+    });
+
+    if (hasTimeRestrictions && !this.timeRestrictionTimer) {
+      this.timeRestrictionTimer = window.setInterval(() => this.forceUpdate(), TIME_RESTRICTION_CHECK_INTERVAL_MS);
+    }
+    else if (!hasTimeRestrictions && this.timeRestrictionTimer) {
+      window.clearInterval(this.timeRestrictionTimer);
+      this.timeRestrictionTimer = null;
+    }
+  };
 
   /**
    * Set focused interaction index.

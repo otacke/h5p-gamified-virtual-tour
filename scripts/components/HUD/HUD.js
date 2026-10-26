@@ -8,20 +8,12 @@ import { SceneTypes } from '@components/Scene/Scene.js';
 import OverviewMap from '@components/HUD/Panels/OverviewMap.js';
 import Checklist from '@components/HUD/Panels/Checklist.js';
 import { isInteractionDone } from '@scripts/services/progress.js';
+import { getInteractionLabel } from '@scripts/services/interaction-util.js';
 
 /** @constant {object} HudPanels Identifiers of panels that can be toggled in HUD. */
 export const HudPanels = {
   OVERVIEW_MAP: 'overviewMap',
   CHECKLIST: 'checklist',
-};
-
-/**
- * Decode HTML entities of text, e.g. from H5P text fields.
- * @param {string} html Text that may contain HTML entities or markup.
- * @returns {string} Plain text.
- */
-const decodeHTML = (html) => {
-  return new DOMParser().parseFromString(html, 'text/html').documentElement.textContent;
 };
 
 export default class HUD extends React.Component {
@@ -64,11 +56,7 @@ export default class HUD extends React.Component {
       .map(({ interaction, index }) => ({
         id: interaction.id,
         index: index,
-        label: decodeHTML(
-          interaction.labelText ||
-          interaction.action.metadata?.title ||
-          H5P.libraryFromString(interaction.action.library).machineName,
-        ),
+        label: getInteractionLabel(interaction),
         isDone: isInteractionDone(this.props.interactionStates ?? {}, interaction.id),
       }));
   };

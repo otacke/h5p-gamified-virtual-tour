@@ -1111,6 +1111,198 @@
         "type": "text",
         "label": "Readspeaker text for item in checklist that is not completed",
         "default": "Not completed"
+      },
+      {
+        "name": "interactionLockedHeader",
+        "type": "text",
+        "label": "Header of dialog for locked interaction",
+        "default": "Interaction locked"
+      },
+      {
+        "name": "interactionLockedDialog",
+        "type": "text",
+        "label": "Text of dialog for locked interaction",
+        "default": "This interaction requires you to meet some goals before it can be opened."
+      },
+      {
+        "name": "ok",
+        "type": "text",
+        "label": "Label for button to close dialog for locked interaction",
+        "default": "OK"
+      },
+      {
+        "name": "locked",
+        "type": "text",
+        "label": "Readspeaker text for locked interaction",
+        "default": "Locked"
+      },
+      {
+        "name": "criterionMet",
+        "type": "text",
+        "label": "Readspeaker text for criterion that is met",
+        "default": "Met"
+      },
+      {
+        "name": "criterionNotMet",
+        "type": "text",
+        "label": "Readspeaker text for criterion that is not met",
+        "default": "Not met"
+      },
+      {
+        "name": "restrictionsAllOfLong",
+        "type": "text",
+        "label": "Introduction to criteria if all sets need to be met",
+        "default": "The interaction will not be available unless:"
+      },
+      {
+        "name": "restrictionsAnyOfLong",
+        "type": "text",
+        "label": "Introduction to criteria if any set needs to be met",
+        "default": "The interaction will not be available unless any of:"
+      },
+      {
+        "name": "restrictionsAllOf",
+        "type": "text",
+        "label": "Introduction to criteria of set if all need to be met",
+        "default": "All of:"
+      },
+      {
+        "name": "restrictionsAnyOf",
+        "type": "text",
+        "label": "Introduction to criteria of set if any needs to be met",
+        "default": "Any of:"
+      },
+      {
+        "name": "restrictionTotalScoreLessThan",
+        "type": "text",
+        "label": "Restriction: total score less than",
+        "default": "You have a total score less than @value."
+      },
+      {
+        "name": "restrictionTotalScoreEqualTo",
+        "type": "text",
+        "label": "Restriction: total score equal to",
+        "default": "You have a total score equal to @value."
+      },
+      {
+        "name": "restrictionTotalScoreNotEqualTo",
+        "type": "text",
+        "label": "Restriction: total score not equal to",
+        "default": "You have a total score not equal to @value."
+      },
+      {
+        "name": "restrictionTotalScoreGreaterThan",
+        "type": "text",
+        "label": "Restriction: total score greater than",
+        "default": "You have a total score greater than @value."
+      },
+      {
+        "name": "restrictionInteractionScoreLessThan",
+        "type": "text",
+        "label": "Restriction: interaction score less than",
+        "default": "You have a score less than @value in interaction @label."
+      },
+      {
+        "name": "restrictionInteractionScoreEqualTo",
+        "type": "text",
+        "label": "Restriction: interaction score equal to",
+        "default": "You have a score equal to @value in interaction @label."
+      },
+      {
+        "name": "restrictionInteractionScoreNotEqualTo",
+        "type": "text",
+        "label": "Restriction: interaction score not equal to",
+        "default": "You have a score not equal to @value in interaction @label."
+      },
+      {
+        "name": "restrictionInteractionScoreGreaterThan",
+        "type": "text",
+        "label": "Restriction: interaction score greater than",
+        "default": "You have a score greater than @value in interaction @label."
+      },
+      {
+        "name": "restrictionInteractionScorePercentageLessThan",
+        "type": "text",
+        "label": "Restriction: interaction score percentage less than",
+        "default": "You have a score percentage less than @value in interaction @label."
+      },
+      {
+        "name": "restrictionInteractionScorePercentageEqualTo",
+        "type": "text",
+        "label": "Restriction: interaction score percentage equal to",
+        "default": "You have a score percentage equal to @value in interaction @label."
+      },
+      {
+        "name": "restrictionInteractionScorePercentageNotEqualTo",
+        "type": "text",
+        "label": "Restriction: interaction score percentage not equal to",
+        "default": "You have a score percentage not equal to @value in interaction @label."
+      },
+      {
+        "name": "restrictionInteractionScorePercentageGreaterThan",
+        "type": "text",
+        "label": "Restriction: interaction score percentage greater than",
+        "default": "You have a score percentage greater than @value in interaction @label."
+      },
+      {
+        "name": "restrictionInteractionProgressIs",
+        "type": "text",
+        "label": "Restriction: interaction progress is",
+        "default": "The progress of interaction @label is @value."
+      },
+      {
+        "name": "restrictionInteractionProgressIsNot",
+        "type": "text",
+        "label": "Restriction: interaction progress is not",
+        "default": "The progress of interaction @label is not @value."
+      },
+      {
+        "name": "restrictionTimeBefore",
+        "type": "text",
+        "label": "Restriction: time before",
+        "default": "The current time is before @value."
+      },
+      {
+        "name": "restrictionTimeIs",
+        "type": "text",
+        "label": "Restriction: date is",
+        "default": "The current date is @value."
+      },
+      {
+        "name": "restrictionTimeIsNot",
+        "type": "text",
+        "label": "Restriction: date is not",
+        "default": "The current date is not @value."
+      },
+      {
+        "name": "restrictionTimeAfter",
+        "type": "text",
+        "label": "Restriction: time after",
+        "default": "The current time is after @value."
+      },
+      {
+        "name": "progressUnstarted",
+        "type": "text",
+        "label": "Progress of interaction: not started",
+        "default": "not started"
+      },
+      {
+        "name": "progressOpened",
+        "type": "text",
+        "label": "Progress of interaction: started",
+        "default": "started"
+      },
+      {
+        "name": "progressCompleted",
+        "type": "text",
+        "label": "Progress of interaction: completed",
+        "default": "completed"
+      },
+      {
+        "name": "progressCleared",
+        "type": "text",
+        "label": "Progress of interaction: completed successfully",
+        "default": "completed successfully"
       }
     ]
   }
