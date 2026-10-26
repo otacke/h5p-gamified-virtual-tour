@@ -10,6 +10,7 @@ import NoScene from '@components/Scene/NoScene.js';
 import { isCompletingStatement, isInstanceTask } from '@scripts/services/h5p-util.js';
 import {
   getInteractionProgress,
+  isInteractionTask,
   getInteractionScore,
   getInteractionScorePercentage,
   getTotalScore,
@@ -177,6 +178,7 @@ export default class Main extends React.Component {
         getInteractionScore: (id) => getInteractionScore(states, id),
         getInteractionScorePercentage: (id) => getInteractionScorePercentage(states, id),
         getInteractionProgress: (id) => getInteractionProgress(states, id),
+        isInteractionTask: (id) => isInteractionTask(states, id),
         getInteractionLabel: (id) => {
           const referenced = (sceneParams.interactions ?? []).find((other) => other.id === id);
           return referenced ? getInteractionLabel(referenced) : null;
@@ -405,7 +407,7 @@ export default class Main extends React.Component {
         const player = this.getAudioPlayer(playerId, interaction);
         if (player) {
           player.play();
-          this.updateInteractionState(interaction.id, { progress: 'cleared' });
+          this.updateInteractionState(interaction.id, { progress: 'cleared', isTask: false });
         }
       }
     }
@@ -446,11 +448,11 @@ export default class Main extends React.Component {
    */
   handleInstanceCreated = (instance, interaction) => {
     if (!isInstanceTask(instance)) {
-      this.updateInteractionState(interaction.id, { progress: 'cleared' });
+      this.updateInteractionState(interaction.id, { progress: 'cleared', isTask: false });
       return;
     }
 
-    this.updateInteractionState(interaction.id, { progress: 'opened' });
+    this.updateInteractionState(interaction.id, { progress: 'opened', isTask: true });
 
     instance.on('xAPI', (event) => {
       if (!isCompletingStatement(event, instance)) {

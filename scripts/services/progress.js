@@ -15,6 +15,16 @@ export const getInteractionProgress = (states, interactionId) => {
 };
 
 /**
+ * Determine whether interaction is a task. Only known once interaction has been opened.
+ * @param {object} states States of interactions, keyed by interaction ID.
+ * @param {string} interactionId ID of interaction.
+ * @returns {boolean|undefined} True for tasks, false for other content, undefined if not known yet.
+ */
+export const isInteractionTask = (states, interactionId) => {
+  return states[interactionId]?.isTask;
+};
+
+/**
  * Determine whether interaction has been completed.
  * @param {object} states States of interactions, keyed by interaction ID.
  * @param {string} interactionId ID of interaction.
@@ -62,7 +72,7 @@ export const getTotalScore = (states) => {
 /**
  * Merge changes into state of interaction, never lowering its progress.
  * @param {object} [state] Current state of interaction.
- * @param {object} changes Changes with progress, score and maxScore.
+ * @param {object} changes Changes with progress, isTask, score and maxScore.
  * @returns {object} New state of interaction.
  */
 export const mergeInteractionState = (state = {}, changes) => {

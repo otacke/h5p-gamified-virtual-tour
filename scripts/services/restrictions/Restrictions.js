@@ -31,6 +31,7 @@ export default class Restrictions {
    * @param {function} params.callbacks.getInteractionScore Get score of interaction by ID.
    * @param {function} params.callbacks.getInteractionScorePercentage Get score percentage of interaction by ID.
    * @param {function} params.callbacks.getInteractionProgress Get progress of interaction by ID.
+   * @param {function} params.callbacks.isInteractionTask Get whether interaction is task by ID, undefined if unknown.
    * @param {function} params.callbacks.getInteractionLabel Get label of interaction by ID, null if not found.
    * @param {function} params.callbacks.getTime Get current time.
    */
@@ -89,7 +90,10 @@ export default class Restrictions {
         });
       case 'interactionProgress':
         return new RestrictionProgress({
-          ...common, label, getCurrentValue: () => this.callbacks.getInteractionProgress(interactionId),
+          ...common,
+          label,
+          getCurrentValue: () => this.callbacks.getInteractionProgress(interactionId),
+          isTask: () => this.callbacks.isInteractionTask(interactionId),
         });
       default:
         return null;
