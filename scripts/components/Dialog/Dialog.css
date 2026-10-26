@@ -1,7 +1,9 @@
 @import '@styles/icons.css';
 
+/* Colors follow H5P core's confirmation dialog */
 .h5p-text-overlay {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.85);
+  background-color: hsl(from var(--h5p-theme-main-cta-base, #006fbf) h calc(s * 0.3) 18% / 40%);
   height: 100%;
   left: 0;
   position: absolute;
@@ -10,8 +12,10 @@
   z-index: 4;
 
   .h5p-text-dialog {
-    background: white;
+    background: var(--h5p-theme-ui-base, #ffffff);
+    border-radius: var(--h5p-theme-border-radius-large, 0.5rem);
     box-sizing: border-box;
+    color: var(--h5p-theme-text-primary, #101729);
     display: flex;
     left: 50%;
     max-height: 90%;
@@ -30,8 +34,8 @@
     }
 
     .nav-button-wrapper {
-      background-color: #ebebeb;
-      border: 8px solid #fff;
+      background-color: var(--h5p-theme-ui-base, #ffffff);
+      border: 8px solid var(--h5p-theme-ui-base, #ffffff);
       border-radius: 50%;
       box-shadow: 0 0 var(--h5p-theme-spacing-s, 1rem) 0 rgba(0, 0, 0, 0.2);
       left: auto;
@@ -40,7 +44,7 @@
       transition: background 0.5s linear;
 
       &:hover {
-        background: #d6d6d6;
+        background: var(--h5p-theme-alternative-base, #f1f5fb);
       }
     }
 
@@ -59,30 +63,31 @@
       overflow-y: auto;
 
       &::-webkit-scrollbar {
-        background: #fff;
+        background: var(--h5p-theme-ui-base, #ffffff);
         width: var(--h5p-theme-spacing-xxs, 0.5rem);
       }
 
       &::-webkit-scrollbar-thumb {
-        background: #ddd;
+        background: var(--h5p-theme-secondary-cta-base, #e3e9f1);
       }
 
       &::-webkit-scrollbar-thumb:hover {
-        background: #aaa;
+        background: var(--h5p-theme-secondary-cta-dark, #d3dce9);
       }
 
       &::-webkit-scrollbar-thumb:active,
       &::-webkit-scrollbar-thumb:focus {
-        background: #888;
+        background: var(--h5p-theme-text-third, #737373);
       }
     }
 
     .close-button-wrapper {
-      background-color: #ebebeb;
-      border: 8px solid #fff;
+      background-color: var(--h5p-theme-ui-base, #ffffff);
+      border: 8px solid var(--h5p-theme-ui-base, #ffffff);
       border-radius: 50%;
       box-shadow: 0 0 var(--h5p-theme-spacing-s, 1rem) 0 rgba(0, 0, 0, 0.2);
       box-sizing: content-box;
+      color: var(--h5p-theme-text-primary, #101729);
       cursor: pointer;
       font-size: var(--h5p-theme-font-size-m, 1rem);
       height: var(--h5p-theme-spacing-l, 2rem);
@@ -91,12 +96,16 @@
       position: absolute;
       right: calc(-1 * var(--h5p-theme-spacing-s, 1rem));
       top: calc(-1 * var(--h5p-theme-spacing-s, 1rem));
-      transition: background 0.5s linear;
       width: var(--h5p-theme-spacing-l, 2rem);
       z-index: 2;
 
       &:hover {
-        background: #d6d6d6;
+        background: var(--h5p-theme-alternative-base, #f1f5fb);
+      }
+
+      &:focus-visible {
+        outline: 2px ridge var(--h5p-theme-contrast-cta-white, #006fbf);
+        outline-offset: 2px;
       }
 
       &:before {

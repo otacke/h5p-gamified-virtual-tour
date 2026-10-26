@@ -20,8 +20,10 @@
 }
 
 .three-sixty-scene-wrapper {
+  /* Colors follow H5P core's confirmation dialog */
   .loading-overlay {
-    background: rgba(27, 29, 44, 0.85);
+    background: rgba(0, 0, 0, 0.85);
+    background-color: hsl(from var(--h5p-theme-main-cta-base, #006fbf) h calc(s * 0.3) 18% / 40%);
     color: white;
     height: 100%;
     left: 0;
@@ -31,7 +33,8 @@
     z-index: 3;
 
     &.no-opacity {
-      background: rgb(27, 29, 44);
+      background: rgb(0, 0, 0);
+      background-color: hsl(from var(--h5p-theme-main-cta-base, #006fbf) h calc(s * 0.3) 18%);
     }
 
     .loading-wrapper {

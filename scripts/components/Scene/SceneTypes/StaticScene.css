@@ -35,6 +35,6 @@
   }
 
   .interaction {
-    background: white;
+    background: var(--h5p-theme-ui-base, #ffffff);
   }
 }

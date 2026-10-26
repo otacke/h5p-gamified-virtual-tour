@@ -13,6 +13,8 @@ const DEFAULT_RATIO_WIDTH = 16;
 const PHONE_SIZE_MAX_WIDTH = 480;
 /** @constant {number} MEDIUM_TABLET_SIZE_MAX_WIDTH Breakpoint for medium tablet-sized wrapper. */
 const MEDIUM_TABLET_SIZE_MAX_WIDTH = 768;
+/** @constant {number} FULLSCREEN_TIMEOUT_MS Delay before toggling fullscreen, so devices register user gesture. */
+const FULLSCREEN_TIMEOUT_MS = 300;
 
 // Load library
 H5P = H5P || {};
@@ -92,6 +94,8 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
       progressOpened: 'started',
       progressCompleted: 'completed',
       progressCleared: 'completed successfully',
+      fullscreenEnter: 'Enter full screen mode',
+      fullscreenExit: 'Exit full screen mode',
       ...params.l10n,
     };
 
@@ -105,8 +109,42 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     this.sceneRenderingQuality = this.behavior.sceneRenderingQuality || 'high';
     this.interactionStates = getInitialInteractionStates(extras.previousState);
 
+    this.isFullscreenAllowed = !!extras.standalone && !extras.isEditor && H5P.fullscreenSupported;
+    this.isFullscreen = false;
+
     this.on('resize', this.handleResize);
+
+    if (this.isFullscreenAllowed) {
+      this.on('enterFullScreen', () => {
+        this.isFullscreen = true;
+        this.renderMain();
+      });
+
+      this.on('exitFullScreen', () => {
+        this.isFullscreen = false;
+        this.renderMain();
+      });
+    }
   }
+
+  /**
+   * Toggle fullscreen mode.
+   */
+  toggleFullscreen = () => {
+    if (!this.container || !this.isFullscreenAllowed) {
+      return;
+    }
+
+    // Some devices don't register user gesture before call to requestFullscreen
+    window.setTimeout(() => {
+      if (H5P.isFullscreen) {
+        H5P.exitFullScreen();
+      }
+      else {
+        H5P.fullScreen(H5P.jQuery(this.container), this);
+      }
+    }, FULLSCREEN_TIMEOUT_MS);
+  };
 
   /**
    * Set current scene ID.

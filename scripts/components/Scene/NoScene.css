@@ -1,8 +1,8 @@
 @import '@styles/icons.css';
 
 .no-scene-container {
-  background-color: #1b1d2c;
-  color: #fff;
+  background-color: var(--h5p-theme-main-cta-base, #006fbf);
+  color: var(--h5p-theme-secondary-cta-base, #e3e9f1);
   height: 100%;
 
   .no-scene-wrapper {
@@ -14,12 +14,10 @@
     transform: translate(-50%, -50%);
 
     &:before {
-      color: #8d8f98;
       content: var(--icon-fontawesome-no-scene);
       font-family: "H5PFontAwesome4", sans-serif;
       font-size: calc(10 * var(--h5p-theme-font-size-m, 1rem));
       line-height: 0.75;
-      padding-left: calc(1.25 * var(--h5p-theme-spacing-s, 1rem));
     }
 
     .title {

@@ -1303,6 +1303,18 @@
         "type": "text",
         "label": "Progress of interaction: completed successfully",
         "default": "completed successfully"
+      },
+      {
+        "name": "fullscreenEnter",
+        "type": "text",
+        "label": "Enter full screen mode",
+        "default": "Enter full screen mode"
+      },
+      {
+        "name": "fullscreenExit",
+        "type": "text",
+        "label": "Exit full screen mode",
+        "default": "Exit full screen mode"
       }
     ]
   }

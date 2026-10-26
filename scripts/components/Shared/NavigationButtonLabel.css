@@ -2,8 +2,6 @@
 @import '@styles/colors.css';
 
 .nav-label-container {
-  --arrow-down-top: calc(-50% + 1px);
-  --arrow-up-top: calc(-50% - 1px);
   --label-max-width: 11em;
   --label-min-width: 6em;
   --label-padding: 0.5em 1em 0.5em 1em;
@@ -50,7 +48,7 @@
   }
 
   .nav-label-expand-button {
-    background: transparent;
+    background: var(--label-bg);
     border: 1px solid transparent;
     border-radius: 50%;
     bottom: -1.1em;
@@ -62,36 +60,21 @@
     /* center-horizontally */
     transform: translateX(-50%);
 
-    &:focus {
-      background-color: #000000;
-      border: 1px dotted #ffffff;
-      box-shadow: 0 0px 10px 1px #373e94;
-      outline: none;
+    &:focus-visible {
+      background-color: var(--interaction-bg);
+      outline: 2px ridge var(--h5p-theme-contrast-cta-white, #006fbf);
+      outline-offset: 2px;
     }
 
     &:hover {
-      background-color: #ffffff;
       box-shadow: 0 0px 10px 1px #000000;
     }
 
     .nav-label-expand-arrow {
       position: relative;
 
-      &:before {
-        color: #ffffff;
-        content: var(--icon-fontawesome-triangle-arrow);
-        font-family: "H5PFontAwesome4", sans-serif;
-        font-size: 1.1em;
-        height: 1.025em;
-        left: -50%;
-        position: absolute;
-        top: var(--arrow-down-top);
-        transform: rotate(180deg) translate(50%, 50%);
-        z-index: 1;
-      }
-
       &:after {
-        color: #000000;
+        color: var(--label-color);
         content: var(--icon-fontawesome-triangle-arrow);
         font-family: "H5PFontAwesome4", sans-serif;
         font-size: 1.1em;
@@ -102,6 +85,10 @@
         transform: rotate(180deg) translate(50%, 50%);
         z-index: 1;
       }
+    }
+
+    &:focus-visible .nav-label-expand-arrow:after {
+      color: var(--button-color);
     }
   }
 
@@ -126,11 +113,6 @@
       top: -1.1em;
 
       .nav-label-expand-arrow {
-        &:before {
-          top: var(--arrow-up-top);
-          transform: rotate(0deg) translate(-50%, -50%);
-        }
-
         &:after {
           transform: rotate(0deg) translate(-50%, -50%);
         }
@@ -197,11 +179,6 @@
     top: -1.1em;
 
     .nav-label-expand-arrow {
-      &:before {
-        top: var(--arrow-up-top);
-        transform: rotate(0deg) translate(-50%, -50%);
-      }
-
       &:after {
         transform: rotate(0deg) translate(-50%, -50%);
       }
@@ -218,12 +195,6 @@
     }
 
     .nav-label-expand-button .nav-label-expand-arrow {
-      &:before {
-        left: 50%;
-        top: var(--arrow-up-top);
-        transform: rotate(0deg) translate(-50%, -50%);
-      }
-
       &:after {
         left: 50%;
         top: 50%;
@@ -249,37 +220,19 @@
   }
 
   &.top.is-expanded .nav-label-expand-button .nav-label-expand-arrow {
-    &:before {
-      top: var(--arrow-down-top);
-      transform: rotate(180deg) translate(50%, 50%);
-    }
-
     &:after {
       transform: rotate(180deg) translate(50%, 50%);
     }
   }
 
   &.expand-up.is-expanded .nav-label-expand-button .nav-label-expand-arrow {
-    &:before {
-      top: var(--arrow-down-top);
-      transform: rotate(180deg) translate(50%, 50%);
-    }
-
     &:after {
       transform: rotate(180deg) translate(50%, 50%);
     }
   }
 
-  .nav-button-wrapper:hover &.hover-only {
-    visibility: visible;
-
-    .nav-label {
-      max-height: 3em;
-      max-width: var(--label-max-width);
-    }
-  }
-
-  .nav-button-wrapper &.hover-only.show-label {
+  .nav-button-wrapper:hover &.hover-only,
+  .nav-button-wrapper:has(.nav-button:focus-visible) &.hover-only {
     visibility: visible;
 
     .nav-label {

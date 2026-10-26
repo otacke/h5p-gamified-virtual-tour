@@ -141,6 +141,18 @@ export default class HUD extends React.Component {
           }
         </div>
         {
+          this.context.isFullscreenAllowed &&
+          <div className="hud-top-right">
+            <Button
+              type={ this.context.isFullscreen ? 'fullscreen-exit' : 'fullscreen-enter' }
+              label={ this.context.isFullscreen ? this.context.l10n.fullscreenExit : this.context.l10n.fullscreenEnter }
+              isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+              nextFocus={ this.props.nextFocus }
+              onClick={ this.context.toggleFullscreen }
+            />
+          </div>
+        }
+        {
           isShowingOverviewMap &&
           <OverviewMap
             image={ overviewMap.image }

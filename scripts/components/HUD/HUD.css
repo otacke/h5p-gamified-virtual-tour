@@ -12,4 +12,10 @@
     left: 1rem;
     position: absolute;
   }
+
+  .hud-top-right {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+  }
 }

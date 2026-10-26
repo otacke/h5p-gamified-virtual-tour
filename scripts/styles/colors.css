@@ -1,17 +1,16 @@
 .h5p-gamified-virtual-tour {
-  /* Active */
-  --active-bg: black;
-  --active-border: #6d6d6d;
-  /* Buttons */
-  --button-bg: black;
+  /* Navigation buttons use color scheme of .h5p-theme-primary-cta from H5P.Components */
+  --active-bg: var(--h5p-theme-main-cta-dark, #005fa3);
+  --active-border: var(--h5p-theme-main-cta-dark, #005fa3);
+  --button-bg: var(--h5p-theme-main-cta-base, #006fbf);
+  --button-color: var(--h5p-theme-contrast-cta, #ebf7ff);
   --button-size: 2.5em;
-  /* Hover */
-  --hover-bg: #2b2b2b;
-  --interaction-active-bg: #1b1f4a;
-  --interaction-active-border: #8587d4;
-  --interaction-bg: #373e94;
-  --interaction-hover-bg: #292e6f;
-  /* Labels */
-  --label-bg: rgba(0, 0, 0, 0.7);
-  --label-color: #FFF;
+  --hover-bg: var(--h5p-theme-main-cta-light, #0d74c0);
+  --interaction-active-bg: var(--h5p-theme-main-cta-dark, #005fa3);
+  --interaction-active-border: var(--h5p-theme-main-cta-dark, #005fa3);
+  --interaction-bg: var(--h5p-theme-main-cta-base, #006fbf);
+  --interaction-hover-bg: var(--h5p-theme-main-cta-light, #0d74c0);
+  /* Labels use color scheme of HUD buttons (.h5p-theme-nav-button from H5P.Components) */
+  --label-bg: color-mix(in srgb, var(--h5p-theme-secondary-cta-base, #e3e9f1) 70%, transparent);
+  --label-color: var(--h5p-theme-secondary-contrast-cta, #202122);
 }

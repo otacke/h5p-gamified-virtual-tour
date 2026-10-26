@@ -1,6 +1,6 @@
 .hud {
   .hud-panel {
-    background: rgba(255, 255, 255, 0.95);
+    background: var(--h5p-theme-ui-base, #ffffff);
     border-radius: calc(0.25 * var(--h5p-theme-spacing-s, 1rem));
     bottom: var(--h5p-theme-spacing-s, 1rem);
     box-shadow: rgba(0, 0, 0, 0.4) 0 3px 10px;

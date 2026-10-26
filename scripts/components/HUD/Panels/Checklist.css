@@ -1,6 +1,8 @@
+/* Colors follow H5P core's confirmation dialog */
 .hud {
   .checklist-panel {
-    color: #212121;
+    border-radius: var(--h5p-theme-border-radius-large, 0.5rem);
+    color: var(--h5p-theme-text-primary, #101729);
 
     .checklist-title {
       font-weight: bold;
@@ -19,7 +21,7 @@
         padding: calc(0.25 * var(--h5p-theme-spacing-s, 1rem)) 0;
 
         &:before {
-          color: #8d8f98;
+          color: var(--h5p-theme-text-third, #737373);
           content: '\f096';
           flex-shrink: 0;
           font-family: "H5PFontAwesome4", sans-serif;
@@ -27,12 +29,12 @@
         }
 
         &.done:before {
-          color: #2c611a;
+          color: var(--h5p-theme-feedback-correct-main, #256d1d);
           content: '\f046';
         }
 
         &.locked:before {
-          color: #8d8f98;
+          color: var(--h5p-theme-text-third, #737373);
           content: var(--icon-fontawesome-lock);
         }
 

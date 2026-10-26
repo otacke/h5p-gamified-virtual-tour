@@ -6,11 +6,12 @@
   pointer-events: auto;
   position: relative;
 
+  /* Color scheme of .h5p-theme-nav-button from H5P.Components */
   .hud-btn {
-    background: #000;
+    background: var(--h5p-theme-secondary-cta-base, #e3e9f1);
     border: 0.2rem solid transparent;
     border-radius: 50%;
-    color: #fff;
+    color: var(--h5p-theme-secondary-contrast-cta, #202122);
     cursor: pointer;
     display: block;
     font-size: 2rem;
@@ -31,14 +32,17 @@
       transform: translate(-50%,-50%);
     }
 
-    &:hover,
-    &:focus {
-      background-color: #2b2b2b;
+    &:hover:not(:disabled) {
+      background-color: var(--h5p-theme-secondary-cta-light, #f5f7fa);
     }
 
-    &:active {
-      background-color: black;
-      border-color: #6d6d6d;
+    &:active:not(:disabled) {
+      background-color: var(--h5p-theme-secondary-cta-dark, #d3dce9);
+    }
+
+    &:focus-visible {
+      outline: 2px ridge var(--h5p-theme-contrast-cta-white, #006fbf);
+      outline-offset: 2px;
     }
 
     &[disabled] {
@@ -70,12 +74,21 @@
     &.audio-track.active:before {
       content: var(--icon-fontawesome-audio-off);
     }
+
+    &.fullscreen-enter:before {
+      content: var(--icon-fontawesome-fullscreen-enter);
+    }
+
+    &.fullscreen-exit:before {
+      content: var(--icon-fontawesome-fullscreen-exit);
+    }
   }
 
+  /* Color scheme of HUD buttons */
   .tooltip {
-    background: #000;
+    background: var(--h5p-theme-secondary-cta-base, #e3e9f1);
     box-shadow: rgba(0, 0, 0, 0.4) 0 3px 10px;
-    color: #fff;
+    color: var(--h5p-theme-secondary-contrast-cta, #202122);
     font-size: 0.875rem;
     line-height: 1.75;
     opacity: 0;
@@ -87,7 +100,7 @@
     z-index: 11;
 
     &:after {
-      background: #000;
+      background: var(--h5p-theme-secondary-cta-base, #e3e9f1);
       box-shadow: rgba(0, 0, 0, 0.4) 0 3px 10px;
       content: " ";
       display: block;
@@ -111,25 +124,38 @@
   }
 }
 
-.hud-bottom-left {
-  .btn-wrap {
-    .hud-btn {
-      margin-right: 0.5rem;
-    }
+.hud-bottom-left .btn-wrap {
+  .hud-btn {
+    margin-right: 0.5rem;
+  }
 
-    .tooltip {
-      bottom: 200%;
-      left: -0.21875rem;
+  .tooltip {
+    bottom: 200%;
+    left: -0.21875rem;
 
-      &:after {
-        left: 0;
-        top: 100%;
-        transform: translateX(130%) translateY(-50%) rotate(45deg);
-      }
-    }
-
-    &:hover .tooltip {
-      bottom: 140%;
+    &:after {
+      left: 0;
+      top: 100%;
+      transform: translateX(130%) translateY(-50%) rotate(45deg);
     }
   }
+}
+
+.hud-top-right .btn-wrap .tooltip {
+  right: -0.21875rem;
+  top: 200%;
+
+  &:after {
+    bottom: 100%;
+    right: 0;
+    transform: translateX(-130%) translateY(50%) rotate(45deg);
+  }
+}
+
+.hud-bottom-left .btn-wrap:hover .tooltip {
+  bottom: 140%;
+}
+
+.hud-top-right .btn-wrap:hover .tooltip {
+  top: 140%;
 }

@@ -745,6 +745,14 @@
         {
           "label": "Progress of interaction: completed successfully",
           "default": "completed successfully"
+        },
+        {
+          "label": "Enter full screen mode",
+          "default": "Enter full screen mode"
+        },
+        {
+          "label": "Exit full screen mode",
+          "default": "Exit full screen mode"
         }
       ]
     }

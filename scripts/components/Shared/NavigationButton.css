@@ -68,7 +68,7 @@
     /* Cover whole button and center glyph, independent of glyph's advance width and line height */
     &:before {
       align-items: center;
-      color: white;
+      color: var(--button-color);
       display: flex;
       font-family: "H5PFontAwesome4", sans-serif;
       font-size: 1.25em;
@@ -139,7 +139,7 @@
   }
 
   &.has-restrictions .nav-button:after {
-    background: #fff;
+    background: var(--h5p-theme-ui-base, #ffffff);
     border-radius: 50%;
     box-shadow: 0 0 0.2em rgba(0, 0, 0, 0.4);
     color: #212121;

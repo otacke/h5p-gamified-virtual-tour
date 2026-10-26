@@ -14,12 +14,12 @@
         }
 
         &.met:before {
-          color: #2c611a;
+          color: var(--h5p-theme-feedback-correct-main, #256d1d);
           content: var(--icon-fontawesome-check);
         }
 
         &.not-met:before {
-          color: #a32a2a;
+          color: var(--h5p-theme-feedback-incorrect-main, #a13236);
           content: var(--icon-fontawesome-times);
         }
 
