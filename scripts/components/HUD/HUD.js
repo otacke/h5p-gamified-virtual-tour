@@ -6,11 +6,21 @@ import AudioButton from '@components/HUD/Buttons/AudioButton.js';
 import Button from '@components/HUD/Buttons/Button/Button.js';
 import { SceneTypes } from '@components/Scene/Scene.js';
 import OverviewMap from '@components/HUD/Panels/OverviewMap.js';
+import Checklist from '@components/HUD/Panels/Checklist.js';
 
 /** @constant {object} HudPanels Identifiers of panels that can be toggled in HUD. */
 export const HudPanels = {
   OVERVIEW_MAP: 'overviewMap',
   CHECKLIST: 'checklist',
+};
+
+/**
+ * Decode HTML entities of text, e.g. from H5P text fields.
+ * @param {string} html Text that may contain HTML entities or markup.
+ * @returns {string} Plain text.
+ */
+const decodeHTML = (html) => {
+  return new DOMParser().parseFromString(html, 'text/html').documentElement.textContent;
 };
 
 export default class HUD extends React.Component {
@@ -43,6 +53,31 @@ export default class HUD extends React.Component {
   };
 
   /**
+   * Get checklist items for all interactions of scene except for navigation buttons.
+   * @returns {object[]} Items with id, label and isDone.
+   */
+  getChecklistItems = () => {
+    return (this.props.scene.interactions ?? [])
+      .filter((interaction) => H5P.libraryFromString(interaction.action.library).machineName !== 'H5P.GoToScene')
+      .map((interaction) => ({
+        id: interaction.id,
+        label: decodeHTML(
+          interaction.labelText ||
+          interaction.action.metadata?.title ||
+          H5P.libraryFromString(interaction.action.library).machineName,
+        ),
+        isDone: (this.props.completedInteractions ?? []).includes(interaction.id),
+      }));
+  };
+
+  /**
+   * Show or hide checklist.
+   */
+  handleToggleChecklist = () => {
+    this.props.onToggleHudPanel(HudPanels.CHECKLIST);
+  };
+
+  /**
    * Show or hide overview map.
    */
   handleToggleOverviewMap = () => {
@@ -59,6 +94,9 @@ export default class HUD extends React.Component {
     const overviewMap = this.context.behavior.overviewMap;
     const hasOverviewMap = overviewMap?.show === true && !!overviewMap.image?.path;
     const isShowingOverviewMap = hasOverviewMap && this.props.hudPanel === HudPanels.OVERVIEW_MAP;
+
+    const checklistItems = this.getChecklistItems();
+    const isShowingChecklist = checklistItems.length > 0 && this.props.hudPanel === HudPanels.CHECKLIST;
 
     return (
       <div className="hud" aria-hidden={ this.props.isHiddenBehindOverlay ? true : undefined }>
@@ -94,6 +132,17 @@ export default class HUD extends React.Component {
               onClick={ this.handleToggleOverviewMap }
             />
           }
+          {
+            checklistItems.length > 0 &&
+            <Button
+              type={ 'checklist' }
+              label={ this.context.l10n.checklist }
+              isPressed={ isShowingChecklist }
+              isHiddenBehindOverlay={ this.props.isHiddenBehindOverlay }
+              nextFocus={ this.props.nextFocus }
+              onClick={ this.handleToggleChecklist }
+            />
+          }
         </div>
         {
           isShowingOverviewMap &&
@@ -102,6 +151,10 @@ export default class HUD extends React.Component {
             position={ this.props.scene.overviewMapPosition }
             label={ this.context.l10n.overviewMap }
           />
+        }
+        {
+          isShowingChecklist &&
+          <Checklist items={ checklistItems } l10n={ this.context.l10n } />
         }
       </div>
     );

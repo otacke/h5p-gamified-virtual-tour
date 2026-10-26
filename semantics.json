@@ -645,6 +645,24 @@
         "type": "text",
         "label": "Label for button to show and hide the overview map",
         "default": "Overview map"
+      },
+      {
+        "name": "checklist",
+        "type": "text",
+        "label": "Label for button to show and hide the checklist",
+        "default": "Checklist"
+      },
+      {
+        "name": "checklistItemDone",
+        "type": "text",
+        "label": "Readspeaker text for completed item in checklist",
+        "default": "Completed"
+      },
+      {
+        "name": "checklistItemNotDone",
+        "type": "text",
+        "label": "Readspeaker text for item in checklist that is not completed",
+        "default": "Not completed"
       }
     ]
   }

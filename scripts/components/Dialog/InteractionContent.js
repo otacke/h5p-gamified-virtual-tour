@@ -65,6 +65,7 @@ export default class InteractionContent extends React.Component {
     const library = interaction.action;
 
     this.instance = H5P.newRunnable(library, this.context.contentId, H5P.jQuery(contentRef));
+    this.props.onInstanceCreated?.(this.instance, interaction);
 
     if (library.library.split(' ')[0] === 'H5P.Video') {
       this.instance.on('stateChange', (e) => {

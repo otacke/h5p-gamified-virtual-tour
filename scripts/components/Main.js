@@ -7,6 +7,7 @@ import '@components/Main.css';
 import HUD from '@components/HUD/HUD.js';
 import AudioButton from '@components/HUD/Buttons/AudioButton.js';
 import NoScene from '@components/Scene/NoScene.js';
+import { isCompletingStatement, isInstanceTask } from '@scripts/services/h5p-util.js';
 
 export default class Main extends React.Component {
   /**
@@ -32,6 +33,7 @@ export default class Main extends React.Component {
       sceneWaitingForLoad: null,
       updateThreeSixty: false,
       hudPanel: null,
+      completedInteractions: this.props.initialCompletedInteractions ?? [],
       labelBehavior: {
         showLabel: true,
         labelPosition: 'right',
@@ -285,6 +287,7 @@ export default class Main extends React.Component {
         const player = this.getAudioPlayer(playerId, interaction);
         if (player) {
           player.play();
+          this.markInteractionCompleted(interaction.id);
         }
       }
     }
@@ -296,6 +299,40 @@ export default class Main extends React.Component {
         nextFocus: null,
       });
     }
+  };
+
+  /**
+   * Mark interaction as completed for checklist.
+   * @param {string} interactionId ID of interaction.
+   */
+  markInteractionCompleted = (interactionId) => {
+    if (!interactionId || this.state.completedInteractions.includes(interactionId)) {
+      return;
+    }
+
+    this.setState((prevState) => ({
+      completedInteractions: [...prevState.completedInteractions, interactionId],
+    }), () => {
+      this.props.onCompletedInteractionsChanged?.(this.state.completedInteractions);
+    });
+  };
+
+  /**
+   * Track completion of interaction's content instance.
+   * @param {object} instance H5P instance of interaction's content.
+   * @param {object} interaction Interaction parameters.
+   */
+  handleInstanceCreated = (instance, interaction) => {
+    if (!isInstanceTask(instance)) {
+      this.markInteractionCompleted(interaction.id);
+      return;
+    }
+
+    instance.on('xAPI', (event) => {
+      if (isCompletingStatement(event, instance)) {
+        this.markInteractionCompleted(interaction.id);
+      }
+    });
   };
 
   /**
@@ -425,6 +462,7 @@ export default class Main extends React.Component {
               currentInteraction={this.state.currentInteraction}
               audioIsPlaying={ this.state.audioIsPlaying }
               onAudioIsPlaying={ this.handleAudioIsPlaying }
+              onInstanceCreated={ this.handleInstanceCreated }
             />
           </Dialog>
         }
@@ -478,6 +516,7 @@ export default class Main extends React.Component {
           onCenterScene={ this.centerScene }
           hudPanel={ this.state.hudPanel }
           onToggleHudPanel={ this.toggleHudPanel }
+          completedInteractions={ this.state.completedInteractions }
         />
       </div>
     );

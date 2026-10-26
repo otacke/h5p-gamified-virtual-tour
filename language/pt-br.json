@@ -364,6 +364,18 @@
         {
           "label": "Label for button to show and hide the overview map",
           "default": "Overview map"
+        },
+        {
+          "label": "Label for button to show and hide the checklist",
+          "default": "Checklist"
+        },
+        {
+          "label": "Readspeaker text for completed item in checklist",
+          "default": "Completed"
+        },
+        {
+          "label": "Readspeaker text for item in checklist that is not completed",
+          "default": "Not completed"
         }
       ]
     }

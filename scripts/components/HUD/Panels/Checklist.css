@@ -1,0 +1,45 @@
+.hud {
+  .checklist {
+    color: #212121;
+
+    .checklist-title {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .checklist-items {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      .checklist-item {
+        align-items: baseline;
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.25rem 0;
+
+        &:before {
+          color: #8d8f98;
+          content: '\f096';
+          flex-shrink: 0;
+          font-family: "H5PFontAwesome4", sans-serif;
+          width: 1rem;
+        }
+
+        &.done:before {
+          color: #2c611a;
+          content: '\f046';
+        }
+
+        .checklist-item-status {
+          clip-path: inset(50%);
+          height: 1px;
+          overflow: hidden;
+          position: absolute;
+          white-space: nowrap;
+          width: 1px;
+        }
+      }
+    }
+  }
+}

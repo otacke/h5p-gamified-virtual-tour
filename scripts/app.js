@@ -52,6 +52,9 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
       backgroundLoading: 'Loading background image...',
       noContent: 'No content',
       overviewMap: 'Overview map',
+      checklist: 'Checklist',
+      checklistItemDone: 'Completed',
+      checklistItemNotDone: 'Not completed',
       ...params.l10n,
     };
 
@@ -63,6 +66,7 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     this.contentId = contentId;
     this.extras = extras;
     this.sceneRenderingQuality = this.behavior.sceneRenderingQuality || 'high';
+    this.completedInteractions = extras.previousState?.completedInteractions ?? [];
 
     this.on('resize', this.handleResize);
   }
@@ -131,9 +135,33 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
           setCurrentSceneId={this.setCurrentSceneId}
           addThreeSixty={ (tS) => this.threeSixty = tS }
           onSetCameraPos={this.setCameraPosition}
+          initialCompletedInteractions={this.completedInteractions}
+          onCompletedInteractionsChanged={this.handleCompletedInteractionsChanged}
         />
       </H5PContext.Provider>,
     );
+  };
+
+  /**
+   * Store IDs of completed interactions for resuming.
+   * @param {string[]} completedInteractions IDs of completed interactions.
+   */
+  handleCompletedInteractionsChanged = (completedInteractions) => {
+    this.completedInteractions = completedInteractions;
+  };
+
+  /**
+   * Get current state for resuming.
+   * @returns {object|undefined} Current state, or undefined if there is nothing to resume.
+   */
+  getCurrentState = () => {
+    if (!this.completedInteractions.length) {
+      return;
+    }
+
+    return {
+      completedInteractions: this.completedInteractions,
+    };
   };
 
   /**
