@@ -162,6 +162,92 @@ export default class InteractionInstances {
   }
 
   /**
+   * Get sum of scores of all tasks.
+   * @returns {number} Score.
+   */
+  getScore() {
+    return this.getTaskEntries().reduce((sum, entry) => {
+      const score = entry.instance.getScore?.();
+      return sum + ((typeof score === 'number') ? score : 0);
+    }, 0);
+  }
+
+  /**
+   * Get sum of maximum scores of all tasks.
+   * @returns {number} Maximum score.
+   */
+  getMaxScore() {
+    return this.getTaskEntries().reduce((sum, entry) => {
+      const maxScore = entry.instance.getMaxScore?.();
+      return sum + ((typeof maxScore === 'number') ? maxScore : 0);
+    }, 0);
+  }
+
+  /**
+   * Determine whether an answer was given in any instance.
+   * @returns {boolean} True, if an answer was given.
+   */
+  getAnswerGiven() {
+    return Object.values(this.entries).some((entry) => entry.instance.getAnswerGiven?.() ?? false);
+  }
+
+  /**
+   * Show solutions of all tasks.
+   */
+  showSolutions() {
+    this.getTaskEntries().forEach((entry) => {
+      this.attach(entry);
+      entry.instance.showSolutions?.();
+    });
+  }
+
+  /**
+   * Reset all instances. Instances that cannot be reset are recreated.
+   */
+  reset() {
+    this.previousStates = {};
+
+    Object.values(this.entries).forEach((entry) => {
+      // If not attached yet, some contents can fail (e.g. CP)
+      this.attach(entry);
+
+      if (typeof entry.instance.resetTask === 'function') {
+        entry.instance.resetTask();
+        delete entry.instance.activityStartTime;
+        return;
+      }
+
+      const interaction = entry.interaction;
+      this.destroy(interaction.id);
+      delete this.previousStates[interaction.id];
+      this.create(interaction);
+    });
+  }
+
+  /**
+   * Get xAPI data of all instances.
+   * @returns {object[]} xAPI data of instances that provide it.
+   */
+  getXAPIData() {
+    return Object.values(this.entries)
+      .map((entry) => {
+        if (typeof entry.instance.getXAPIData !== 'function') {
+          return;
+        }
+
+        try {
+          return entry.instance.getXAPIData();
+        }
+        catch (error) {
+          // Guard against content types that crash when calling getXAPIData, see HFP-4202
+          console.warn('Could not get xAPI data from content type:', error);
+          return;
+        }
+      })
+      .filter((data) => data !== undefined);
+  }
+
+  /**
    * Get current states of all instances.
    * @returns {object} Current states, keyed by interaction ID.
    */

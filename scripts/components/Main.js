@@ -89,6 +89,11 @@ export default class Main extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     this.updateTimeRestrictionTimer();
 
+    if (prevProps.resetCount !== this.props.resetCount) {
+      this.reset();
+      return;
+    }
+
     if (this.state.updateThreeSixty) {
       this.setState({
         updateThreeSixty: false,
@@ -442,6 +447,27 @@ export default class Main extends React.Component {
       },
     }), () => {
       this.props.onInteractionStatesChanged?.(this.state.interactionStates);
+    });
+  };
+
+  /**
+   * Reset progress, history, dialogs and audio after content was reset.
+   */
+  reset = () => {
+    Object.values(this.audioPlayers).forEach((player) => {
+      player.pause();
+      player.currentTime = 0;
+    });
+
+    this.setState({
+      interactionStates: {},
+      sceneHistory: [],
+      showingTextDialog: false,
+      currentText: null,
+      showingInteraction: false,
+      currentInteraction: null,
+      audioIsPlaying: null,
+      hudPanel: null,
     });
   };
 

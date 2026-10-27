@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import Main from '@components/Main.js';
 import { H5PContext } from '@context/H5PContext.js';
 import { sceneRenderingQualityMapping } from '@components/Scene/SceneTypes/ThreeSixtyScene.js';
-import { getInitialInteractionStates } from '@scripts/services/progress.js';
+import { getInitialInteractionStates, isInteractionDone } from '@scripts/services/progress.js';
 import InteractionInstances from '@scripts/services/interaction-instances.js';
 
 /** @constant {number} DEFAULT_RATIO_HEIGHT Height of default 16:9 aspect ratio. */
@@ -16,6 +16,25 @@ const PHONE_SIZE_MAX_WIDTH = 480;
 const MEDIUM_TABLET_SIZE_MAX_WIDTH = 768;
 /** @constant {number} FULLSCREEN_TIMEOUT_MS Delay before toggling fullscreen, so devices register user gesture. */
 const FULLSCREEN_TIMEOUT_MS = 300;
+
+/**
+ * Format language code to RFC 5646 recommendations, taken from H5P.GameMap.
+ * @param {string} languageCode Language code.
+ * @returns {string} Formatted language code.
+ */
+const formatLanguageCode = (languageCode) => {
+  if (typeof languageCode !== 'string') {
+    return languageCode;
+  }
+
+  const segments = languageCode.split('-');
+  segments[0] = segments[0].toLowerCase(); // ISO 639 recommendation
+  if (segments.length > 1) {
+    segments[1] = segments[1].toUpperCase(); // ISO 3166-1 recommendation
+  }
+
+  return segments.join('-');
+};
 
 // Load library
 H5P = H5P || {};
@@ -109,6 +128,22 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     this.extras = extras;
     this.sceneRenderingQuality = this.behavior.sceneRenderingQuality || 'high';
     this.interactionStates = getInitialInteractionStates(extras.previousState);
+
+    // Total score that was last sent with a "completed" statement
+    this.completedScore = extras.previousState?.completedScore;
+    // Incremented on reset to let main component reset its state
+    this.resetCount = 0;
+
+    const defaultLanguage = extras.metadata?.defaultLanguage || 'en';
+    this.languageTag = formatLanguageCode(defaultLanguage);
+
+    if (extras.isEditor) {
+      /*
+       * Kill all external listeners that may have been added so far, so the preview does not pollute LRS (as in
+       * H5P.GameMap). /!\ This can have side effects if a customization listens within the H5P Editor!
+       */
+      H5P.externalDispatcher.off('xAPI');
+    }
 
     this.interactionInstances = new InteractionInstances({
       contentId: this.contentId,
@@ -223,6 +258,7 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
           addThreeSixty={ (tS) => this.threeSixty = tS }
           onSetCameraPos={this.setCameraPosition}
           initialInteractionStates={this.interactionStates}
+          resetCount={this.resetCount}
           onInteractionStatesChanged={this.handleInteractionStatesChanged}
         />
       </H5PContext.Provider>,
@@ -235,6 +271,28 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
    */
   handleInteractionStatesChanged = (interactionStates) => {
     this.interactionStates = interactionStates;
+    this.triggerCompletedIfDone();
+  };
+
+  /**
+   * Trigger "completed" xAPI statement once all tasks are done and whenever the total score changes afterwards.
+   */
+  triggerCompletedIfDone = () => {
+    const taskIds = this.interactionInstances.getTaskEntries().map((entry) => entry.interaction.id);
+    const allTasksDone = taskIds.length > 0 &&
+      taskIds.every((interactionId) => isInteractionDone(this.interactionStates, interactionId));
+
+    if (!allTasksDone) {
+      return;
+    }
+
+    const score = this.getScore();
+    if (score === this.completedScore) {
+      return;
+    }
+
+    this.completedScore = score;
+    this.trigger(this.createXAPIEvent('completed'));
   };
 
   /**
@@ -245,13 +303,138 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     const instanceStates = this.interactionInstances.getCurrentStates();
 
     if (!Object.keys(this.interactionStates).length && !Object.keys(instanceStates).length) {
-      return;
+      // Nothing relevant to store, but previous state in DB must be cleared after reset
+      return this.contentWasReset ? {} : undefined;
     }
 
     return {
       interactionStates: this.interactionStates,
       instanceStates: instanceStates,
+      ...(this.completedScore !== undefined && { completedScore: this.completedScore }),
     };
+  };
+
+  /**
+   * Get current score.
+   * @returns {number} Current score.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-2}
+   */
+  getScore = () => {
+    return this.interactionInstances.getScore();
+  };
+
+  /**
+   * Get maximum possible score.
+   * @returns {number} Maximum possible score.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-3}
+   */
+  getMaxScore = () => {
+    return this.interactionInstances.getMaxScore();
+  };
+
+  /**
+   * Determine whether the task was answered already.
+   * @returns {boolean} True if answer was given by user, else false.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-1}
+   */
+  getAnswerGiven = () => {
+    return this.interactionInstances.getAnswerGiven() || Object.keys(this.interactionStates).length > 0;
+  };
+
+  /**
+   * Show solutions.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-4}
+   */
+  showSolutions = () => {
+    this.interactionInstances.showSolutions();
+  };
+
+  /**
+   * Reset task.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-5}
+   */
+  resetTask = () => {
+    this.contentWasReset = true;
+    this.interactionInstances.reset();
+    this.interactionStates = {};
+    this.completedScore = undefined;
+    this.resetCount += 1;
+
+    if (this.root) {
+      this.setCurrentSceneId(this.params.startSceneId);
+    }
+  };
+
+  /**
+   * Get xAPI data.
+   * @returns {object} xAPI statement with statements of subcontents as children.
+   * @see contract at {@link https://h5p.org/documentation/developers/contracts#guides-header-6}
+   */
+  getXAPIData = () => {
+    const xAPIEvent = this.createXAPIEvent('completed');
+
+    // Not a valid xAPI value (!), but H5P uses it for reporting
+    xAPIEvent.data.statement.object.definition.interactionType = 'compound';
+
+    return {
+      statement: xAPIEvent.data.statement,
+      children: this.interactionInstances.getXAPIData(),
+    };
+  };
+
+  /**
+   * Get context data. Contract used for confusion report.
+   * @returns {object} Context data.
+   */
+  getContext = () => {
+    return {
+      type: 'scene',
+      value: this.currentScene,
+    };
+  };
+
+  /**
+   * Create xAPI event.
+   * @param {string} verb Short id of the verb to trigger.
+   * @returns {H5P.XAPIEvent} xAPI event.
+   */
+  createXAPIEvent = (verb) => {
+    const xAPIEvent = this.createXAPIEventTemplate(verb);
+
+    Object.assign(xAPIEvent.getVerifiedStatementValue(['object', 'definition']), this.getXAPIDefinition());
+
+    if (verb === 'completed' || verb === 'answered') {
+      const maxScore = this.getMaxScore();
+      const score = Math.min(this.getScore(), maxScore);
+      xAPIEvent.setScoredResult(score, maxScore, this, true, score === maxScore);
+    }
+
+    return xAPIEvent;
+  };
+
+  /**
+   * Get xAPI definition for xAPI object.
+   * @returns {object} xAPI definition.
+   */
+  getXAPIDefinition = () => {
+    const title = this.getTitle();
+
+    return {
+      // Fallback for h5p-php-reporting, expects en-US
+      name: { [this.languageTag]: title, 'en-US': title },
+      description: { [this.languageTag]: title, 'en-US': title },
+      type: 'http://adlnet.gov/expapi/activities/cmi.interaction',
+      interactionType: 'other',
+    };
+  };
+
+  /**
+   * Get title of content.
+   * @returns {string} Title.
+   */
+  getTitle = () => {
+    // H5P Core function: createTitle
+    return H5P.createTitle(this.extras?.metadata?.title || this.l10n.title);
   };
 
   /**
