@@ -524,7 +524,12 @@ export default class Main extends React.Component {
    * @param {number} maxScore Maximum score.
    */
   showScoreFeedback = (interaction, score, maxScore) => {
-    const range = getScoreFeedback(interaction.scoreFeedback?.ranges, score, maxScore);
+    // H5P editor stores group with only one field as value of that field
+    const ranges = Array.isArray(interaction.scoreFeedback) ?
+      interaction.scoreFeedback :
+      interaction.scoreFeedback?.ranges;
+
+    const range = getScoreFeedback(ranges, score, maxScore);
     if (!range) {
       return;
     }
@@ -758,7 +763,7 @@ export default class Main extends React.Component {
         {
           this.state.scoreFeedback &&
           <FeedbackOverlay
-            key={ this.state.scoreFeedback.key }
+            key={ `feedback-${this.state.scoreFeedback.key}` }
             text={ this.state.scoreFeedback.text }
             image={ this.state.scoreFeedback.image }
             onClose={ this.closeScoreFeedback }
@@ -767,7 +772,7 @@ export default class Main extends React.Component {
         {
           this.state.celebration &&
           <Celebration
-            key={ this.state.celebration.key }
+            key={ `celebration-${this.state.celebration.key}` }
             type={ this.state.celebration.type }
             onDone={ this.handleCelebrationDone }
           />

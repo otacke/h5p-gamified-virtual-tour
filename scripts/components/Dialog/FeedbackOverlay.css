@@ -1,11 +1,29 @@
-/* Uses color scheme of .h5p-text-overlay, but must be on top of other dialogs */
+/* Uses color scheme of .h5p-text-overlay, but must be on top of other dialogs and cover whole content */
 .h5p-text-overlay.h5p-feedback-overlay {
   z-index: 5;
+
+  .h5p-text-dialog {
+    border-radius: 0;
+    height: 100%;
+    left: 0;
+    max-height: none;
+    max-width: none;
+    top: 0;
+    transform: none;
+    width: 100%;
+
+    .close-button-wrapper {
+      right: var(--h5p-theme-spacing-s, 1rem);
+      top: var(--h5p-theme-spacing-s, 1rem);
+    }
+  }
 
   .h5p-text-content {
     display: flex;
     flex-direction: column;
     gap: var(--h5p-theme-spacing-s, 1rem);
+    /* Center vertically, but keep top reachable when content overflows */
+    justify-content: safe center;
   }
 
   .feedback-image {
