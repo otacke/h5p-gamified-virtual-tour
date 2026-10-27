@@ -29,7 +29,6 @@
         }
 
         &.done:before {
-          color: var(--h5p-theme-feedback-correct-main, #256d1d);
           content: '\f046';
         }
 
