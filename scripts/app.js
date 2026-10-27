@@ -108,6 +108,10 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     this.extras = extras;
     this.sceneRenderingQuality = this.behavior.sceneRenderingQuality || 'high';
     this.interactionStates = getInitialInteractionStates(extras.previousState);
+    // States of subcontent instances, keyed by interaction ID
+    this.instanceStates = extras.previousState?.instanceStates ?? {};
+    // Subcontent instances that are currently open, keyed by interaction ID
+    this.openInstances = {};
 
     this.isFullscreenAllowed = !!extras.standalone && !extras.isEditor && H5P.fullscreenSupported;
     this.isFullscreen = false;
@@ -230,13 +234,60 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
    * @returns {object|undefined} Current state, or undefined if there is nothing to resume.
    */
   getCurrentState = () => {
-    if (!Object.keys(this.interactionStates).length) {
+    Object.entries(this.openInstances).forEach(([interactionId, instance]) => {
+      this.storeInstanceState(interactionId, instance);
+    });
+
+    if (!Object.keys(this.interactionStates).length && !Object.keys(this.instanceStates).length) {
       return;
     }
 
     return {
       interactionStates: this.interactionStates,
+      instanceStates: this.instanceStates,
     };
+  };
+
+  /**
+   * Get previous state of subcontent instance.
+   * @param {string} interactionId ID of interaction.
+   * @returns {object|undefined} Previous state of instance.
+   */
+  getInstanceState = (interactionId) => {
+    return this.instanceStates[interactionId];
+  };
+
+  /**
+   * Store current state of subcontent instance.
+   * @param {string} interactionId ID of interaction.
+   * @param {object} instance Subcontent instance.
+   */
+  storeInstanceState = (interactionId, instance) => {
+    const state = instance?.getCurrentState?.();
+    if (state === undefined || state === null) {
+      delete this.instanceStates[interactionId];
+    }
+    else {
+      this.instanceStates[interactionId] = state;
+    }
+  };
+
+  /**
+   * Register subcontent instance as open, so its state can be retrieved.
+   * @param {string} interactionId ID of interaction.
+   * @param {object} instance Subcontent instance.
+   */
+  registerOpenInstance = (interactionId, instance) => {
+    this.openInstances[interactionId] = instance;
+  };
+
+  /**
+   * Unregister open subcontent instance and store its state.
+   * @param {string} interactionId ID of interaction.
+   */
+  unregisterOpenInstance = (interactionId) => {
+    this.storeInstanceState(interactionId, this.openInstances[interactionId]);
+    delete this.openInstances[interactionId];
   };
 
   /**

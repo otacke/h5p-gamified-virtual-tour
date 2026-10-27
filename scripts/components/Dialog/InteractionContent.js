@@ -17,6 +17,15 @@ export default class InteractionContent extends React.Component {
   }
 
   /**
+   * React - run before unmount.
+   */
+  componentWillUnmount() {
+    if (this.interactionId !== undefined) {
+      this.context.unregisterOpenInstance(this.interactionId);
+    }
+  }
+
+  /**
    * React - update after render.
    * @param {object} prevProps Props from previous render.
    */
@@ -69,8 +78,15 @@ export default class InteractionContent extends React.Component {
       this.context.contentId,
       H5P.jQuery(contentRef),
       false,
-      { parent: this.context },
+      {
+        parent: this.context,
+        previousState: this.context.getInstanceState(interaction.id),
+      },
     );
+    this.interactionId = interaction.id;
+    if (this.interactionId !== undefined) {
+      this.context.registerOpenInstance(this.interactionId, this.instance);
+    }
     this.props.onInstanceCreated?.(this.instance, interaction);
 
     if (library.library.split(' ')[0] === 'H5P.Video') {
