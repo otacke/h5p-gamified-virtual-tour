@@ -61,6 +61,10 @@ export default class Main extends React.Component {
   componentDidMount() {
     this.updateTimeRestrictionTimer();
 
+    this.context.interactionInstances.setCallbacks({
+      onXAPI: this.handleInstanceXAPI,
+    });
+
     // Listen for focus to interaction
     this.context.on('focusInteraction', (e) => {
       this.setState({
@@ -442,33 +446,37 @@ export default class Main extends React.Component {
   };
 
   /**
-   * Track progress and score of interaction's content instance.
-   * @param {object} instance H5P instance of interaction's content.
+   * Track progress of interaction that was opened.
    * @param {object} interaction Interaction parameters.
+   * @param {boolean} isTask True, if interaction's content is a task.
    */
-  handleInstanceCreated = (instance, interaction) => {
-    if (!isInstanceTask(instance)) {
-      this.updateInteractionState(interaction.id, { progress: 'cleared', isTask: false });
+  handleInteractionOpened = (interaction, isTask) => {
+    this.updateInteractionState(
+      interaction.id,
+      isTask ? { progress: 'opened', isTask: true } : { progress: 'cleared', isTask: false },
+    );
+  };
+
+  /**
+   * Track progress and score of interaction's content instance.
+   * @param {object} interaction Interaction parameters.
+   * @param {object} instance H5P instance of interaction's content.
+   * @param {object} event xAPI event.
+   */
+  handleInstanceXAPI = (interaction, instance, event) => {
+    if (!isInstanceTask(instance) || !isCompletingStatement(event, instance)) {
       return;
     }
 
-    this.updateInteractionState(interaction.id, { progress: 'opened', isTask: true });
+    const score = event.getScore();
+    const maxScore = event.getMaxScore();
+    const hasScore = typeof score === 'number' && typeof maxScore === 'number';
+    const isSuccess = event.getVerifiedStatementValue(['result', 'success']) === true ||
+      (hasScore && maxScore > 0 && score >= maxScore);
 
-    instance.on('xAPI', (event) => {
-      if (!isCompletingStatement(event, instance)) {
-        return;
-      }
-
-      const score = event.getScore();
-      const maxScore = event.getMaxScore();
-      const hasScore = typeof score === 'number' && typeof maxScore === 'number';
-      const isSuccess = event.getVerifiedStatementValue(['result', 'success']) === true ||
-        (hasScore && maxScore > 0 && score >= maxScore);
-
-      this.updateInteractionState(interaction.id, {
-        progress: isSuccess ? 'cleared' : 'completed',
-        ...(hasScore && { score: score, maxScore: maxScore }),
-      });
+    this.updateInteractionState(interaction.id, {
+      progress: isSuccess ? 'cleared' : 'completed',
+      ...(hasScore && { score: score, maxScore: maxScore }),
     });
   };
 
@@ -599,7 +607,7 @@ export default class Main extends React.Component {
               currentInteraction={this.state.currentInteraction}
               audioIsPlaying={ this.state.audioIsPlaying }
               onAudioIsPlaying={ this.handleAudioIsPlaying }
-              onInstanceCreated={ this.handleInstanceCreated }
+              onInteractionOpened={ this.handleInteractionOpened }
             />
           </Dialog>
         }

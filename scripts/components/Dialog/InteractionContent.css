@@ -1,7 +1,12 @@
 .h5p-text-overlay {
   .h5p-text-dialog {
     .h5p-text-content {
-      > .h5p-image {
+      /* Wrapper of instance (that gets the content type's classes) should be laid out as direct child */
+      > .interaction-content {
+        display: contents;
+      }
+
+      > .interaction-content > .h5p-image {
         height: 100%;
         width: 100%;
 
@@ -10,7 +15,7 @@
         }
       }
 
-      > .h5p-video {
+      > .interaction-content > .h5p-video {
         height: 100%;
         overflow: hidden;
       }

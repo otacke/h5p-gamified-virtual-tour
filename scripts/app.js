@@ -4,6 +4,7 @@ import Main from '@components/Main.js';
 import { H5PContext } from '@context/H5PContext.js';
 import { sceneRenderingQualityMapping } from '@components/Scene/SceneTypes/ThreeSixtyScene.js';
 import { getInitialInteractionStates } from '@scripts/services/progress.js';
+import InteractionInstances from '@scripts/services/interaction-instances.js';
 
 /** @constant {number} DEFAULT_RATIO_HEIGHT Height of default 16:9 aspect ratio. */
 const DEFAULT_RATIO_HEIGHT = 9;
@@ -108,10 +109,17 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
     this.extras = extras;
     this.sceneRenderingQuality = this.behavior.sceneRenderingQuality || 'high';
     this.interactionStates = getInitialInteractionStates(extras.previousState);
-    // States of subcontent instances, keyed by interaction ID
-    this.instanceStates = extras.previousState?.instanceStates ?? {};
-    // Subcontent instances that are currently open, keyed by interaction ID
-    this.openInstances = {};
+
+    this.interactionInstances = new InteractionInstances({
+      contentId: this.contentId,
+      parent: this,
+      previousStates: extras.previousState?.instanceStates,
+    });
+
+    // In the editor, parameters can change, so instances are only created when an interaction is shown
+    if (!extras.isEditor) {
+      this.interactionInstances.createAll(this.params.scenes);
+    }
 
     this.isFullscreenAllowed = !!extras.standalone && !extras.isEditor && H5P.fullscreenSupported;
     this.isFullscreen = false;
@@ -234,60 +242,16 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
    * @returns {object|undefined} Current state, or undefined if there is nothing to resume.
    */
   getCurrentState = () => {
-    Object.entries(this.openInstances).forEach(([interactionId, instance]) => {
-      this.storeInstanceState(interactionId, instance);
-    });
+    const instanceStates = this.interactionInstances.getCurrentStates();
 
-    if (!Object.keys(this.interactionStates).length && !Object.keys(this.instanceStates).length) {
+    if (!Object.keys(this.interactionStates).length && !Object.keys(instanceStates).length) {
       return;
     }
 
     return {
       interactionStates: this.interactionStates,
-      instanceStates: this.instanceStates,
+      instanceStates: instanceStates,
     };
-  };
-
-  /**
-   * Get previous state of subcontent instance.
-   * @param {string} interactionId ID of interaction.
-   * @returns {object|undefined} Previous state of instance.
-   */
-  getInstanceState = (interactionId) => {
-    return this.instanceStates[interactionId];
-  };
-
-  /**
-   * Store current state of subcontent instance.
-   * @param {string} interactionId ID of interaction.
-   * @param {object} instance Subcontent instance.
-   */
-  storeInstanceState = (interactionId, instance) => {
-    const state = instance?.getCurrentState?.();
-    if (state === undefined || state === null) {
-      delete this.instanceStates[interactionId];
-    }
-    else {
-      this.instanceStates[interactionId] = state;
-    }
-  };
-
-  /**
-   * Register subcontent instance as open, so its state can be retrieved.
-   * @param {string} interactionId ID of interaction.
-   * @param {object} instance Subcontent instance.
-   */
-  registerOpenInstance = (interactionId, instance) => {
-    this.openInstances[interactionId] = instance;
-  };
-
-  /**
-   * Unregister open subcontent instance and store its state.
-   * @param {string} interactionId ID of interaction.
-   */
-  unregisterOpenInstance = (interactionId) => {
-    this.storeInstanceState(interactionId, this.openInstances[interactionId]);
-    delete this.openInstances[interactionId];
   };
 
   /**
