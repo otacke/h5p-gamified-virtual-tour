@@ -8,6 +8,8 @@ import HUD from '@components/HUD/HUD.js';
 import AudioButton from '@components/HUD/Buttons/AudioButton.js';
 import NoScene from '@components/Scene/NoScene.js';
 import { isCompletingStatement, isInstanceTask } from '@scripts/services/h5p-util.js';
+import { getScoreFeedback, hasFeedbackMessage } from '@scripts/services/score-feedback.js';
+import FeedbackOverlay from '@components/Dialog/FeedbackOverlay.js';
 import {
   getInteractionProgress,
   isInteractionTask,
@@ -47,6 +49,7 @@ export default class Main extends React.Component {
       sceneWaitingForLoad: null,
       updateThreeSixty: false,
       hudPanel: null,
+      scoreFeedback: null,
       interactionStates: this.props.initialInteractionStates ?? {},
       labelBehavior: {
         showLabel: true,
@@ -468,6 +471,7 @@ export default class Main extends React.Component {
       currentInteraction: null,
       audioIsPlaying: null,
       hudPanel: null,
+      scoreFeedback: null,
     });
   };
 
@@ -504,6 +508,37 @@ export default class Main extends React.Component {
       progress: isSuccess ? 'cleared' : 'completed',
       ...(hasScore && { score: score, maxScore: maxScore }),
     });
+
+    if (hasScore) {
+      this.showScoreFeedback(interaction, score, maxScore);
+    }
+  };
+
+  /**
+   * Show feedback that author defined for score range of interaction.
+   * @param {object} interaction Interaction parameters.
+   * @param {number} score Score achieved.
+   * @param {number} maxScore Maximum score.
+   */
+  showScoreFeedback = (interaction, score, maxScore) => {
+    const range = getScoreFeedback(interaction.scoreFeedback?.ranges, score, maxScore);
+    if (!hasFeedbackMessage(range)) {
+      return;
+    }
+
+    // Key lets overlay be recreated if new feedback arrives while it is shown
+    this.scoreFeedbackCount = (this.scoreFeedbackCount ?? 0) + 1;
+
+    this.setState({
+      scoreFeedback: { text: range.text, image: range.image, key: this.scoreFeedbackCount },
+    });
+  };
+
+  /**
+   * Close score feedback.
+   */
+  closeScoreFeedback = () => {
+    this.setState({ scoreFeedback: null });
   };
 
   /**
@@ -606,7 +641,7 @@ export default class Main extends React.Component {
     const showTextDialog = (this.state.showingTextDialog && this.state.currentText);
 
     // Whenever a dialog is shown we need to hide all the elements behind the overlay
-    const isHiddenBehindOverlay = (showInteractionDialog || showTextDialog);
+    const isHiddenBehindOverlay = (showInteractionDialog || showTextDialog || !!this.state.scoreFeedback);
 
     let dialogTitle;
     if (showInteractionDialog) {
@@ -697,6 +732,15 @@ export default class Main extends React.Component {
           lockedInteractions={ this.getLockedInteractions(scene) }
           onShowInteraction={ this.showInteraction }
         />
+        {
+          this.state.scoreFeedback &&
+          <FeedbackOverlay
+            key={ this.state.scoreFeedback.key }
+            text={ this.state.scoreFeedback.text }
+            image={ this.state.scoreFeedback.image }
+            onClose={ this.closeScoreFeedback }
+          />
+        }
       </div>
     );
   }

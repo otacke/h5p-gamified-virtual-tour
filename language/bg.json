@@ -800,6 +800,10 @@
         {
           "label": "Exit full screen mode",
           "default": "Exit full screen mode"
+        },
+        {
+          "label": "Feedback dialog",
+          "default": "Feedback"
         }
       ]
     }

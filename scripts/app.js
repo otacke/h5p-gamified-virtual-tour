@@ -116,6 +116,7 @@ H5P.GamifiedVirtualTour = class Wrapper extends H5P.EventDispatcher {
       progressCleared: 'completed successfully',
       fullscreenEnter: 'Enter full screen mode',
       fullscreenExit: 'Exit full screen mode',
+      feedback: 'Feedback',
       ...params.l10n,
     };
 

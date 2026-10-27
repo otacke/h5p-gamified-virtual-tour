@@ -720,9 +720,12 @@
                             },
                             {
                               "name": "image",
-                              "type": "image",
+                              "type": "library",
                               "label": "Feedback image",
-                              "optional": true
+                              "optional": true,
+                              "options": [
+                                "H5P.Image 1.1"
+                              ]
                             },
                             {
                               "name": "animation",
@@ -1463,6 +1466,12 @@
         "type": "text",
         "label": "Exit full screen mode",
         "default": "Exit full screen mode"
+      },
+      {
+        "name": "feedback",
+        "type": "text",
+        "label": "Feedback dialog",
+        "default": "Feedback"
       }
     ]
   }
