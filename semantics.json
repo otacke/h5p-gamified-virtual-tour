@@ -617,6 +617,141 @@
                         "optional": true
                       }
                     ]
+                  },
+                  {
+                    "name": "scoreFeedback",
+                    "type": "group",
+                    "label": "Feedback",
+                    "description": "Define feedback that is shown depending on the score achieved in this interaction.",
+                    "importance": "low",
+                    "optional": true,
+                    "widget": "gamifiedVirtualTourShowWhen",
+                    "gamifiedVirtualTourShowWhen": {
+                      "rules": [
+                        {
+                          "field": "action",
+                          "equals": [
+                            "H5P.Blanks",
+                            "H5P.CoursePresentation",
+                            "H5P.DragQuestion",
+                            "H5P.DragText",
+                            "H5P.Essay",
+                            "H5P.ImageHotspotQuestion",
+                            "H5P.InteractiveVideo",
+                            "H5P.MarkTheWords",
+                            "H5P.MemoryGame",
+                            "H5P.MultiChoice",
+                            "H5P.MultiMediaChoice",
+                            "H5P.QuestionSet",
+                            "H5P.SingleChoiceSet",
+                            "H5P.Summary",
+                            "H5P.TrueFalse"
+                          ]
+                        }
+                      ]
+                    },
+                    "fields": [
+                      {
+                        "name": "ranges",
+                        "type": "list",
+                        "label": "Feedback for score ranges",
+                        "entity": "range",
+                        "importance": "low",
+                        "optional": true,
+                        "min": 1,
+                        "defaultNum": 1,
+                        "widgets": [
+                          {
+                            "name": "GamifiedVirtualTourScoreRangeList",
+                            "label": "Default"
+                          }
+                        ],
+                        "field": {
+                          "name": "range",
+                          "type": "group",
+                          "label": "Range",
+                          "fields": [
+                            {
+                              "name": "from",
+                              "type": "number",
+                              "label": "Score range",
+                              "min": 0,
+                              "max": 100,
+                              "default": 0,
+                              "unit": "%"
+                            },
+                            {
+                              "name": "to",
+                              "type": "number",
+                              "min": 0,
+                              "max": 100,
+                              "default": 100,
+                              "unit": "%"
+                            },
+                            {
+                              "name": "text",
+                              "type": "text",
+                              "widget": "html",
+                              "label": "Feedback text",
+                              "optional": true,
+                              "enterMode": "p",
+                              "tags": [
+                                "strong",
+                                "em",
+                                "sub",
+                                "sup",
+                                "u",
+                                "strike",
+                                "ul",
+                                "ol",
+                                "li",
+                                "a",
+                                "h2",
+                                "h3",
+                                "p",
+                                "br",
+                                "span"
+                              ],
+                              "font": {
+                                "size": true,
+                                "color": true,
+                                "background": true
+                              }
+                            },
+                            {
+                              "name": "image",
+                              "type": "image",
+                              "label": "Feedback image",
+                              "optional": true
+                            },
+                            {
+                              "name": "animation",
+                              "type": "select",
+                              "label": "Animation",
+                              "default": "none",
+                              "options": [
+                                {
+                                  "value": "none",
+                                  "label": "None"
+                                },
+                                {
+                                  "value": "balloons",
+                                  "label": "Balloons"
+                                },
+                                {
+                                  "value": "fireworks",
+                                  "label": "Fireworks"
+                                },
+                                {
+                                  "value": "confetti",
+                                  "label": "Confetti"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      }
+                    ]
                   }
                 ]
               }

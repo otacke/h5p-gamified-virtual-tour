@@ -331,6 +331,53 @@
                           "label": "Dummy"
                         }
                       ]
+                    },
+                    {
+                      "label": "Feedback",
+                      "description": "Define feedback that is shown depending on the score achieved in this interaction.",
+                      "fields": [
+                        {
+                          "label": "Feedback for score ranges",
+                          "entity": "range",
+                          "widgets": [
+                            {
+                              "label": "Default"
+                            }
+                          ],
+                          "field": {
+                            "label": "Range",
+                            "fields": [
+                              {
+                                "label": "Score range"
+                              },
+                              {},
+                              {
+                                "label": "Feedback text"
+                              },
+                              {
+                                "label": "Feedback image"
+                              },
+                              {
+                                "label": "Animation",
+                                "options": [
+                                  {
+                                    "label": "None"
+                                  },
+                                  {
+                                    "label": "Balloons"
+                                  },
+                                  {
+                                    "label": "Fireworks"
+                                  },
+                                  {
+                                    "label": "Confetti"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        }
+                      ]
                     }
                   ]
                 }
