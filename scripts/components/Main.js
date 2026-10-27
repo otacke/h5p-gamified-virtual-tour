@@ -10,6 +10,7 @@ import NoScene from '@components/Scene/NoScene.js';
 import { isCompletingStatement, isInstanceTask } from '@scripts/services/h5p-util.js';
 import { getScoreFeedback, hasFeedbackMessage } from '@scripts/services/score-feedback.js';
 import FeedbackOverlay from '@components/Dialog/FeedbackOverlay.js';
+import Celebration from '@components/Celebration/Celebration.js';
 import {
   getInteractionProgress,
   isInteractionTask,
@@ -50,6 +51,7 @@ export default class Main extends React.Component {
       updateThreeSixty: false,
       hudPanel: null,
       scoreFeedback: null,
+      celebration: null,
       interactionStates: this.props.initialInteractionStates ?? {},
       labelBehavior: {
         showLabel: true,
@@ -472,6 +474,7 @@ export default class Main extends React.Component {
       audioIsPlaying: null,
       hudPanel: null,
       scoreFeedback: null,
+      celebration: null,
     });
   };
 
@@ -522,6 +525,19 @@ export default class Main extends React.Component {
    */
   showScoreFeedback = (interaction, score, maxScore) => {
     const range = getScoreFeedback(interaction.scoreFeedback?.ranges, score, maxScore);
+    if (!range) {
+      return;
+    }
+
+    const animation = range.animation ?? 'none';
+    // Some content types send several statements for one result, don't restart running animation
+    if (animation !== 'none' && this.state.celebration?.type !== animation) {
+      this.celebrationCount = (this.celebrationCount ?? 0) + 1;
+      this.setState({
+        celebration: { type: animation, key: this.celebrationCount },
+      });
+    }
+
     if (!hasFeedbackMessage(range)) {
       return;
     }
@@ -532,6 +548,13 @@ export default class Main extends React.Component {
     this.setState({
       scoreFeedback: { text: range.text, image: range.image, key: this.scoreFeedbackCount },
     });
+  };
+
+  /**
+   * Remove celebration after it has finished.
+   */
+  handleCelebrationDone = () => {
+    this.setState({ celebration: null });
   };
 
   /**
@@ -739,6 +762,14 @@ export default class Main extends React.Component {
             text={ this.state.scoreFeedback.text }
             image={ this.state.scoreFeedback.image }
             onClose={ this.closeScoreFeedback }
+          />
+        }
+        {
+          this.state.celebration &&
+          <Celebration
+            key={ this.state.celebration.key }
+            type={ this.state.celebration.type }
+            onDone={ this.handleCelebrationDone }
           />
         }
       </div>

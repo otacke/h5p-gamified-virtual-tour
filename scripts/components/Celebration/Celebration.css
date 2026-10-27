@@ -1,0 +1,120 @@
+/* Layer on top of everything else, not blocking user interaction */
+.h5p-gamified-virtual-tour-celebration {
+  container-type: size;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 6;
+
+  .balloon {
+    animation: h5p-gamified-virtual-tour-balloon-rise var(--duration) ease-in var(--delay) both;
+    background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.6) 0, transparent 30%), var(--color);
+    border-radius: 50% 50% 50% 50% / 45% 45% 55% 55%;
+    bottom: calc(-2 * var(--size));
+    height: calc(1.2 * var(--size));
+    left: var(--x);
+    position: absolute;
+    width: var(--size);
+
+    /* Knot */
+    &:before {
+      border-bottom: 0.4em solid var(--color);
+      border-left: 0.25em solid transparent;
+      border-right: 0.25em solid transparent;
+      bottom: -0.3em;
+      content: "";
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+    }
+
+    /* String */
+    &:after {
+      background: rgba(0, 0, 0, 0.3);
+      content: "";
+      height: calc(1.2 * var(--size));
+      left: 50%;
+      position: absolute;
+      top: 100%;
+      width: 1px;
+    }
+  }
+
+  .confetti-piece {
+    animation: h5p-gamified-virtual-tour-confetti-fall var(--duration) linear var(--delay) both;
+    background: var(--color);
+    height: var(--height);
+    left: var(--x);
+    position: absolute;
+    top: -2em;
+    width: var(--width);
+  }
+
+  .burst {
+    height: 0;
+    left: var(--x);
+    position: absolute;
+    top: var(--y);
+    width: 0;
+
+    .particle {
+      animation: h5p-gamified-virtual-tour-firework-particle 1.2s ease-out var(--delay) both;
+      background: var(--color);
+      border-radius: 50%;
+      box-shadow: 0 0 0.4em var(--color);
+      height: 0.4em;
+      left: -0.2em;
+      position: absolute;
+      top: -0.2em;
+      width: 0.4em;
+    }
+  }
+}
+
+@keyframes h5p-gamified-virtual-tour-balloon-rise {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(var(--sway), calc(-0.5 * (100cqh + 3 * var(--size))));
+  }
+
+  100% {
+    transform: translate(0, calc(-1 * (100cqh + 3 * var(--size))));
+  }
+}
+
+@keyframes h5p-gamified-virtual-tour-confetti-fall {
+  0% {
+    transform: translate(0, 0) rotate(var(--rotation)) rotateX(0deg);
+  }
+
+  100% {
+    transform: translate(var(--drift), calc(100cqh + 4em)) rotate(calc(var(--rotation) + 720deg)) rotateX(720deg);
+  }
+}
+
+@keyframes h5p-gamified-virtual-tour-firework-particle {
+  0% {
+    opacity: 0;
+    transform: rotate(var(--angle)) translateX(0);
+  }
+
+  5% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(var(--angle)) translateX(var(--distance));
+  }
+}
