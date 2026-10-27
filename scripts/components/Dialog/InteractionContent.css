@@ -14,6 +14,13 @@
         height: 100%;
         overflow: hidden;
       }
+
+      /* Prevent subcontent from going to fullscreen (as in H5P.GameMap) */
+      .h5p-interactive-video .h5p-control.h5p-fullscreen,
+      .h5p-course-presentation .h5p-footer-button.h5p-footer-toggle-full-screen,
+      .h5p-dragquestion .h5p-my-fullscreen-button-enter {
+        display: none;
+      }
     }
 
     &.h5p-video .h5p-text-content {

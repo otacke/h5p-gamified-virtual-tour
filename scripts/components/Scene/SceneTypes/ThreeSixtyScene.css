@@ -20,6 +20,9 @@
 }
 
 .three-sixty-scene-wrapper {
+  /* Keep z-index of hotspots (set by CSS2DRenderer) from competing with overlays outside of scene */
+  isolation: isolate;
+
   /* Colors follow H5P core's confirmation dialog */
   .loading-overlay {
     background: rgba(0, 0, 0, 0.85);
