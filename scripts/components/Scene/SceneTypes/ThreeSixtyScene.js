@@ -24,6 +24,9 @@ const DEFAULT_ASPECT_RATIO = 16 / 9;
 /** @constant {number} MOUNT_TIMEOUT_MS Delay before mounting scene, in milliseconds. */
 const MOUNT_TIMEOUT_MS = 40;
 
+/** @constant {WeakMap} hotspotRoots React roots for hotspots, keyed by camera element of ThreeSixty instance. */
+const hotspotRoots = new WeakMap();
+
 export default class ThreeSixtyScene extends React.Component {
   /**
    * Create three sixty scene component.
@@ -264,6 +267,20 @@ export default class ThreeSixtyScene extends React.Component {
   };
 
   /**
+   * Get React root for hotspots. All scenes share the camera element of the ThreeSixty instance, so they must share
+   * the root as well. Otherwise, hotspots of other scenes would remain or roots would remove each other's nodes.
+   * @param {HTMLElement} cameraElement Camera element of ThreeSixty instance.
+   * @returns {object} React root.
+   */
+  getHotspotRoot = (cameraElement) => {
+    if (!hotspotRoots.has(cameraElement)) {
+      hotspotRoots.set(cameraElement, createRoot(cameraElement));
+    }
+
+    return hotspotRoots.get(cameraElement);
+  };
+
+  /**
    * Create, add and render all interactions in 3D world.
    * @param {object} threeSixty ThreeSixty scene to render hotspots into.
    * @param {Array} interactions Interactions to create hotspots for (undefined when there are none).
@@ -272,16 +289,7 @@ export default class ThreeSixtyScene extends React.Component {
     const list = interactions ? interactions.map(this.createInteraction) : [];
     this.renderedInteractions = list.length;
 
-    const cameraElement = threeSixty.getCameraElement();
-    if (!this.interactionHotspotRoot || this.interactionHotspotRootElement !== cameraElement) {
-      if (this.interactionHotspotRoot) {
-        this.interactionHotspotRoot.unmount();
-      }
-      this.interactionHotspotRoot = createRoot(cameraElement);
-      this.interactionHotspotRootElement = cameraElement;
-    }
-
-    this.interactionHotspotRoot.render(
+    this.getHotspotRoot(threeSixty.getCameraElement()).render(
       <H5PContext.Provider value={this.context}>
         { list }
       </H5PContext.Provider>,
