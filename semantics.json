@@ -308,10 +308,6 @@
                                     "optional": true,
                                     "options": [
                                       {
-                                        "value": "totalScore",
-                                        "label": "Total score"
-                                      },
-                                      {
                                         "value": "interactionScore",
                                         "label": "Interaction score"
                                       },
@@ -328,55 +324,7 @@
                                         "label": "Time"
                                       }
                                     ],
-                                    "default": "totalScore"
-                                  },
-                                  {
-                                    "name": "totalScoreGroup",
-                                    "type": "group",
-                                    "label": "Total score",
-                                    "expanded": true,
-                                    "fields": [
-                                      {
-                                        "name": "totalScoreOperator",
-                                        "label": "Operator for total score",
-                                        "type": "select",
-                                        "optional": true,
-                                        "options": [
-                                          {
-                                            "value": "lessThan",
-                                            "label": "less than"
-                                          },
-                                          {
-                                            "value": "equalTo",
-                                            "label": "equal to"
-                                          },
-                                          {
-                                            "value": "notEqualTo",
-                                            "label": "not equal to"
-                                          },
-                                          {
-                                            "value": "greaterThan",
-                                            "label": "greater than"
-                                          }
-                                        ],
-                                        "default": "greaterThan"
-                                      },
-                                      {
-                                        "name": "totalScoreValue",
-                                        "label": "Value of total score to compare to",
-                                        "type": "number",
-                                        "optional": true
-                                      }
-                                    ],
-                                    "widget": "gamifiedVirtualTourShowWhen",
-                                    "gamifiedVirtualTourShowWhen": {
-                                      "rules": [
-                                        {
-                                          "field": "restrictionType",
-                                          "equals": "totalScore"
-                                        }
-                                      ]
-                                    }
+                                    "default": "interactionScore"
                                   },
                                   {
                                     "name": "interactionScoreGroup",
@@ -1323,30 +1271,6 @@
         "type": "text",
         "label": "Introduction to criteria of set if any needs to be met",
         "default": "Any of:"
-      },
-      {
-        "name": "restrictionTotalScoreLessThan",
-        "type": "text",
-        "label": "Restriction: total score less than",
-        "default": "You have a total score less than @value."
-      },
-      {
-        "name": "restrictionTotalScoreEqualTo",
-        "type": "text",
-        "label": "Restriction: total score equal to",
-        "default": "You have a total score equal to @value."
-      },
-      {
-        "name": "restrictionTotalScoreNotEqualTo",
-        "type": "text",
-        "label": "Restriction: total score not equal to",
-        "default": "You have a total score not equal to @value."
-      },
-      {
-        "name": "restrictionTotalScoreGreaterThan",
-        "type": "text",
-        "label": "Restriction: total score greater than",
-        "default": "You have a total score greater than @value."
       },
       {
         "name": "restrictionInteractionScoreLessThan",

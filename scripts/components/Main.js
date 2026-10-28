@@ -16,7 +16,6 @@ import {
   isInteractionTask,
   getInteractionScore,
   getInteractionScorePercentage,
-  getTotalScore,
   mergeInteractionState,
 } from '@scripts/services/progress.js';
 import Restrictions from '@scripts/services/restrictions/Restrictions.js';
@@ -188,7 +187,6 @@ export default class Main extends React.Component {
     return new Restrictions(interaction.accessRestrictions, {
       l10n: this.context.l10n,
       callbacks: {
-        getTotalScore: () => getTotalScore(states),
         getInteractionScore: (id) => getInteractionScore(states, id),
         getInteractionScorePercentage: (id) => getInteractionScorePercentage(states, id),
         getInteractionProgress: (id) => getInteractionProgress(states, id),

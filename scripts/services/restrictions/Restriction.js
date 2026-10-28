@@ -14,7 +14,7 @@ export default class Restriction {
   /**
    * Create restriction.
    * @param {object} params Parameters.
-   * @param {string} params.type Type of restriction, e.g. totalScore.
+   * @param {string} params.type Type of restriction, e.g. interactionScore.
    * @param {string} params.operator Operator, e.g. greaterThan.
    * @param {number|string} params.value Value to compare current value to.
    * @param {string} [params.label] Label of interaction that restriction refers to.

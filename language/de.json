@@ -163,9 +163,6 @@
                                       "label": "Kriterium",
                                       "options": [
                                         {
-                                          "label": "Gesamtpunktzahl"
-                                        },
-                                        {
                                           "label": "Interaktionspunktzahl"
                                         },
                                         {
@@ -176,31 +173,6 @@
                                         },
                                         {
                                           "label": "Zeitpunkt"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "label": "Gesamtpunktzahl",
-                                      "fields": [
-                                        {
-                                          "label": "Vergleichsoperator für die Gesamtpunktzahl",
-                                          "options": [
-                                            {
-                                              "label": "kleiner als"
-                                            },
-                                            {
-                                              "label": "gleich"
-                                            },
-                                            {
-                                              "label": "ungleich"
-                                            },
-                                            {
-                                              "label": "größer als"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "label": "Wert, mit dem die Gesamtpunktzahl verglichen wird"
                                         }
                                       ]
                                     },
@@ -706,22 +678,6 @@
           "default": "Mindestens eine Bedingung:"
         },
         {
-          "label": "Gesamtpunktzahl kleiner als",
-          "default": "Du hast eine Gesamtpunktzahl kleiner als @value."
-        },
-        {
-          "label": "Gesamtpunktzahl gleich",
-          "default": "Du hast eine Gesamtpunktzahl gleich @value."
-        },
-        {
-          "label": "Gesamtpunktzahl ungleich",
-          "default": "Du hast eine Gesamtpunktzahl ungleich @value."
-        },
-        {
-          "label": "Gesamtpunktzahl größer als",
-          "default": "Du hast eine Gesamtpunktzahl größer als @value."
-        },
-{
           "label": "Interaktionspunktzahl kleiner als",
           "default": "Deine Punktzahl in Interaktion @label ist kleiner als @value."
         },

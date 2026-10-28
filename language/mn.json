@@ -163,9 +163,6 @@
                                       "label": "Restriction type",
                                       "options": [
                                         {
-                                          "label": "Total score"
-                                        },
-                                        {
                                           "label": "Interaction score"
                                         },
                                         {
@@ -176,31 +173,6 @@
                                         },
                                         {
                                           "label": "Time"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "label": "Total score",
-                                      "fields": [
-                                        {
-                                          "label": "Operator for total score",
-                                          "options": [
-                                            {
-                                              "label": "less than"
-                                            },
-                                            {
-                                              "label": "equal to"
-                                            },
-                                            {
-                                              "label": "not equal to"
-                                            },
-                                            {
-                                              "label": "greater than"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "label": "Value of total score to compare to"
                                         }
                                       ]
                                     },
@@ -704,22 +676,6 @@
         {
           "label": "Introduction to criteria of set if any needs to be met",
           "default": "Any of:"
-        },
-        {
-          "label": "Restriction: total score less than",
-          "default": "You have a total score less than @value."
-        },
-        {
-          "label": "Restriction: total score equal to",
-          "default": "You have a total score equal to @value."
-        },
-        {
-          "label": "Restriction: total score not equal to",
-          "default": "You have a total score not equal to @value."
-        },
-        {
-          "label": "Restriction: total score greater than",
-          "default": "You have a total score greater than @value."
         },
         {
           "label": "Restriction: interaction score less than",

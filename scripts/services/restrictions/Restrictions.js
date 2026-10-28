@@ -27,7 +27,6 @@ export default class Restrictions {
    * @param {object} params Parameters.
    * @param {object} params.l10n Localization strings.
    * @param {object} params.callbacks Callbacks.
-   * @param {function} params.callbacks.getTotalScore Get total score.
    * @param {function} params.callbacks.getInteractionScore Get score of interaction by ID.
    * @param {function} params.callbacks.getInteractionScorePercentage Get score percentage of interaction by ID.
    * @param {function} params.callbacks.getInteractionProgress Get progress of interaction by ID.
@@ -64,10 +63,6 @@ export default class Restrictions {
       value: group[`${type}Value`],
       l10n: this.l10n,
     };
-
-    if (type === 'totalScore') {
-      return new RestrictionComparison({ ...common, getCurrentValue: this.callbacks.getTotalScore });
-    }
 
     if (type === 'time') {
       return new RestrictionTime({ ...common, getCurrentValue: this.callbacks.getTime });

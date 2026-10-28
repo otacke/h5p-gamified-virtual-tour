@@ -61,15 +61,6 @@ export const getInteractionScorePercentage = (states, interactionId) => {
 };
 
 /**
- * Get sum of latest scores of all interactions.
- * @param {object} states States of interactions, keyed by interaction ID.
- * @returns {number} Total score.
- */
-export const getTotalScore = (states) => {
-  return Object.values(states).reduce((sum, state) => sum + (state.score ?? 0), 0);
-};
-
-/**
  * Merge changes into state of interaction, never lowering its progress.
  * @param {object} [state] Current state of interaction.
  * @param {object} changes Changes with progress, isTask, score and maxScore.

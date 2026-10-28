@@ -4,7 +4,7 @@ import Restriction from '@scripts/services/restrictions/Restriction.js';
 const VALID_OPERATORS = ['lessThan', 'equalTo', 'notEqualTo', 'greaterThan'];
 
 /**
- * Restriction comparing numbers, used for total score, interaction score and interaction score percentage.
+ * Restriction comparing numbers, used for interaction score and interaction score percentage.
  */
 export default class RestrictionComparison extends Restriction {
   /**
