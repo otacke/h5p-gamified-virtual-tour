@@ -60,7 +60,6 @@
       flex: 1;
       max-height: 100%;
       max-width: 100%;
-      overflow-y: auto;
 
       &::-webkit-scrollbar {
         background: var(--h5p-theme-ui-base, #ffffff);
