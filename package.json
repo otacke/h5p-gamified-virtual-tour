@@ -1,7 +1,6 @@
 {
   "name": "h5p-gamified-virtual-tour",
   "description": "Create 360 game content",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "build": "webpack --mode=production",
