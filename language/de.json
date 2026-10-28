@@ -36,22 +36,22 @@
                 "description": "Ein Text, der die Szene für den Benutzer beschreibt"
               },
               {
-                "label": "Camera start position",
+                "label": "Kamerastartposition",
                 "fields": [
                   {
-                    "label": "Yaw"
+                    "label": "Gierwinkel"
                   },
                   {
-                    "label": "Pitch"
+                    "label": "Steigung"
                   }
                 ]
               },
               {
-                "entity": "interaction",
+                "entity": "Interaktion",
                 "field": {
                   "fields": [
                     {
-                      "label": "Label",
+                      "label": "Beschriftung",
                       "description": "Wenn leer, wird keine Beschriftung angezeigt und für Vorlesewerkzeuge wird der Szenentitel verwendet"
                     },
                     {
@@ -97,7 +97,7 @@
                     },
                     {},
                     {
-                      "label": "Interaction position",
+                      "label": "Position der Interaktion",
                       "fields": [
                         {
                           "label": "X"
@@ -111,213 +111,213 @@
                       "label": "ID"
                     },
                     {
-                      "label": "Connected interactions",
-                      "description": "Interactions of this scene that will be connected to this interaction by a path."
+                      "label": "Verbundene Interaktionen",
+                      "description": "Interaktionen dieser Szene, die über einen Pfad mit dieser Interaktion verbunden werden."
                     },
                     {
-                      "label": "Access restrictions",
-                      "description": "Define restrictions for unlocking this interaction.",
+                      "label": "Zugangsbeschränkungen",
+                      "description": "Definiere Beschränkungen für den Zugriff auf diese Interaktion.",
                       "fields": [
                         {
-                          "label": "All or any restriction set",
-                          "description": "Choose if all or any of the following restriction sets need to be met.",
+                          "label": "Alle oder mindestens eine Bedingungsgruppe",
+                          "description": "Wähle, ob alle oder mindestens eine der folgenden Bedingungsgruppen erfüllt sein müssen.",
                           "options": [
                             {
-                              "label": "All"
+                              "label": "Alle"
                             },
                             {
-                              "label": "Any"
+                              "label": "Mindestens eine"
                             }
                           ]
                         },
                         {
-                          "label": "Restriction sets",
-                          "entity": "restriction set",
+                          "label": "Bedingungsgruppen",
+                          "entity": "Bedingungsgruppe",
                           "widgets": [
                             {
-                              "label": "Default"
+                              "label": "Voreinstellung"
                             }
                           ],
                           "field": {
-                            "label": "Restriction set",
+                            "label": "Bedingungsgruppe",
                             "fields": [
                               {
-                                "label": "All or any restriction",
-                                "description": "Choose if all or any of the following restrictions need to be met.",
+                                "label": "Alle oder mindestens eine Bedingung",
+                                "description": "Wähle, ob alle oder mindestens eine der folgenden Bedingungsgruppen erfüllt sein müssen.",
                                 "options": [
                                   {
-                                    "label": "All"
+                                    "label": "Alle"
                                   },
                                   {
-                                    "label": "Any"
+                                    "label": "Mindestens eine"
                                   }
                                 ]
                               },
                               {
-                                "label": "Restrictions",
-                                "entity": "restriction",
+                                "label": "Bedingungen",
+                                "entity": "Bedingung",
                                 "field": {
-                                  "label": "Restriction",
+                                  "label": "Bedingung",
                                   "fields": [
                                     {
-                                      "label": "Restriction type",
+                                      "label": "Kriterium",
                                       "options": [
                                         {
-                                          "label": "Total score"
+                                          "label": "Gesamtpunktzahl"
                                         },
                                         {
-                                          "label": "Interaction score"
+                                          "label": "Interaktionspunktzahl"
                                         },
                                         {
-                                          "label": "Interaction score percentage"
+                                          "label": "Interaktionspunktzahlprozentsatz"
                                         },
                                         {
-                                          "label": "Interaction progress"
+                                          "label": "Interaktionsfortschritt"
                                         },
                                         {
-                                          "label": "Time"
+                                          "label": "Zeitpunkt"
                                         }
                                       ]
                                     },
                                     {
-                                      "label": "Total score",
+                                      "label": "Gesamtpunktzahl",
                                       "fields": [
                                         {
-                                          "label": "Operator for total score",
+                                          "label": "Vergleichsoperator für die Gesamtpunktzahl",
                                           "options": [
                                             {
-                                              "label": "less than"
+                                              "label": "kleiner als"
                                             },
                                             {
-                                              "label": "equal to"
+                                              "label": "gleich"
                                             },
                                             {
-                                              "label": "not equal to"
+                                              "label": "ungleich"
                                             },
                                             {
-                                              "label": "greater than"
+                                              "label": "größer als"
                                             }
                                           ]
                                         },
                                         {
-                                          "label": "Value of total score to compare to"
+                                          "label": "Wert, mit dem die Gesamtpunktzahl verglichen wird"
                                         }
                                       ]
                                     },
                                     {
-                                      "label": "Interaction score",
+                                      "label": "Interaktionspunktzahl",
                                       "fields": [
                                         {
-                                          "label": "Interaction to get score from"
+                                          "label": "Interaktion, mit deren Punktzahl verglichen wird"
                                         },
                                         {
-                                          "label": "Operator for interaction score",
+                                          "label": "Vergleichsoperator für die Interaktionspunktzahl",
                                           "options": [
                                             {
-                                              "label": "less than"
+                                              "label": "kleiner als"
                                             },
                                             {
-                                              "label": "equal to"
+                                              "label": "gleich"
                                             },
                                             {
-                                              "label": "not equal to"
+                                              "label": "ungleich"
                                             },
                                             {
-                                              "label": "greater than"
+                                              "label": "größer als"
                                             }
                                           ]
                                         },
                                         {
-                                          "label": "Interaction score to compare to"
+                                          "label": "Wert, mit dem die Interaktionspunktzahl verglichen wird"
                                         }
                                       ]
                                     },
                                     {
-                                      "label": "Interaction score percentage",
+                                      "label": "Interaktionspunktzahlprozentsatz",
                                       "fields": [
                                         {
-                                          "label": "Interaction to get score percentage from"
+                                          "label": "Interaktion, mit deren Punktzahlprozentsatz verglichen wird"
                                         },
                                         {
-                                          "label": "Operator for interaction score percentage",
+                                          "label": "Vergleichsoperator für den Interaktionspunktzahlprozentsatz",
                                           "options": [
                                             {
-                                              "label": "less than"
+                                              "label": "kleiner als"
                                             },
                                             {
-                                              "label": "equal to"
+                                              "label": "gleich"
                                             },
                                             {
-                                              "label": "not equal to"
+                                              "label": "ungleich"
                                             },
                                             {
-                                              "label": "greater than"
+                                              "label": "größer als"
                                             }
                                           ]
                                         },
                                         {
-                                          "label": "Interaction score percentage to compare to"
+                                          "label": "Wert, mit dem der Interaktionspunktzahlprozentsatz verglichen wird"
                                         }
                                       ]
                                     },
                                     {
-                                      "label": "Interaction progress",
+                                      "label": "Interaktionsfortschritt",
                                       "fields": [
                                         {
-                                          "label": "Interaction to get progress from"
+                                          "label": "Interaktion, deren Fortschritt verglichen wird"
                                         },
                                         {
-                                          "label": "Operator for interaction progress",
+                                          "label": "Operator für den Interaktionsfortschritt",
                                           "options": [
                                             {
-                                              "label": "is"
+                                              "label": "ist"
                                             },
                                             {
-                                              "label": "is not"
+                                              "label": "ist nicht"
                                             }
                                           ]
                                         },
                                         {
-                                          "label": "Progress to compare to",
+                                          "label": "Fortschritt, mit dem verglichen wird",
                                           "options": [
                                             {
-                                              "label": "not started"
+                                              "label": "nicht gestartet"
                                             },
                                             {
-                                              "label": "started"
+                                              "label": "gestartet"
                                             },
                                             {
-                                              "label": "completed"
+                                              "label": "abgeschlossen"
                                             },
                                             {
-                                              "label": "completed successfully"
+                                              "label": "erfolgreich abgeschlossen"
                                             }
                                           ]
                                         }
                                       ]
                                     },
                                     {
-                                      "label": "Time",
+                                      "label": "Zeitpunkt",
                                       "fields": [
                                         {
-                                          "label": "Operator for time",
+                                          "label": "Vergleichsoperator für den aktuellen Zeitpunkt",
                                           "options": [
                                             {
-                                              "label": "before"
+                                              "label": "vor"
                                             },
                                             {
-                                              "label": "on (same day)"
+                                              "label": "ist"
                                             },
                                             {
-                                              "label": "not on (other day)"
+                                              "label": "ist nicht"
                                             },
                                             {
-                                              "label": "after"
+                                              "label": "nach"
                                             }
                                           ]
                                         },
                                         {
-                                          "label": "Time to compare to"
+                                          "label": "Zeitpunkt, mit dem der jetzige Zeitpunkt verglichen wird"
                                         }
                                       ]
                                     }
@@ -333,44 +333,44 @@
                       ]
                     },
                     {
-                      "label": "Feedback",
-                      "description": "Define feedback that is shown depending on the score achieved in this interaction.",
+                      "label": "Rückmeldung",
+                      "description": "Definiere eine Rückmeldung, die in Abhängigkeit von der Punktzahl gezeigt wird, die in der Interaktion erreicht wurde.",
                       "fields": [
                         {
-                          "label": "Feedback for score ranges",
-                          "entity": "range",
+                          "label": "Rückmeldung für Punktebereiche",
+                          "entity": "Bereich",
                           "widgets": [
                             {
-                              "label": "Default"
+                              "label": "Voreinstellung"
                             }
                           ],
                           "field": {
-                            "label": "Range",
+                            "label": "Bereich",
                             "fields": [
                               {
-                                "label": "Score range"
+                                "label": "Punktebereich"
                               },
                               {},
                               {
-                                "label": "Feedback text"
+                                "label": "Rückmeldungstext"
                               },
                               {
-                                "label": "Feedback image"
+                                "label": "Rückmeldungsbild"
                               },
                               {
                                 "label": "Animation",
                                 "options": [
                                   {
-                                    "label": "None"
+                                    "label": "Keine"
                                   },
                                   {
-                                    "label": "Balloons"
+                                    "label": "Luftballons"
                                   },
                                   {
-                                    "label": "Fireworks"
+                                    "label": "Feuerwerk"
                                   },
                                   {
-                                    "label": "Confetti"
+                                    "label": "Konfetti"
                                   }
                                 ]
                               }
@@ -399,62 +399,62 @@
                 "description": "Füge eine Tonspur hinzu, die nur in dieser Szene gespielt wird."
               },
               {
-                "label": "Paths",
-                "entity": "path",
+                "label": "Pfade",
+                "entity": "Pfad",
                 "field": {
-                  "label": "Path",
+                  "label": "Pfad",
                   "fields": [
                     {
-                      "label": "From"
+                      "label": "Von"
                     },
                     {
-                      "label": "To"
+                      "label": "Nach"
                     },
                     {
-                      "label": "Visual settings",
+                      "label": "Visuelle Einstellungen",
                       "options": [
                         {
-                          "label": "Use global settings"
+                          "label": "Benutze die globalen Einstellungen"
                         },
                         {
-                          "label": "Use custom settings"
+                          "label": "Benutze eigene Einstellungen"
                         }
                       ]
                     },
                     {
-                      "label": "Custom visual settings",
+                      "label": "Eigene visuelle Einstellungen",
                       "fields": [
                         {
-                          "label": "Path color"
+                          "label": "Pfadfarbe"
                         },
                         {
-                          "label": "Path width",
+                          "label": "Pfadbreite",
                           "options": [
                             {
-                              "label": "Thin"
+                              "label": "Schmal"
                             },
                             {
-                              "label": "Medium"
+                              "label": "Mittel"
                             },
                             {
-                              "label": "Thick"
+                              "label": "Breit"
                             }
                           ]
                         },
                         {
-                          "label": "Path style",
+                          "label": "Pfadstil",
                           "options": [
                             {
-                              "label": "Solid"
+                              "label": "Durchgezogen"
                             },
                             {
-                              "label": "Dotted"
+                              "label": "Gepunktet"
                             },
                             {
-                              "label": "Dashed"
+                              "label": "Gestrichelt"
                             },
                             {
-                              "label": "Double"
+                              "label": "Doppelt"
                             }
                           ]
                         }
@@ -464,11 +464,11 @@
                 }
               },
               {
-                "label": "Overview map marker",
+                "label": "Markierung auf Überblickskarte",
                 "fields": [
                   {
                     "label": "Position",
-                    "description": "Mark where this scene is located on the overview map.",
+                    "description": "Lege fest, wo diese Szene auf der Überblickskarte verortet ist.",
                     "fields": [
                       {
                         "label": "X"
@@ -479,18 +479,18 @@
                     ]
                   },
                   {
-                    "label": "Color",
+                    "label": "Farbe",
                     "options": [
                       {
-                        "label": "Use default color"
+                        "label": "Benutze die globale Einstellung"
                       },
                       {
-                        "label": "Use custom color"
+                        "label": "Benutze eine eigene Farbe"
                       }
                     ]
                   },
                   {
-                    "label": "Custom color"
+                    "label": "Eigene Farbe"
                   }
                 ]
               }
@@ -554,57 +554,57 @@
           ]
         },
         {
-          "label": "Paths",
+          "label": "Pfade",
           "fields": [
             {
-              "label": "Path color"
+              "label": "Pfadfarbe"
             },
             {
-              "label": "Path width",
+              "label": "Pfadbreite",
               "options": [
                 {
-                  "label": "Thin"
+                  "label": "Schmal"
                 },
                 {
-                  "label": "Medium"
+                  "label": "Mittel"
                 },
                 {
-                  "label": "Thick"
+                  "label": "Breit"
                 }
               ]
             },
             {
-              "label": "Path style",
+              "label": "Pfadstil",
               "options": [
                 {
-                  "label": "Solid"
+                  "label": "Durchgezogen"
                 },
                 {
-                  "label": "Dotted"
+                  "label": "Gepunktet"
                 },
                 {
-                  "label": "Dashed"
+                  "label": "Gestrichelt"
                 },
                 {
-                  "label": "Double"
+                  "label": "Doppelt"
                 }
               ]
             }
           ]
         },
         {
-          "label": "Overview map",
+          "label": "Überblickskarte",
           "fields": [
             {
-              "label": "Show overview map",
-              "description": "Users can toggle an overview map that shows where the current scene is located. Set the position of each scene in the scene settings."
+              "label": "Zeige die Überblickskarte",
+              "description": "Nutzende können die Überblickskarte ein- und ausblenden um zu erfahren, wo die aktuelle Szene verortet ist. Lege die Position jeder Szene in den Szeneneinstellungen fest."
             },
             {
-              "label": "Overview map image"
+              "label": "Bild der Überblickskarte"
             },
             {
-              "label": "Default marker color",
-              "description": "Color of the marker for the current scene, unless the scene uses a custom color."
+              "label": "Vorgegebene Markierungsfarbe",
+              "description": "Farbe für den Marker einer Szene, falls für eine Szene keine eigene Farbe festgelegt wird."
             }
           ]
         }
@@ -642,7 +642,7 @@
           "default": "Die Beschriftung erweitern"
         },
         {
-          "label": "Beschriftung wenn der Hintergrund der 360°-Szene lädt",
+          "label": "Beschriftung, wenn der Hintergrund der 360°-Szene lädt",
           "default": "Lade Hintergrundbild..."
         },
         {
@@ -650,160 +650,160 @@
           "default": "Kein Inhalt"
         },
         {
-          "label": "Label for button to show and hide the overview map",
-          "default": "Overview map"
+          "label": "Beschriftung für den Button, um die Überblickskarte ein- und auszublenden",
+          "default": "Überblickskarte"
         },
         {
-          "label": "Label for button to show and hide the checklist",
-          "default": "Checklist"
+          "label": "Beschriftung für den Button, um die Checkliste ein- und auszublenden",
+          "default": "Checkliste"
         },
         {
-          "label": "Readspeaker text for completed item in checklist",
-          "default": "Completed"
+          "label": "Screenreader-Text für abgeschlossene Interaktionen auf der Checkliste",
+          "default": "Abgeschlossen"
         },
         {
-          "label": "Readspeaker text for item in checklist that is not completed",
-          "default": "Not completed"
+          "label": "Screenreader-Text für nicht abgeschlossene Interaktionen auf der Checkliste",
+          "default": "Nicht abgeschlossen"
         },
         {
-          "label": "Header of dialog for locked interaction",
-          "default": "Interaction locked"
+          "label": "Dialogtitel für verschlossene Interaktionen",
+          "default": "Interaktion verschlossen"
         },
         {
-          "label": "Text of dialog for locked interaction",
-          "default": "This interaction requires you to meet some goals before it can be opened."
+          "label": "Dialogtext für verschlossene Interaktionen",
+          "default": "Um diese Interaktion zu sehen, müssen einige Bedingungen erfüllt sein."
         },
         {
-          "label": "Label for button to close dialog for locked interaction",
+          "label": "Beschriftung des Buttons, um den Dialog für eine geschlossene Interaktion zu schließen",
           "default": "OK"
         },
         {
-          "label": "Readspeaker text for locked interaction",
-          "default": "Locked"
+          "label": "Screenreader-Text für verschlossene Interaktionen",
+          "default": "Verschlossen"
         },
         {
-          "label": "Readspeaker text for criterion that is met",
-          "default": "Met"
+          "label": "Screenreader-Text für erfülltes Kriterium",
+          "default": "Erfüllt"
         },
         {
-          "label": "Readspeaker text for criterion that is not met",
-          "default": "Not met"
+          "label": "Screenreader-Text für nicht erfülltes Kriterium",
+          "default": "Nicht erfüllt"
         },
         {
-          "label": "Introduction to criteria if all sets need to be met",
-          "default": "The interaction will not be available unless:"
+          "label": "Einleitung zu den Bedingungen, wenn alle Bedingungsgruppen erfüllt sein müssen",
+          "default": "Die Interaktion ist nicht verfügbar, außer:"
         },
         {
-          "label": "Introduction to criteria if any set needs to be met",
-          "default": "The interaction will not be available unless any of:"
+          "label": "Einleitung zu den Bedingungen, wenn mindestens eine Bedingungsgruppe erfüllt sein muss",
+          "default": "Die Interaktion ist nicht verfügbar, außer mindestens eine Bedingung ist erfüllt:"
         },
         {
-          "label": "Introduction to criteria of set if all need to be met",
-          "default": "All of:"
+          "label": "Einleitung zu den Bedingungen einer Gruppe, wenn alle erfüllt sein müssen",
+          "default": "Alle Bedingungen:"
         },
         {
-          "label": "Introduction to criteria of set if any needs to be met",
-          "default": "Any of:"
+          "label": "Einleitung zu den Bedingungen einer Gruppe, wenn mindestens eine erfüllt sein muss",
+          "default": "Mindestens eine Bedingung:"
         },
         {
-          "label": "Restriction: total score less than",
-          "default": "You have a total score less than @value."
+          "label": "Gesamtpunktzahl kleiner als",
+          "default": "Du hast eine Gesamtpunktzahl kleiner als @value."
         },
         {
-          "label": "Restriction: total score equal to",
-          "default": "You have a total score equal to @value."
+          "label": "Gesamtpunktzahl gleich",
+          "default": "Du hast eine Gesamtpunktzahl gleich @value."
         },
         {
-          "label": "Restriction: total score not equal to",
-          "default": "You have a total score not equal to @value."
+          "label": "Gesamtpunktzahl ungleich",
+          "default": "Du hast eine Gesamtpunktzahl ungleich @value."
         },
         {
-          "label": "Restriction: total score greater than",
-          "default": "You have a total score greater than @value."
+          "label": "Gesamtpunktzahl größer als",
+          "default": "Du hast eine Gesamtpunktzahl größer als @value."
+        },
+{
+          "label": "Interaktionspunktzahl kleiner als",
+          "default": "Deine Punktzahl in Interaktion @label ist kleiner als @value."
         },
         {
-          "label": "Restriction: interaction score less than",
-          "default": "You have a score less than @value in interaction @label."
+          "label": "Interaktionspunktzahl gleich",
+          "default": "Deine Punktzahl in Interaktion @label ist @value."
         },
         {
-          "label": "Restriction: interaction score equal to",
-          "default": "You have a score equal to @value in interaction @label."
+          "label": "Interaktionspunktzahl nicht gleich",
+          "default": "Deine Punktzahl in Interaktion @label ist nicht @value."
         },
         {
-          "label": "Restriction: interaction score not equal to",
-          "default": "You have a score not equal to @value in interaction @label."
+          "label": "Interaktionspunktzahl größer als",
+          "default": "Deine Punktzahl in Interaktion @label ist größer als @value."
         },
         {
-          "label": "Restriction: interaction score greater than",
-          "default": "You have a score greater than @value in interaction @label."
+          "label": "Interaktionspunktzahlprozentsatz kleiner als",
+          "default": "Deine prozentuale Punktzahl in Interaktion @label ist kleiner als @value."
         },
         {
-          "label": "Restriction: interaction score percentage less than",
-          "default": "You have a score percentage less than @value in interaction @label."
+          "label": "Interaktionspunktzahlprozentsatz gleich",
+          "default": "Deine prozentuale Punktzahl in Interaktion @label ist @value."
         },
         {
-          "label": "Restriction: interaction score percentage equal to",
-          "default": "You have a score percentage equal to @value in interaction @label."
+          "label": "Interaktionspunktzahlprozentsatz nicht gleich",
+          "default": "Deine prozentuale Punktzahl in Interaktion @label ist nicht @value."
         },
         {
-          "label": "Restriction: interaction score percentage not equal to",
-          "default": "You have a score percentage not equal to @value in interaction @label."
+          "label": "Interaktionspunktzahlprozentsatz größer als",
+          "default": "Deine prozentuale Punktzahl in Interaktion @label ist größer als @value."
         },
         {
-          "label": "Restriction: interaction score percentage greater than",
-          "default": "You have a score percentage greater than @value in interaction @label."
+          "label": "Interaktionsfortschritt ist",
+          "default": "Der Fortschritt in Interaktion @label ist @value."
         },
         {
-          "label": "Restriction: interaction progress is",
-          "default": "The progress of interaction @label is @value."
+          "label": "Interaktionsfortschritt ist nicht",
+          "default": "Der Fortschritt in Interaktion @label ist nicht @value."
         },
         {
-          "label": "Restriction: interaction progress is not",
-          "default": "The progress of interaction @label is not @value."
+          "label": "Zeitpunkt vor",
+          "default": "Der jetzige Zeitpunkt liegt vor @value."
         },
         {
-          "label": "Restriction: time before",
-          "default": "The current time is before @value."
+          "label": "Zeitpunkt ist",
+          "default": "Der jetzige Zeitpunkt ist @value."
         },
         {
-          "label": "Restriction: date is",
-          "default": "The current date is @value."
+          "label": "Zeitpunkt ist nicht",
+          "default": "Der jetzige Zeitpunkt ist nicht @value."
         },
         {
-          "label": "Restriction: date is not",
-          "default": "The current date is not @value."
+          "label": "Zeitpunkt nach",
+          "default": "Der jetzige Zeitpunkt liegt nach @value."
         },
         {
-          "label": "Restriction: time after",
-          "default": "The current time is after @value."
+          "label": "Nicht gestartet",
+          "default": "nicht gestartet"
         },
         {
-          "label": "Progress of interaction: not started",
-          "default": "not started"
+          "label": "Gestartet",
+          "default": "gestartet"
         },
         {
-          "label": "Progress of interaction: started",
-          "default": "started"
+          "label": "Abgeschlossen",
+          "default": "abgeschlossen"
         },
         {
-          "label": "Progress of interaction: completed",
-          "default": "completed"
+          "label": "Erfolgreich abgeschlossen",
+          "default": "erfolgreich abgeschlossen"
         },
         {
-          "label": "Progress of interaction: completed successfully",
-          "default": "completed successfully"
+          "label": "Vollbildmodus aktivieren",
+          "default": "Gehe in den Vollbildmodus"
         },
         {
-          "label": "Enter full screen mode",
-          "default": "Enter full screen mode"
+          "label": "Vollbildmodus deaktivieren",
+          "default": "Verlasse den Vollbildmodus"
         },
         {
-          "label": "Exit full screen mode",
-          "default": "Exit full screen mode"
-        },
-        {
-          "label": "Feedback dialog",
-          "default": "Feedback"
+          "label": "Rückmeldungsdialog",
+          "default": "Rückmeldung"
         }
       ]
     }
