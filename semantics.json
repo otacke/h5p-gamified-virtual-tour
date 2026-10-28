@@ -716,7 +716,8 @@
                                 "size": true,
                                 "color": true,
                                 "background": true
-                              }
+                              },
+                              "default": "<p style=\"text-align: center;\"></p>"
                             },
                             {
                               "name": "image",
