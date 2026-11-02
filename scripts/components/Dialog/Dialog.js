@@ -60,9 +60,11 @@ export default class Dialog extends React.Component {
           className="h5p-dialog-focusstart"
           tabIndex="-1"
         ></div>
-        <div className={dialogClasses.join(' ')} ref={ this.handleDialogRef }>
-          <div className='h5p-text-content'>
-            { children }
+        <div className='h5p-text-dialog-container'>
+          <div className={dialogClasses.join(' ')} ref={ this.handleDialogRef }>
+            <div className='h5p-text-content'>
+              { children }
+            </div>
           </div>
           <button
             type="button"

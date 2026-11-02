@@ -2,8 +2,7 @@
 .h5p-text-overlay.h5p-feedback-overlay {
   z-index: 5;
 
-  .h5p-text-dialog {
-    border-radius: 0;
+  .h5p-text-dialog-container {
     height: 100%;
     left: 0;
     max-height: none;
@@ -11,11 +10,16 @@
     top: 0;
     transform: none;
     width: 100%;
+  }
 
-    .close-button-wrapper {
-      right: var(--h5p-theme-spacing-s, 1rem);
-      top: var(--h5p-theme-spacing-s, 1rem);
-    }
+  .h5p-text-dialog {
+    border-radius: 0;
+    height: 100%;
+  }
+
+  .close-button-wrapper {
+    right: var(--h5p-theme-spacing-s, 1rem);
+    top: var(--h5p-theme-spacing-s, 1rem);
   }
 
   .h5p-text-content {

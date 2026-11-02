@@ -59,16 +59,18 @@ export default class FeedbackOverlay extends React.Component {
         aria-label={ this.context.l10n.feedback }
         onKeyDown={ this.handleKeyDown }
       >
-        <div className='h5p-text-dialog'>
-          <div className='h5p-text-content'>
-            {
-              hasImage(this.props.image) &&
-              <div className='feedback-image' ref={ (el) => this.imageContainer = el } />
-            }
-            {
-              hasText(this.props.text) &&
-              <div className='feedback-text' dangerouslySetInnerHTML={ { __html: this.props.text } } />
-            }
+        <div className='h5p-text-dialog-container'>
+          <div className='h5p-text-dialog'>
+            <div className='h5p-text-content'>
+              {
+                hasImage(this.props.image) &&
+                <div className='feedback-image' ref={ (el) => this.imageContainer = el } />
+              }
+              {
+                hasText(this.props.text) &&
+                <div className='feedback-text' dangerouslySetInnerHTML={ { __html: this.props.text } } />
+              }
+            </div>
           </div>
           <button
             type='button'
